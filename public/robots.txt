@@ -1,0 +1,22 @@
+# Robots.txt for Haider Institute of Technology and Management (HITM)
+# Website: https://www.hitmranchi.ac.in
+
+User-agent: *
+
+# Allow all public content
+Allow: /
+
+# Block admin, API, and internal routes
+Disallow: /admin/
+Disallow: /api/
+Disallow: /ccavenue-test/
+Disallow: /payment/
+
+# Block query-parameter-only pages that duplicate content
+Disallow: /*?*
+
+# Allow important pages with query parameters explicitly
+Allow: /admissions/apply?form=1
+
+# Sitemap location
+Sitemap: https://www.hitmranchi.ac.in/sitemap.xml

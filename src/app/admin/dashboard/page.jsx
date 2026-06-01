@@ -15,6 +15,7 @@ import DashboardView from '@/components/admin/DashboardView';
 import NoticesManager from '@/components/admin/NoticesManager';
 import EventsManager from '@/components/admin/EventsManager';
 import EnquiriesManager from '@/components/admin/EnquiriesManager';
+import ApplicationsManager from '@/components/admin/ApplicationsManager';
 import CareerManager from '@/components/admin/CareerManager';
 import PopupManager from '@/components/admin/PopupManager';
 import IncubationManager from '@/components/admin/IncubationManager';
@@ -24,6 +25,7 @@ const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={16} /> },
   { id: 'notices', label: 'Notices', icon: <Bell size={16} /> },
   { id: 'events', label: 'Events', icon: <CalendarDays size={16} /> },
+  { id: 'applications', label: 'Applications', icon: <Users size={16} /> },
   { id: 'enquiries', label: 'Enquiries', icon: <Users size={16} /> },
   { id: 'payments', label: 'Payments', icon: <CreditCard size={16} /> },
   { id: 'careers', label: 'Careers', icon: <Briefcase size={16} /> },
@@ -83,6 +85,7 @@ export default function AdminDashboard() {
       case 'dashboard': return <DashboardView />;
       case 'notices': return <NoticesManager />;
       case 'events': return <EventsManager />;
+      case 'applications': return <ApplicationsManager />;
       case 'enquiries': return <EnquiriesManager />;
       case 'payments': return <PaymentsManager />;
       case 'careers': return <CareerManager />;

@@ -135,7 +135,7 @@ export default function ApplicationForm({ applicationData, onComplete, onCancel 
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2"><Label>Student Name *</Label><Input required value={formData.personalDetails.name} onChange={e => updateNestedField('personalDetails', 'name', e.target.value)} /></div>
-                  <div className="space-y-2"><Label>Father's Name *</Label><Input required value={formData.personalDetails.fatherName} onChange={e => updateNestedField('personalDetails', 'fatherName', e.target.value)} /></div>
+                  <div className="space-y-2"><Label>Father&apos;s Name *</Label><Input required value={formData.personalDetails.fatherName} onChange={e => updateNestedField('personalDetails', 'fatherName', e.target.value)} /></div>
                   <div className="space-y-2"><Label>Email Address *</Label><Input type="email" required value={formData.personalDetails.email} onChange={e => updateNestedField('personalDetails', 'email', e.target.value)} /></div>
                   <div className="space-y-2"><Label>Date of Birth *</Label><Input type="date" required value={formData.personalDetails.dob} onChange={e => updateNestedField('personalDetails', 'dob', e.target.value)} /></div>
                   

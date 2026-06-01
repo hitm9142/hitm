@@ -155,7 +155,7 @@ export default function ApplicationsManager() {
                </div>
                <div className="p-6">
                   <p className="text-gray-700 mb-6 font-medium text-sm leading-relaxed">
-                    Verify the application manually. This will mark the payment and application status as "Verified".
+                    Verify the application manually. This will mark the payment and application status as &quot;Verified&quot;.
                   </p>
                   
                   <div className="bg-gray-50 p-4 border rounded-xl space-y-2 mb-6">

@@ -53,7 +53,7 @@ export default function SubmittedDetailsView({ applicationData, onCancel }) {
                 <p className="font-medium">{pDetails.name || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 font-bold uppercase">Father's Name</p>
+                <p className="text-xs text-gray-500 font-bold uppercase">Father&apos;s Name</p>
                 <p className="font-medium">{pDetails.fatherName || 'N/A'}</p>
               </div>
               <div>

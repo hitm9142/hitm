@@ -17,8 +17,8 @@ const floatingButtons = [
 const courseOptions = ['B.Tech', 'Diploma', 'MBA', 'BBA', 'MCA', 'BCA'];
 
 const branchOptions = {
-  'B.Tech': ['Computer Science & Engineering (CSE)', 'Data Science', 'Artificial Intelligence & ML', 'Electric & Electronics Engineering', 'Mechanical Engineering', 'Civil Engineering'],
-  Diploma: ['Computer Science & Engineering', 'Data Science', 'Artificial Intelligence', 'Mechanical Engineering', 'Electrical Engineering', 'Civil Engineering', 'Electrical & Electronics Engg.', 'Electronics & Comm. Engg.'],
+  'B.Tech': ['Computer Science & Engineering (CSE)', 'Data Sciences', 'Artificial Intelligence (AI)', 'Electrical & Electronics Engineering', 'Mechanical Engineering', 'Civil Engineering'],
+  Diploma: ['Computer Science & Engineering', 'Data Sciences', 'Artificial Intelligence', 'Mechanical Engineering', 'Electrical & Electronics Engineering', 'Civil Engineering'],
   MBA: ['Finance Management', 'Marketing Management', 'Human Resource Management', 'Information Technology'],
 };
 
@@ -152,7 +152,7 @@ export default function FloatingApply() {
                         value={formData.course} 
                         onChange={e => setFormData({ ...formData, course: e.target.value, branch: '' })}
                       >
-                        <option value="">Course *</option>
+                        <option value="">Programme *</option>
                         {courseOptions.map(c => (
                           <option key={c} value={c}>{c}</option>
                         ))}

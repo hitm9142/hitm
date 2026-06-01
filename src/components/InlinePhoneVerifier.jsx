@@ -20,12 +20,31 @@ export default function InlinePhoneVerifier({
   const [timer, setTimer] = useState(60);
   const [canResend, setCanResend] = useState(false);
 
+  const [touched, setTouched] = useState(false);
+  const [validationError, setValidationError] = useState('');
+
   const recaptchaVerifierRef = useRef(null);
   const confirmationResultRef = useRef(null);
   const timerRef = useRef(null);
 
-  // Check if phone number is exactly 10 digits
-  const isTenDigits = phone && phone.replace(/\D/g, '').length === 10;
+  // Validate phone number input and return standard error text
+  const validatePhoneInput = (val) => {
+    if (!val) return '';
+    if (!/^[6-9]/.test(val)) {
+      return 'Indian mobile numbers must start with 6, 7, 8, or 9.';
+    }
+    if (val.length < 10) {
+      return `Mobile number must be exactly 10 digits. (${val.length}/10 entered)`;
+    }
+    return '';
+  };
+
+  // Check if phone number is exactly 10 digits and starts with 6-9
+  const isIndianMobile = (p) => {
+    const cleaned = p ? p.replace(/\D/g, '') : '';
+    return cleaned.length === 10 && /^[6-9]/.test(cleaned);
+  };
+  const isTenDigits = isIndianMobile(phone);
 
   // Format phone number to standard E.164 (+91 for India)
   const formatPhone = (p) => {
@@ -169,6 +188,16 @@ export default function InlinePhoneVerifier({
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, '').slice(0, 10);
               onChange(val);
+              
+              if (touched || val.length >= 10 || (val.length > 0 && !/^[6-9]/.test(val))) {
+                setValidationError(validatePhoneInput(val));
+              } else {
+                setValidationError('');
+              }
+            }}
+            onBlur={() => {
+              setTouched(true);
+              setValidationError(validatePhoneInput(phone));
             }}
             disabled={success || loading}
             className={`h-12 bg-gray-50 border-gray-200 focus:bg-white transition-all rounded-xl ${success ? 'pr-10 border-green-500 bg-green-50/20' : ''}`}
@@ -191,6 +220,21 @@ export default function InlinePhoneVerifier({
           </Button>
         )}
       </div>
+
+      {!success && (
+        <div className="flex justify-between items-center text-[11px] px-1 text-gray-500 mt-1 select-none">
+          {validationError ? (
+            <span className="text-red-500 font-semibold flex items-center gap-1">
+              <ShieldAlert size={12} className="shrink-0" /> {validationError}
+            </span>
+          ) : (
+            <span></span>
+          )}
+          <span className={`${phone && phone.length === 10 ? 'text-green-600 font-bold' : 'text-gray-400 font-medium'}`}>
+            {phone ? phone.length : 0}/10 digits
+          </span>
+        </div>
+      )}
 
       {otpSent && (
         <div className="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3 animate-in slide-in-from-top duration-300">

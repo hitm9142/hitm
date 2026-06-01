@@ -18,12 +18,12 @@ export default function EngineeringPage() {
   };
 
   const branches = [
-    { name: 'Computer Science & Engineering', seats: 120, desc: 'Cutting-edge curriculum focused on AI, Software Engineering, and Cloud Computing.' },
-    { name: 'Data Science', seats: 60, desc: 'Advanced analytics, statistical modeling, and big data technologies.' },
-    { name: 'Artificial Intelligence & ML', seats: 60, desc: 'Deep learning, robotics, and neural networks integration.' },
-    { name: 'Electric & Electronics Engineering', seats: 30, desc: 'Power systems, microelectronics, and control systems.' },
-    { name: 'Mechanical Engineering', seats: 30, desc: 'Thermodynamics, robotics, and precision manufacturing.' },
-    { name: 'Civil Engineering', seats: 30, desc: 'Structural design, construction management, and urban planning.' }
+    { name: 'Computer Science & Engineering (CSE)', seats: 120, desc: 'Cutting-edge curriculum focused on AI, Software Engineering, and Cloud Computing.' },
+    { name: 'Data Sciences (DS)', seats: 30, desc: 'Advanced analytics, statistical modeling, and big data technologies.' },
+    { name: 'Artificial Intelligence (AI)', seats: 30, desc: 'Deep learning, robotics, and neural networks integration.' },
+    { name: 'Electrical & Electronics Engineering (EEE)', seats: 60, desc: 'Power systems, microelectronics, and control systems.' },
+    { name: 'Mechanical Engineering (ME)', seats: 60, desc: 'Thermodynamics, robotics, and precision manufacturing.' },
+    { name: 'Civil Engineering (CE)', seats: 60, desc: 'Structural design, construction management, and urban planning.' }
   ];
 
   return (

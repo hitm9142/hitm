@@ -76,7 +76,7 @@ export default function BCAPage() {
               <h3 className="text-2xl font-black font-serif text-hitm-navy mb-6">Program Snapshot</h3>
               <div className="space-y-3 mb-10">
                 {[
-                  { label: 'Seats', value: '120' },
+                  { label: 'Seats', value: '180' },
                   { label: 'Duration', value: '3 Years / 6 Sem' },
                   { label: 'Eligibility', value: '10+2 with 45%' },
                   { label: 'Core Language', value: 'C++, Java, Python' },

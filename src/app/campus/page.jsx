@@ -67,8 +67,8 @@ export default function CampusPage() {
               <p className="text-gray-500 text-sm">Laboratories</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-hitm-navy mb-1">1440+</div>
-              <p className="text-gray-500 text-sm">Student Capacity</p>
+              <div className="text-3xl font-bold text-hitm-navy mb-1">1440</div>
+              <p className="text-gray-500 text-sm">Approved Intake Seats</p>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-hitm-navy mb-1">24/7</div>

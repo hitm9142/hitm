@@ -15,9 +15,8 @@ export default function MCAPage() {
       headers: ["Feature", "Benefit"],
       rows: [
         ["Advanced Coding", "Focus on Java, Python, and C++"],
-        ["Industry Ready", "Internships at Fortune 500 firms"],
+        ["Industry Ready", "Practical hands-on training"],
         ["2-Year Track", "Fast-track post-grad career"],
-        ["Average Package", "10 LPA+"]
       ]
     });
   };
@@ -58,9 +57,9 @@ export default function MCAPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   { icon: <Code className="text-hitm-red" />, title: 'Advanced Coding', desc: 'Focus on Java, Python, and C++.' },
-                  { icon: <Users className="text-hitm-red" />, title: 'Industry Ready', desc: 'Internships at Fortune 500 firms.' },
+                  { icon: <Users className="text-hitm-red" />, title: 'Industry Ready', desc: 'Practical hands-on training.' },
                   { icon: <Clock className="text-hitm-red" />, title: '2-Year Track', desc: 'Fast-track your post-grad career.' },
-                  { icon: <BookOpen className="text-hitm-red" />, title: 'Research Base', desc: 'Cutting-edge CS research lab access.' }
+                  { icon: <BookOpen className="text-hitm-red" />, title: 'Research Base', desc: 'Research and development CS lab access.' }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
                     <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center shrink-0">{item.icon}</div>
@@ -72,7 +71,7 @@ export default function MCAPage() {
               <div className="bg-hitm-navy rounded-3xl p-8 text-white">
                 <h3 className="text-xl font-bold mb-4 font-serif text-hitm-gold">Eligibility</h3>
                 <ul className="space-y-3">
-                  {['Maths in 10+2 is Mandatory', 'BCA / B.Sc (IT) / B.Sc with 50% Marks', 'JCECEB / Direct Admission Round'].map((li, i) => (
+                  {['Maths in 10+2 is Mandatory', 'BCA / B.Sc (IT) / B.Sc with 50% Marks', 'JCECEB / Direct Admission Round', 'Approved Intake: 180 Seats'].map((li, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm text-white/80">
                       <CheckCircle size={16} className="text-hitm-gold" /> {li}
                     </li>
@@ -100,12 +99,6 @@ export default function MCAPage() {
             <div className="relative">
               <div className="absolute -inset-4 bg-hitm-red/10 rounded-[60px] blur-3xl -z-10" />
               <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1000" alt="Tech" className="rounded-[40px] shadow-2xl relative z-10" />
-              <Card className="absolute -bottom-10 -left-10 bg-white shadow-2xl border-none z-20 hidden md:block">
-                <CardContent className="p-8 text-center">
-                  <p className="text-4xl font-black text-hitm-navy font-serif">10 LPA+</p>
-                  <p className="text-xs text-gray-400 uppercase tracking-widest font-bold mt-1">Average SDE Package</p>
-                </CardContent>
-              </Card>
             </div>
 
           </div>

@@ -94,7 +94,7 @@ export default function SyllabusPage() {
               <div className="bg-white rounded-[32px] shadow-xl border border-gray-100 p-8 space-y-6">
                  {/* Course Dropdown */}
                  <div className="space-y-2">
-                   <label className="text-sm font-bold text-gray-700">Select Course</label>
+                   <label className="text-sm font-bold text-gray-700">Select Programme</label>
                    <select 
                      className="w-full h-12 border rounded-xl px-4 bg-gray-50 focus:ring-2 focus:ring-hitm-red focus:outline-none"
                      value={selectedCourse} 
@@ -104,7 +104,7 @@ export default function SyllabusPage() {
                        setSelectedSemester('');
                      }}
                    >
-                     <option value="">-- Choose Course --</option>
+                     <option value="">-- Choose Programme --</option>
                      {Object.keys(syllabusData).map(course => (
                        <option key={course} value={course}>{course}</option>
                      ))}
@@ -172,7 +172,7 @@ export default function SyllabusPage() {
             </div>
 
             <div className="space-y-6">
-               <h2 className="text-xl font-black text-hitm-navy mb-6">Course Content Overview</h2>
+               <h2 className="text-xl font-black text-hitm-navy mb-6">Programme Content Overview</h2>
                {syllabusPreview.map((s, i) => (
                  <div key={i} className="bg-white p-6 rounded-[32px] shadow-lg border-l-4 border-hitm-red">
                    <h3 className="font-bold text-hitm-navy mb-4">{s.title}</h3>

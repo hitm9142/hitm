@@ -9,7 +9,7 @@ import VisitCounter from '@/components/VisitCounter';
 const footerLinks = {
   quickLinks: [
     { label: 'About HITM', href: '/about' },
-    { label: 'All Programs', href: '/programs' },
+    { label: 'All Programmes', href: '/programs' },
     { label: 'Apply Online', href: '/admissions/apply?form=1' },
     { label: 'Academic Calendar', href: '/academics/calendar' },
     { label: 'Placement', href: '/placement/overview' },
@@ -51,7 +51,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-5">
-              Haider Institute of Technology and Management, Ranchi - Jharkhand&apos;s most futuristic institute,
+              Haider Institute of Technology and Management (HITM Ranchi) is an emerging technical & management institution in Jharkhand,
               dedicated to excellence in innovation and producing industry-ready leaders.
             </p>
             <div className="flex gap-3">
@@ -89,7 +89,7 @@ export default function Footer() {
 
           {/* Programs */}
           <div>
-            <h4 className="text-white font-semibold mb-4 pb-2 border-b border-hitm-red/40 font-serif">Programs</h4>
+            <h4 className="text-white font-semibold mb-4 pb-2 border-b border-hitm-red/40 font-serif">Programmes</h4>
             <ul className="space-y-2">
               {footerLinks.programs.map((link) => (
                 <li key={link.label}>
@@ -143,6 +143,7 @@ export default function Footer() {
         <div className="flex gap-4">
           <Link href="/privacy" className="text-gray-500 text-xs hover:text-hitm-gold transition-colors">Privacy Policy</Link>
           <Link href="/refund-policy" className="text-gray-500 text-xs hover:text-hitm-gold transition-colors">Refund Policy</Link>
+          <Link href="/mandatory-disclosure" className="text-gray-500 text-xs hover:text-hitm-gold transition-colors">Mandatory Disclosure</Link>
           <Link href="/terms" className="text-gray-500 text-xs hover:text-hitm-gold transition-colors">Terms of Use</Link>
           <Link href="/sitemap" className="text-gray-500 text-xs hover:text-hitm-gold transition-colors">Sitemap</Link>
           <Link href="/admin/login" className="text-gray-500 text-xs hover:text-hitm-gold transition-colors">Admin</Link>

@@ -61,7 +61,7 @@ export default function MBAPage() {
                 </div>
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex items-center gap-4">
                   <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0"><Users /></div>
-                  <div><p className="text-sm font-bold text-gray-900">60 Seats</p><p className="text-xs text-gray-400 font-serif">Limited Intake</p></div>
+                  <div><p className="text-sm font-bold text-gray-900">180 Seats</p><p className="text-xs text-gray-400 font-serif">Approved Intake</p></div>
                 </div>
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex items-center gap-4">
                   <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0"><Briefcase /></div>

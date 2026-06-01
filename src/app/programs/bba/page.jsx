@@ -54,7 +54,7 @@ export default function BBAPage() {
                   <h2 className="text-3xl font-black font-serif text-gray-950 mb-6">Why BBA at HITM Ranchi?</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {[
-                      { icon: <Target className="text-hitm-red" />, title: 'Industry Focused', desc: 'Curriculum designed in collabration with industry leaders.' },
+                      { icon: <Target className="text-hitm-red" />, title: 'Industry Focused', desc: 'Curriculum designed in collaboration with industry leaders.' },
                       { icon: <Users className="text-hitm-red" />, title: 'Mentorship', desc: '1-on-1 career guidance from experienced professionals.' },
                       { icon: <BookOpen className="text-hitm-red" />, title: 'Real World Labs', desc: 'Practical projects and summer internships included.' },
                       { icon: <Clock className="text-hitm-red" />, title: 'Early Placement', desc: 'Placement support starting from final year.' }
@@ -83,7 +83,7 @@ export default function BBAPage() {
                   <h3 className="text-xl font-bold mb-6 font-serif text-hitm-gold">Quick Admission</h3>
                   <div className="space-y-3 mb-8">
                     {[
-                      { label: 'Seats', value: '120' },
+                      { label: 'Seats', value: '180' },
                       { label: 'Duration', value: '3 Years / 6 Sem' },
                       { label: 'Eligibility', value: '10+2 with 45% Avg' },
                       { label: 'Admission Fee', value: '₹ 25,000' },

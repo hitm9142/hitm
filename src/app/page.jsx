@@ -48,7 +48,7 @@ const isOpeningRelated = (n) => {
 const heroSlides = [
   {
     image: "/images/carousel/slide1.jpg",
-    badge: "Admissions Open 2026",
+    badge: "Admissions Open 2026–27",
     title: "Launching a New Era of Excellence in Ranchi",
     subtitle:
       "HITM Ranchi is shaping a strong future in Engineering, Management, and Technology with industry-focused learning and modern academic excellence.",
@@ -71,14 +71,14 @@ const heroSlides = [
 
 const stats = [
   { icon: <Calendar size={24} />, number: "2026", label: "Admissions Session" },
-  { icon: <Users size={24} />, number: "1440+", label: "Seat Capacity" },
-  { icon: <BookOpen size={24} />, number: "16+", label: "Approved Courses" },
+  { icon: <Users size={24} />, number: "1440", label: "Approved Intake Seats (2026-27)" },
+  { icon: <BookOpen size={24} />, number: "16", label: "Programmes Offered" },
 ];
 
 const programs = [
   {
     icon: <BookOpen className="text-white" size={24} />,
-    name: "B.Tech Programs",
+    name: "B.Tech Programmes",
     desc: "4-Year Undergraduate Engineering (360 Seats)",
     image:
       "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
@@ -87,21 +87,21 @@ const programs = [
       "EEE (60)",
       "Civil (60)",
       "Mechanical (60)",
-      "AI (30)",
-      "Data Science (30)",
+      "Artificial Intelligence (AI) (30)",
+      "Data Sciences (30)",
     ],
   },
   {
     icon: <Award className="text-white" size={24} />,
     name: "Management Studies",
-    desc: "UG & PG Programs (360 Seats)",
+    desc: "UG & PG Programmes (360 Seats)",
     image:
       "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=800",
     courses: ["BBA (180)", "MBA (180)"],
   },
   {
     icon: <Briefcase className="text-white" size={24} />,
-    name: "Diploma Programs",
+    name: "Diploma Programmes",
     desc: "3-Year Polytechnic Diploma (360 Seats)",
     image:
       "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800",
@@ -110,14 +110,14 @@ const programs = [
       "EEE (60)",
       "Civil (60)",
       "Mechanical (60)",
-      "AI (30)",
-      "Data Science (30)",
+      "Artificial Intelligence (30)",
+      "Data Sciences (30)",
     ],
   },
   {
     icon: <GraduationCap className="text-white" size={24} />,
     name: "Computer Applications",
-    desc: "UG & PG Programs (360 Seats)",
+    desc: "UG & PG Programmes (360 Seats)",
     image:
       "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=800",
     courses: ["BCA (180)", "MCA (180)"],
@@ -165,14 +165,14 @@ const DEFAULT_EVENTS = [
 
 const testimonials = [
   {
-    text: "HITM Ranchi is exactly what Jharkhand needed â€” a forward-thinking institute with world-class facilities and a curriculum designed for the 2026 industry standards.",
+    text: "HITM Ranchi is exactly what Jharkhand needed — a forward-thinking institute with world-class facilities and a curriculum designed for the 2026 industry standards.",
     name: "Dr. Ramesh Singh",
     role: "Education Consultant",
     stars: 5,
     avatar: "https://i.pravatar.cc/150?u=hitm2",
   },
   {
-    text: "The commitment to innovation and student-centric learning is evident in every aspect of HITM. Im excited to see the first batch of pioneers graduate.",
+    text: "The commitment to innovation and student-centric learning is evident in every aspect of HITM. I'm excited to see the first batch of pioneers graduate.",
     name: "Sonal Verma",
     role: "Industry Expert",
     stars: 5,
@@ -435,7 +435,7 @@ export default function HomePage() {
   const marqueeItems =
     activeNotices.length > 0
       ? activeNotices
-      : ["📣 Admissions Open for 2026 Batch "];
+      : ["📣 Admissions Open for 2026–27 Batch "];
 
   return (
     <main>
@@ -552,24 +552,20 @@ export default function HomePage() {
                       setEnquiry({ ...enquiry, program: e.target.value })
                     }
                   >
-                    <option value="">Select Program</option>
+                    <option value="">Select Programme</option>
                     {[
-                      "B.Tech CSE",
-                      "B.Tech AI",
-                      "B.Tech Data Science",
-                      "B.Tech Electrical",
-                      "B.Tech EEE",
-                      "B.Tech ECE",
-                      "B.Tech Mechanical",
-                      "B.Tech Civil",
-                      "Diploma CSE",
-                      "Diploma Data Science",
-                      "Diploma AI",
-                      "Diploma Mechanical",
-                      "Diploma Civil",
-                      "Diploma Electrical",
-                      "Diploma EEE",
-                      "Diploma ECE",
+                      "B.Tech Computer Science & Engineering (CSE)",
+                      "B.Tech Data Sciences",
+                      "B.Tech Artificial Intelligence (AI)",
+                      "B.Tech Electrical & Electronics Engineering",
+                      "B.Tech Mechanical Engineering",
+                      "B.Tech Civil Engineering",
+                      "Diploma Computer Science & Engineering",
+                      "Diploma Data Sciences",
+                      "Diploma Artificial Intelligence",
+                      "Diploma Mechanical Engineering",
+                      "Diploma Electrical & Electronics Engineering",
+                      "Diploma Civil Engineering",
                       "MBA",
                       "MCA",
                       "BCA",
@@ -617,7 +613,7 @@ export default function HomePage() {
                 <CardContent className="p-4 text-center">
                   <div className="text-3xl font-black font-serif">2026</div>
                   <div className="text-xs text-white/75 mt-1">
-                    Eastablished On
+                    Established On
                   </div>
                 </CardContent>
               </Card>
@@ -683,7 +679,7 @@ export default function HomePage() {
               {
                 icon: <Calendar size={28} />,
                 number: "Admissions",
-                label: "Open 2k26 Batch",
+                label: "Admissions Open 2026-27",
               },
               {
                 icon: <Users size={28} />,
@@ -693,7 +689,7 @@ export default function HomePage() {
               {
                 icon: <BookOpen size={28} />,
                 number: "6+",
-                label: "Modern Programs",
+                label: "Modern Programmes",
               },
               {
                 icon: <Building2 size={28} />,
@@ -721,16 +717,16 @@ export default function HomePage() {
       <section id="programs" className="py-24 bg-gray-50/50">
         <div className="container mx-auto px-4">
           <div className="section-title mb-16">
-            <h2 className="text-4xl md:text-5xl">Programs Offered</h2>
+            <h2 className="text-4xl md:text-5xl">Programmes Offered</h2>
             <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg leading-relaxed">
-              Choose from our industry-aligned technical and management programs
+              Choose from our industry-aligned technical and management programmes
               designed to launch your global career.
             </p>
             <Badge
               variant="outline"
               className="mt-2 border-hitm-red text-hitm-red font-bold px-4 py-1"
             >
-              Academic Programs
+              Academic Programmes
             </Badge>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
@@ -901,7 +897,7 @@ export default function HomePage() {
                   Admissions Open
                 </h4>
                 <p className="text-white/80 text-xs mb-5">
-                  Be a part of Jharkhand&apos;s most futuristic campus.
+                  Be a part of an emerging technical & management institution in Jharkhand.
                 </p>
                 <Button
                   asChild

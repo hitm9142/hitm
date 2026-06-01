@@ -18,14 +18,12 @@ export default function DiplomaPage() {
   };
 
   const branches = [
-    { name: 'Computer Science & Engineering', seats: 60 },
-    { name: 'Data Science', seats: 30 },
-    { name: 'Artificial Intelligence', seats: 30 },
-    { name: 'Mechanical Engineering', seats: 60 },
-    { name: 'Electrical Engineering', seats: 60 },
-    { name: 'Civil Engineering', seats: 60 },
-    { name: 'Electrical & Electronics Engg.', seats: 30 },
-    { name: 'Electronics & Comm. Engg.', seats: 30 }
+    { name: 'Computer Science & Engineering (CSE)', seats: 120 },
+    { name: 'Data Sciences (DS)', seats: 30 },
+    { name: 'Artificial Intelligence (AI)', seats: 30 },
+    { name: 'Mechanical Engineering (ME)', seats: 60 },
+    { name: 'Electrical & Electronics Engineering (EEE)', seats: 60 },
+    { name: 'Civil Engineering (CE)', seats: 60 }
   ];
 
   return (

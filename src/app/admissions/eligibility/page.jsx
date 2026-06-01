@@ -13,7 +13,7 @@ export default function EligibilityPage() {
       criteria: [
         'Passed 10+2 with Physics and Mathematics (Compulsory) + Chemistry/CS/IT (Any one).',
         'Min 45% marks (40% for Reserved Categories) as per AICTE/JUT norms.',
-        'Courses: CSE, EEE, AI, Data Science, Mechanical, Civil.'
+        'Branches: Computer Science & Engineering (CSE), Data Sciences, Artificial Intelligence (AI), Electrical & Electronics Engineering, Mechanical Engineering, Civil Engineering.'
       ],
       icon: <GraduationCap className="text-hitm-red" />
     },
@@ -23,7 +23,7 @@ export default function EligibilityPage() {
       criteria: [
         'Passed 10th Std. / SSC examination.',
         'Obtained at least 35% marks in the qualifying examination.',
-        'Courses: CSE, EEE, AI, Data Science, Mechanical, Civil.'
+        'Branches: Computer Science & Engineering, Data Sciences, Artificial Intelligence, Mechanical Engineering, Electrical & Electronics Engineering, Civil Engineering.'
       ],
       icon: <BookOpen className="text-hitm-red" />
     },
@@ -31,9 +31,8 @@ export default function EligibilityPage() {
       title: 'Management (BBA / MBA)',
       duration: '3 / 2 Years',
       criteria: [
-        'MBA: Any Graduate with min 50% marks (45% for Reserved).',
-        'BBA: 10+2 / Intermediate in any stream with min 45% marks.',
-        'Approval: AICTE Approved 180 Intake for both programs.'
+        'MBA: Any Graduate with min 50% marks (45% for Reserved) with an AICTE-approved intake of 180.',
+        'BBA: 10+2 / Intermediate in any stream with min 45% marks with an intake of 180 (subject to concerned university approval as per LoA).'
       ],
       icon: <GraduationCap className="text-hitm-navy" />
     },

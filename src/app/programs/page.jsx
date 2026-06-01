@@ -28,7 +28,7 @@ export default function ProgramsPage() {
     {
       name: 'Management (MBA/BBA)',
       icon: <Award className="text-white" size={24} />,
-      desc: 'Programs designed to build strategic leaders and entrepreneurs.',
+      desc: 'Programmes designed to build strategic leaders and entrepreneurs.',
       image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800',
       href: '/programs/mba',
       courses: ['MBA (General)', 'BBA (Digital Marketing)', 'BBA (HRM)']
@@ -36,7 +36,7 @@ export default function ProgramsPage() {
     {
       name: 'Computer Applications',
       icon: <Globe className="text-white" size={24} />,
-      desc: 'Specialized programs for building a career in software and IT.',
+      desc: 'Specialized programmes for building a career in software and IT.',
       image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=800',
       href: '/programs/mca',
       courses: ['MCA (Masters)', 'BCA (Undergraduate)']
@@ -54,9 +54,9 @@ export default function ProgramsPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center">
           <Badge variant="gold" className="mb-4">Academic Excellence</Badge>
-          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6">Our Academic Programs</h1>
+          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6">Our Academic Programmes</h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Diverse, industry-aligned programs designed to empower students with knowledge, skills, and values.
+            Diverse, industry-aligned programmes designed to empower students with knowledge, skills, and values.
           </p>
         </div>
       </section>
@@ -91,7 +91,7 @@ export default function ProgramsPage() {
 
           <div className="mt-20 text-center bg-white border border-gray-100 rounded-[40px] p-12 shadow-xl">
             <GraduationCap size={48} className="mx-auto text-hitm-gold mb-6" />
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Confused about which program to choose?</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Confused about which programme to choose?</h2>
             <p className="text-gray-500 mb-8 max-w-xl mx-auto">
               Our academic counselors are here to help you make the right choice for your career. Get a free counseling session today.
             </p>

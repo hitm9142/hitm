@@ -14,8 +14,8 @@ import InlinePhoneVerifier from '@/components/InlinePhoneVerifier';
 import Link from 'next/link';
 
 const branchOptions = {
-  'B.Tech': ['Computer Science & Engineering (CSE)', 'Data Science', 'Artificial Intelligence & ML', 'Electric & Electronics Engineering', 'Mechanical Engineering', 'Civil Engineering'],
-  Diploma: ['Computer Science & Engineering', 'Data Science', 'Artificial Intelligence', 'Mechanical Engineering', 'Electrical Engineering', 'Civil Engineering', 'Electrical & Electronics Engg.', 'Electronics & Comm. Engg.'],
+  'B.Tech': ['Computer Science & Engineering (CSE)', 'Data Sciences', 'Artificial Intelligence (AI)', 'Electrical & Electronics Engineering', 'Mechanical Engineering', 'Civil Engineering'],
+  Diploma: ['Computer Science & Engineering', 'Data Sciences', 'Artificial Intelligence', 'Mechanical Engineering', 'Electrical & Electronics Engineering', 'Civil Engineering'],
   MBA: ['Finance Management', 'Marketing Management', 'Human Resource Management', 'Information Technology'],
 };
 
@@ -302,9 +302,9 @@ export default function AdmissionApplyClient() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label>Select Preferred Course *</Label>
+                      <Label>Select Preferred Programme *</Label>
                       <select className="w-full h-10 border rounded-md px-3 bg-gray-50" required value={formData.program} onChange={e => setFormData({ ...formData, program: e.target.value, branch: '' })}>
-                        <option value="">Choose Course...</option>
+                        <option value="">Choose Programme...</option>
                         <option value="B.Tech">B.Tech (Bachelor of Technology)</option>
                         <option value="Diploma">Diploma in Polytechnic</option>
                         <option value="MBA">MBA</option>

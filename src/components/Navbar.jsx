@@ -17,7 +17,7 @@ const navItems = [
     isHome: true,
   },
   {
-    label: 'Programs', icon: <BookOpen size={16} />,
+    label: 'Programmes', icon: <BookOpen size={16} />,
     children: [
       { label: 'Engineering (B.Tech)', href: '/programs/engineering' },
       { label: 'MBA', href: '/programs/mba' },
@@ -137,12 +137,12 @@ export default function Navbar() {
 
             {/* Bottom Bar (Navbar) - Aligned to standard container */}
             <div className="flex items-center justify-end flex-1 py-1 pr-[max(1rem,calc((100vw-1400px)/2+1rem))]">
-              <ul className="hidden xl:flex items-center gap-1">
+              <ul className="hidden xl:flex items-center xl:gap-0.5 2xl:gap-1.5">
                 {navItems.map((item) => (
                   <li key={item.label} className="relative group">
                     {item.children ? (
                       <>
-                        <span className="flex items-center gap-1.5 px-4 py-3 text-[13px] font-black text-hitm-navy uppercase tracking-tight cursor-pointer transition-colors group-hover:text-hitm-red">
+                        <span className="flex items-center gap-1 px-2.5 xl:px-2 2xl:px-4 py-3 text-[12.5px] 2xl:text-[13px] font-black text-hitm-navy uppercase tracking-tight cursor-pointer transition-colors group-hover:text-hitm-red whitespace-nowrap">
                           {item.label}
                           <ChevronDown size={14} className="transition-transform duration-300 group-hover:-rotate-180 text-hitm-red" />
                         </span>
@@ -154,7 +154,7 @@ export default function Navbar() {
                               <Link
                                 key={child.label}
                                 href={child.href}
-                                className="group/link flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-gray-600 hover:text-hitm-red hover:bg-gray-50 rounded-lg transition-all"
+                                className="group/link flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-gray-600 hover:text-hitm-red hover:bg-gray-50 rounded-lg transition-all whitespace-nowrap"
                               >
                                 <span className="group-hover/link:translate-x-1 transition-transform">{child.label}</span>
                               </Link>
@@ -163,11 +163,11 @@ export default function Navbar() {
                         </div>
                       </>
                     ) : item.isHome ? (
-                      <Link href={item.href} title="Home" className="flex items-center gap-1.5 px-4 py-3 text-[13px] font-black text-hitm-navy uppercase tracking-tight transition-colors hover:text-hitm-red">
+                      <Link href={item.href} title="Home" className="flex items-center gap-1 px-2.5 xl:px-2 2xl:px-4 py-3 text-[12.5px] 2xl:text-[13px] font-black text-hitm-navy uppercase tracking-tight transition-colors hover:text-hitm-red whitespace-nowrap">
                         Home
                       </Link>
                     ) : (
-                      <Link href={item.href} className="flex items-center gap-1.5 px-4 py-3 text-[13px] font-black text-hitm-navy uppercase tracking-tight transition-colors hover:text-hitm-red">
+                      <Link href={item.href} className="flex items-center gap-1 px-2.5 xl:px-2 2xl:px-4 py-3 text-[12.5px] 2xl:text-[13px] font-black text-hitm-navy uppercase tracking-tight transition-colors hover:text-hitm-red whitespace-nowrap">
                         {item.label}
                       </Link>
                     )}

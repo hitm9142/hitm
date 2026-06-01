@@ -1,6 +1,4 @@
 'use client';
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
 
 import { useState } from 'react';
 import dynamicImport from 'next/dynamic';
@@ -9,6 +7,7 @@ import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Mail, Phone, MapPin, Clock, Send, Loader2, CheckCircle2 } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -138,8 +137,15 @@ export default function ContactPage() {
                         <Phone className="text-hitm-gold" size={20} />
                       </div>
                       <p className="text-gray-300 text-sm leading-relaxed">
-                        Admission: 764-496-6461<br />
-                        {/* Admissions: +91 98765 43210 */}
+                        Admission: 764-496-6461
+                      </p>
+                    </div>
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                        <FaWhatsapp className="text-green-400" size={20} />
+                      </div>
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        <a href="https://wa.me/917644966461" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 font-bold hover:underline transition-colors">Chat on WhatsApp</a>
                       </p>
                     </div>
                     <div className="flex gap-4">

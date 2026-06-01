@@ -36,7 +36,7 @@ export default function StudentLifePage() {
     {
       image: "/images/labs.jpg",
       title: "Labs & Library",
-      desc: "Fully equipped modern laboratories and a massive digital library with over 50,000+ books.",
+      desc: "Fully equipped modern laboratories and a massive digital library with an extensive collection of textbooks, reference books, and digital resources.",
     },
     {
       image: "/common-room.jpg",
@@ -44,9 +44,9 @@ export default function StudentLifePage() {
       desc: "Spacious, comfortable, and separate common rooms for girls and boys to relax, study, and engage in indoor games.",
     },
     {
-      image: "/swimmingpool.jpg",
-      title: "Swimming Pool",
-      desc: "A clean, well-maintained, semi-Olympic size swimming pool with trained lifeguards and dedicated slots for boys and girls.",
+      image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=600&auto=format&fit=crop",
+      title: "Sports & Recreation",
+      desc: "Well-equipped sports fields, indoor game provisions, and recreation spaces promoting physical fitness and student wellness.",
     }
   ];
 
@@ -119,7 +119,7 @@ export default function StudentLifePage() {
                   Vibrant Campus Culture
                 </h2>
                 <p className="text-gray-300 font-medium">
-                  Join a diverse community of learners and participate in over 20+ clubs,
+                  Join a diverse community of learners and participate in various student clubs,
                   annual fests, and sports meets that define the HITM experience.
                 </p>
               </div>

@@ -19,7 +19,7 @@ export default function MBAPage() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      
+
       {/* Hero */}
       <section className="bg-hitm-navy pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
@@ -40,7 +40,7 @@ export default function MBAPage() {
       <section className="py-20 flex-1">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            
+
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-black font-serif text-gray-900 mb-8">Program Overview</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
@@ -62,7 +62,7 @@ export default function MBAPage() {
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Specializations</h3>
+              {/* <h3 className="text-2xl font-bold text-gray-900 mb-6">Specializations</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {specializations.map((s, i) => (
                   <Card key={i} className="hover:shadow-md transition-all">
@@ -72,7 +72,7 @@ export default function MBAPage() {
                     </CardContent>
                   </Card>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             <div className="bg-gray-900 text-white rounded-[40px] p-10 shadow-2xl h-fit">
@@ -85,7 +85,7 @@ export default function MBAPage() {
                   'Document Verification'
                 ].map((step, i) => (
                   <div key={i} className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded-full bg-hitm-red flex items-center justify-center text-xs font-black shrink-0">{i+1}</div>
+                    <div className="w-8 h-8 rounded-full bg-hitm-red flex items-center justify-center text-xs font-black shrink-0">{i + 1}</div>
                     <span className="text-sm text-white/80">{step}</span>
                   </div>
                 ))}

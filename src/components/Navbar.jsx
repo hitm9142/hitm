@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 
+import { PROGRAMMES } from '@/config/programs';
+
 const navItems = [
   {
     label: 'Home', icon: <Home size={16} />,
@@ -18,14 +20,7 @@ const navItems = [
   },
   {
     label: 'Programmes', icon: <BookOpen size={16} />,
-    children: [
-      { label: 'B.Tech', href: '/programs/engineering' },
-      { label: 'MBA', href: '/programs/mba' },
-      { label: 'MCA', href: '/programs/mca' },
-      { label: 'Diploma', href: '/programs/diploma' },
-      { label: 'BCA', href: '/programs/bca' },
-      { label: 'BBA', href: '/programs/bba' },
-    ],
+    children: PROGRAMMES,
   },
   {
     label: 'Governance', icon: <Building2 size={16} />,
@@ -47,8 +42,8 @@ const navItems = [
     label: 'Academics', icon: <GraduationCap size={16} />,
     children: [
       { label: 'Syllabus (PDF)', href: '/academics/syllabus' },
-      { label: 'Academic Calendar', href: '/academics/calendar' },
-      { label: 'Faculty Details', href: '/about/faculty' },
+      // { label: 'Academic Calendar', href: '/academics/calendar' },
+      // { label: 'Faculty Details', href: '/about/faculty' },
     ],
   },
   {
@@ -103,7 +98,7 @@ export default function Navbar() {
                 </h1>
                 <div className="text-[7.5px] sm:text-[9px] md:text-[11px] font-bold text-gray-500 uppercase mt-1 leading-[1.2]">
                   <p className="text-hitm-navy">Run and Managed by AL ALMAAS HAIDER CHARITABLE TRUST</p>
-                  Approved by AICTE, New Delhi 
+                  Approved by AICTE, New Delhi
                 </div>
               </div>
             </Link>

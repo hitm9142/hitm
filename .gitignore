@@ -40,4 +40,4 @@ build_logs*.txt
 build_output.log
 eslint_output.*
 .env
-
+knowledge.md

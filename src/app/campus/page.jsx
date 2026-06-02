@@ -37,7 +37,7 @@ export default function CampusPage() {
   return (
     <main className='flex flex-col min-h-screen bg-white'>
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className='pt-32 pb-16 bg-hitm-navy relative overflow-hidden'>
         <div className="absolute top-0 right-0 w-1/3 h-full bg-hitm-red/10 skew-x-12 translate-x-20" />
@@ -59,9 +59,9 @@ export default function CampusPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-  <div className="text-3xl font-bold text-hitm-navy mb-1">Modern Campus</div>
-  <p className="text-gray-500 text-sm">Designed for a better learning experience</p>
-</div>
+              <div className="text-3xl font-bold text-hitm-navy mb-1">Modern Campus</div>
+              <p className="text-gray-500 text-sm">Designed for a better learning experience</p>
+            </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-hitm-navy mb-1">6+</div>
               <p className="text-gray-500 text-sm">Laboratories</p>
@@ -84,7 +84,7 @@ export default function CampusPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* First Large Image */}
             <div className="lg:col-span-2 relative group h-[400px] rounded-2xl overflow-hidden shadow-lg animate-fade-up">
-              <Image 
+              <Image
                 src={images[0].url}
                 alt={images[0].title}
                 fill
@@ -99,7 +99,7 @@ export default function CampusPage() {
 
             {/* Side Image */}
             <div className="relative group h-[400px] rounded-2xl overflow-hidden shadow-lg animate-fade-up" style={{ animationDelay: '0.1s' }}>
-              <Image 
+              <Image
                 src={images[1].url}
                 alt={images[1].title}
                 fill
@@ -115,7 +115,7 @@ export default function CampusPage() {
             {/* Bottom Row */}
             {images.slice(2).map((img, idx) => (
               <div key={idx} className="relative group h-[300px] rounded-2xl overflow-hidden shadow-lg animate-fade-up" style={{ animationDelay: `${(idx + 2) * 0.1}s` }}>
-                <Image 
+                <Image
                   src={img.url}
                   alt={img.title}
                   fill
@@ -171,7 +171,7 @@ export default function CampusPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="bg-hitm-red rounded-3xl p-12 text-center text-white relative overflow-hidden">
              <div className="relative z-10">
@@ -184,14 +184,13 @@ export default function CampusPage() {
                   <button className="px-10 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-colors">Virtual Tour</button>
                 </div>
              </div>
-             {/* Abstract background elements */}
              <div className="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
              <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-1/3 translate-y-1/3" />
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </main>
-  ); 
+  );
 }

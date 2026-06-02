@@ -1,16 +1,16 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
 import { CheckCircle2, Loader2, ShieldAlert } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { signInWithCustomToken } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
 
-export default function InlinePhoneVerifier({ 
-  phone, 
-  onChange, 
-  onVerificationComplete, 
-  recaptchaId = 'default' 
+export default function InlinePhoneVerifier({
+  phone,
+  onChange,
+  onVerificationComplete,
+  recaptchaId = 'default'
 }) {
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,11 +20,12 @@ export default function InlinePhoneVerifier({
   const [timer, setTimer] = useState(60);
   const [canResend, setCanResend] = useState(false);
 
+  // States to hold stateless HMAC parameters
+  const [otpHash, setOtpHash] = useState('');
+  const [otpExpiry, setOtpExpiry] = useState('');
+
   const [touched, setTouched] = useState(false);
   const [validationError, setValidationError] = useState('');
-
-  const recaptchaVerifierRef = useRef(null);
-  const confirmationResultRef = useRef(null);
   const timerRef = useRef(null);
 
   // Validate phone number input and return standard error text
@@ -46,14 +47,6 @@ export default function InlinePhoneVerifier({
   };
   const isTenDigits = isIndianMobile(phone);
 
-  // Format phone number to standard E.164 (+91 for India)
-  const formatPhone = (p) => {
-    const cleaned = p.replace(/\D/g, '');
-    if (cleaned.length === 10) return `+91${cleaned}`;
-    if (cleaned.length === 12 && cleaned.startsWith('91')) return `+${cleaned}`;
-    return `+${cleaned}`;
-  };
-
   useEffect(() => {
     // Reset state if phone number changes from 10 digits
     if (!isTenDigits) {
@@ -61,7 +54,6 @@ export default function InlinePhoneVerifier({
       setSuccess(false);
       setError('');
       onVerificationComplete(false);
-      cleanupVerifier();
       stopTimer();
     }
   }, [phone, isTenDigits]);
@@ -81,61 +73,49 @@ export default function InlinePhoneVerifier({
     }
   };
 
-  const cleanupVerifier = () => {
-    if (recaptchaVerifierRef.current) {
-      try {
-        recaptchaVerifierRef.current.clear();
-      } catch (err) {
-        console.error("Error clearing recaptcha verifier:", err);
-      }
-      recaptchaVerifierRef.current = null;
-    }
-    confirmationResultRef.current = null;
-    
-    // Reset the recaptcha container HTML to prevent "reCAPTCHA has already been rendered" error on retries
-    if (typeof document !== 'undefined') {
-      const container = document.getElementById(`recaptcha-container-${recaptchaId}`);
-      if (container) {
-        container.innerHTML = '';
-      }
-    }
-  };
-
   const handleSendOTP = async (e) => {
     if (e) e.preventDefault();
     if (!isTenDigits) return;
 
     setLoading(true);
     setError('');
-    
-    // Preserve the OTP input container when resending
+
     const isResend = otpSent;
     if (!isResend) {
       setOtpSent(false);
     }
-    cleanupVerifier();
 
     try {
-      // Initialize recaptcha verifier
-      const containerId = `recaptcha-container-${recaptchaId}`;
-      const verifier = new RecaptchaVerifier(auth, containerId, {
-        size: 'invisible',
-        callback: () => {}
+      const response = await fetch('/api/otp/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          mobile: phone,
+          channel: 'sms',
+        }),
       });
-      recaptchaVerifierRef.current = verifier;
 
-      const formattedPhone = formatPhone(phone);
-      const confirmationResult = await signInWithPhoneNumber(auth, formattedPhone, verifier);
-      confirmationResultRef.current = confirmationResult;
-      
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Failed to send verification code. Please try again.');
+      }
+
+      setOtpHash(data.hash);
+      setOtpExpiry(data.expiry);
       setOtpSent(true);
       setTimer(60);
       setCanResend(false);
       setOtp(''); // Clear the previous OTP input box on resend
+
+      // Print debug OTP in console when in development environment
+
+
     } catch (err) {
-      console.error("Firebase send phone OTP error:", err);
-      setError('Failed to send verification code. Please try again.');
-      cleanupVerifier();
+      console.error("Send OTP error:", err);
+      setError(err.message || 'Failed to send verification code. Please try again.');
       if (isResend) {
         setCanResend(true);
       }
@@ -155,19 +135,42 @@ export default function InlinePhoneVerifier({
     setError('');
 
     try {
-      if (!confirmationResultRef.current) {
-        throw new Error('Verification session expired. Please send OTP again.');
+      const response = await fetch('/api/otp/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          mobile: phone,
+          otp: otp,
+          hash: otpHash,
+          expiry: otpExpiry,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Invalid OTP code. Please check and try again.');
       }
-      await confirmationResultRef.current.confirm(otp);
-      
+
+      // Programmatically sign user in using Custom Token generated by our secure server
+      if (data.customToken && auth) {
+        try {
+          await signInWithCustomToken(auth, data.customToken);
+          console.log("Authenticated successfully with Firebase Auth using Custom Token!");
+        } catch (authErr) {
+          console.error("Firebase custom token auth failed on client:", authErr);
+        }
+      }
+
       setSuccess(true);
       setOtpSent(false);
       onVerificationComplete(true);
-      cleanupVerifier();
       stopTimer();
     } catch (err) {
-      console.error("Firebase confirm OTP error:", err);
-      setError('Invalid OTP code. Please check and try again.');
+      console.error("Confirm OTP error:", err);
+      setError(err.message || 'Invalid OTP code. Please check and try again.');
     } finally {
       setLoading(false);
     }
@@ -175,20 +178,17 @@ export default function InlinePhoneVerifier({
 
   return (
     <div className="space-y-3 w-full">
-      {/* Hidden recaptcha element */}
-      <div id={`recaptcha-container-${recaptchaId}`} className="hidden"></div>
-
       <div className="relative flex items-center gap-2">
         <div className="relative flex-1">
-          <Input 
+          <Input
             type="tel"
             required
-            placeholder="Mobile Number" 
+            placeholder="Mobile Number"
             value={phone}
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, '').slice(0, 10);
               onChange(val);
-              
+
               if (touched || val.length >= 10 || (val.length > 0 && !/^[6-9]/.test(val))) {
                 setValidationError(validatePhoneInput(val));
               } else {
@@ -210,7 +210,7 @@ export default function InlinePhoneVerifier({
         </div>
 
         {isTenDigits && !success && !otpSent && (
-          <Button 
+          <Button
             type="button"
             onClick={handleSendOTP}
             disabled={loading}
@@ -230,19 +230,19 @@ export default function InlinePhoneVerifier({
           ) : (
             <span></span>
           )}
-          <span className={`${phone && phone.length === 10 ? 'text-green-600 font-bold' : 'text-gray-400 font-medium'}`}>
+          {/* <span className={`${phone && phone.length === 10 ? 'text-green-600 font-bold' : 'text-gray-400 font-medium'}`}>
             {phone ? phone.length : 0}/10 digits
-          </span>
+          </span> */}
         </div>
       )}
 
       {otpSent && (
-        <div className="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3 animate-in slide-in-from-top duration-300">
+        <div className="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3 animate-in slide-in-from-top duration-300 shadow-inner">
           <p className="text-xs text-gray-500 text-center font-medium">
-            We have sent a verification code to your phone number.
+            We have sent an SMS verification code to your phone number.
           </p>
           <div className="flex gap-2">
-            <Input 
+            <Input
               type="text"
               maxLength={6}
               placeholder="Enter 6-Digit OTP"
@@ -255,7 +255,7 @@ export default function InlinePhoneVerifier({
               type="button"
               onClick={handleVerifyOTP}
               disabled={loading || otp.length !== 6}
-              className="h-10 px-4 bg-green-600 hover:bg-green-700 text-white text-xs font-bold rounded-xl shadow-md shrink-0"
+              className="h-10 px-4 bg-green-600 hover:bg-green-700 text-white text-xs font-bold rounded-xl shadow-md shrink-0 transition-colors"
             >
               {loading ? <Loader2 className="animate-spin w-4 h-4" /> : 'Confirm'}
             </Button>
@@ -263,16 +263,16 @@ export default function InlinePhoneVerifier({
 
           <div className="flex justify-between items-center px-1 text-[11px]">
             {error ? (
-              <span className="text-red-500 font-semibold flex items-center gap-1">
+              <span className="text-red-500 font-semibold flex items-center gap-1 animate-pulse">
                 <ShieldAlert size={12} /> {error}
               </span>
             ) : (
               <span></span>
             )}
             {canResend ? (
-              <button 
-                type="button" 
-                onClick={handleSendOTP} 
+              <button
+                type="button"
+                onClick={handleSendOTP}
                 className="text-hitm-navy hover:text-hitm-red font-bold hover:underline"
               >
                 Resend OTP
@@ -285,8 +285,8 @@ export default function InlinePhoneVerifier({
       )}
 
       {error && !otpSent && (
-        <p className="text-red-500 text-xs font-bold bg-red-50 p-2.5 rounded-xl border border-red-100 animate-fade-in flex items-center gap-1.5">
-          <ShieldAlert size={14} /> {error}
+        <p className="text-red-500 text-xs font-bold bg-red-50 p-2.5 rounded-xl border border-red-100 animate-fade-in flex items-center gap-1.5 mt-1">
+          <ShieldAlert size={14} className="shrink-0" /> {error}
         </p>
       )}
     </div>

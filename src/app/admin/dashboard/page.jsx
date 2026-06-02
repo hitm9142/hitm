@@ -7,7 +7,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import Link from 'next/link';
 import {
   LayoutDashboard, Bell, CalendarDays, Users, Briefcase,
-  Globe, LogOut, Menu, Clock, Sparkles, Rocket, CreditCard
+  Globe, LogOut, Menu, Clock, Sparkles, Rocket, CreditCard, BookOpen
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -15,20 +15,24 @@ import DashboardView from '@/components/admin/DashboardView';
 import NoticesManager from '@/components/admin/NoticesManager';
 import EventsManager from '@/components/admin/EventsManager';
 import EnquiriesManager from '@/components/admin/EnquiriesManager';
+import ApplicationsManager from '@/components/admin/ApplicationsManager';
 import CareerManager from '@/components/admin/CareerManager';
 import PopupManager from '@/components/admin/PopupManager';
 import IncubationManager from '@/components/admin/IncubationManager';
 import PaymentsManager from '@/components/admin/PaymentsManager';
+import SyllabusManager from '@/components/admin/SyllabusManager';
 
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={16} /> },
   { id: 'notices', label: 'Notices', icon: <Bell size={16} /> },
   { id: 'events', label: 'Events', icon: <CalendarDays size={16} /> },
+  { id: 'applications', label: 'Applications', icon: <Users size={16} /> },
   { id: 'enquiries', label: 'Enquiries', icon: <Users size={16} /> },
   { id: 'payments', label: 'Payments', icon: <CreditCard size={16} /> },
   { id: 'careers', label: 'Careers', icon: <Briefcase size={16} /> },
   { id: 'incubation', label: 'Incubation Leads', icon: <Rocket size={16} /> },
   { id: 'popup', label: 'Popup Leads', icon: <Sparkles size={16} /> },
+  { id: 'syllabus', label: 'Syllabus Manager', icon: <BookOpen size={16} /> },
 ];
 
 export default function AdminDashboard() {
@@ -83,11 +87,13 @@ export default function AdminDashboard() {
       case 'dashboard': return <DashboardView />;
       case 'notices': return <NoticesManager />;
       case 'events': return <EventsManager />;
+      case 'applications': return <ApplicationsManager />;
       case 'enquiries': return <EnquiriesManager />;
       case 'payments': return <PaymentsManager />;
       case 'careers': return <CareerManager />;
       case 'incubation': return <IncubationManager />;
       case 'popup': return <PopupManager />;
+      case 'syllabus': return <SyllabusManager />;
       default: return (
         <div className="flex flex-col items-center justify-center py-20 text-gray-400">
           <Clock size={48} className="mb-4 opacity-40" />

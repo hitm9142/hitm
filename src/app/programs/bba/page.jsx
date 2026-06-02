@@ -4,23 +4,11 @@ import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Target, Download } from 'lucide-react';
+import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Target } from 'lucide-react';
 import Link from 'next/link';
-import { generatePagePDF } from '@/lib/pdf-service';
 import ApplyModal from '@/components/ApplyModal';
 
 export default function BBAPage() {
-  const handleDownload = () => {
-    generatePagePDF("BBA_Prospectus", "Bachelor of Business Administration", {
-      headers: ["Asset", "Description"],
-      rows: [
-        ["Industry Focused", "Curriculum designed with industry leaders"],
-        ["Mentorship", "1-on-1 career guidance"],
-        ["Real World Labs", "Practical projects and internships"],
-        ["Early Placement", "Support starting from final year"]
-      ]
-    });
-  };
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
@@ -33,9 +21,6 @@ export default function BBAPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex justify-between items-center mb-4">
             <Badge variant="gold">School of Business</Badge>
-            <Button variant="ghost" size="sm" onClick={handleDownload} className="text-white hover:bg-white/10">
-              <Download size={16} className="mr-2" /> Download Business-Brochure
-            </Button>
           </div>
           <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6">Bachelor of Business Administration</h1>
           <p className="text-gray-300 max-w-2xl text-lg leading-relaxed">

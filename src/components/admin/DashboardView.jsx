@@ -8,15 +8,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 const statusColors = {
-  New: 'bg-red-100 text-red-700',
-  Contacted: 'bg-blue-100 text-blue-700',
-  Converted: 'bg-green-100 text-green-700',
+  Draft: 'bg-gray-100 text-gray-700',
+  'Payment Pending': 'bg-amber-100 text-amber-700',
+  Submitted: 'bg-blue-100 text-blue-700',
+  Verified: 'bg-green-100 text-green-700',
 };
 
 export default function DashboardView() {
   const [noticesCount, setNoticesCount] = useState(0);
-  const [enquiriesCount, setEnquiriesCount] = useState(0);
-  const [recentEnquiries, setRecentEnquiries] = useState([]);
+  const [applicationsCount, setApplicationsCount] = useState(0);
+  const [recentApplications, setRecentApplications] = useState([]);
   const [recentNotices, setRecentNotices] = useState([]);
   const [eventsCount, setEventsCount] = useState(0);
   const [recentEvents, setRecentEvents] = useState([]);
@@ -29,10 +30,10 @@ export default function DashboardView() {
       setRecentNotices(snapshot.docs.slice(0, 4).map(d => ({ id: d.id, ...d.data() })));
     });
 
-    const qEnquiries = query(collection(db, 'enquiries'), orderBy('createdAt', 'desc'));
-    const unsubEnquiries = onSnapshot(qEnquiries, (snapshot) => {
-      setEnquiriesCount(snapshot.size);
-      setRecentEnquiries(snapshot.docs.slice(0, 4).map(d => ({ id: d.id, ...d.data() })));
+    const qApplications = query(collection(db, 'applications'), orderBy('updatedAt', 'desc'));
+    const unsubApplications = onSnapshot(qApplications, (snapshot) => {
+      setApplicationsCount(snapshot.size);
+      setRecentApplications(snapshot.docs.slice(0, 4).map(d => ({ id: d.id, ...d.data() })));
     });
 
     const qEvents = query(collection(db, 'events'), orderBy('createdAt', 'desc'));
@@ -41,11 +42,11 @@ export default function DashboardView() {
       setRecentEvents(snapshot.docs.slice(0, 4).map(d => ({ id: d.id, ...d.data() })));
     });
 
-    return () => { unsubNotices(); unsubEnquiries(); unsubEvents(); };
+    return () => { unsubNotices(); unsubApplications(); unsubEvents(); };
   }, []);
 
   const stats = [
-    { icon: <Users size={22} />, label: 'Total Enquiries', value: enquiriesCount.toString(), change: 'Real-time', color: 'text-hitm-red bg-hitm-red/10' },
+    { icon: <Users size={22} />, label: 'Total Applications', value: applicationsCount.toString(), change: 'Real-time', color: 'text-hitm-red bg-hitm-red/10' },
     { icon: <CalendarDays size={22} />, label: 'Active Events', value: eventsCount.toString(), change: 'Live', color: 'text-hitm-navy bg-hitm-navy/10' },
     { icon: <Bell size={22} />, label: 'Active Notices', value: noticesCount.toString(), change: 'Live', color: 'text-amber-600 bg-amber-50' },
     { icon: <TrendingUp size={22} />, label: 'Admissions Status', value: 'Open', change: '2026', color: 'text-emerald-600 bg-emerald-50' },
@@ -72,11 +73,11 @@ export default function DashboardView() {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        {/* Recent Enquiries */}
+        {/* Recent Applications */}
         <Card className="overflow-hidden">
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center justify-between">
-              Recent Enquiries
+              Recent Applications
               <Button variant="ghost" size="sm" className="text-xs text-hitm-red">View All <ChevronRight size={12} /></Button>
             </CardTitle>
           </CardHeader>
@@ -91,26 +92,30 @@ export default function DashboardView() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {recentEnquiries.length > 0 ? recentEnquiries.map((e) => (
-                  <tr key={e.id} className="hover:bg-gray-50 transition-colors animate-fade-in">
-                    <td className="px-4 py-3">
-                      <p className="font-medium text-gray-900">{e.name}</p>
-                      <p className="text-xs text-gray-400">{e.phone}</p>
-                    </td>
-                    <td className="px-4 py-3 text-gray-600">{e.program}</td>
-                    <td className="px-4 py-3">
-                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${statusColors[e.status] || 'bg-gray-100'}`}>
-                        {e.status || 'New'}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <Button size="sm" variant="ghost" className="h-7 text-xs text-hitm-navy">
-                        <Eye size={12} className="mr-1" /> View
-                      </Button>
-                    </td>
-                  </tr>
-                )) : (
-                  <tr><td colSpan="4" className="text-center py-10 text-gray-400 text-xs">No recent enquiries</td></tr>
+                {recentApplications.length > 0 ? recentApplications.map((e) => {
+                  const name = e.personalDetails?.name || e.name || 'Draft';
+                  const program = e.programSelection?.program || e.program || 'N/A';
+                  return (
+                    <tr key={e.id} className="hover:bg-gray-50 transition-colors animate-fade-in">
+                      <td className="px-4 py-3">
+                        <p className="font-medium text-gray-900">{name}</p>
+                        <p className="text-xs text-gray-400">{e.phone}</p>
+                      </td>
+                      <td className="px-4 py-3 text-gray-600">{program}</td>
+                      <td className="px-4 py-3">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter ${statusColors[e.status] || 'bg-gray-100 text-gray-700'}`}>
+                          {e.status || 'Draft'}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <Button size="sm" variant="ghost" className="h-7 text-xs text-hitm-navy">
+                          <Eye size={12} className="mr-1" /> View
+                        </Button>
+                      </td>
+                    </tr>
+                  )
+                }) : (
+                  <tr><td colSpan="4" className="text-center py-10 text-gray-400 text-xs">No recent applications</td></tr>
                 )}
               </tbody>
             </table>

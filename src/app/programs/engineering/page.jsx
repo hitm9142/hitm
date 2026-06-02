@@ -4,18 +4,11 @@ import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Award, Download } from 'lucide-react';
+import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Award } from 'lucide-react';
 import Link from 'next/link';
-import { generatePagePDF } from '@/lib/pdf-service';
 import ApplyModal from '@/components/ApplyModal';
 
 export default function EngineeringPage() {
-  const handleDownload = () => {
-    generatePagePDF("BTech_Curriculum", "B.Tech Engineering Program Details", {
-      headers: ["Branch Name", "Capacity", "Specialization Focus"],
-      rows: branches.map(b => [b.name, b.seats, b.desc])
-    });
-  };
 
   const branches = [
     { name: 'Computer Science & Engineering (CSE)', seats: 120, desc: 'Cutting-edge curriculum focused on AI, Software Engineering, and Cloud Computing.' },

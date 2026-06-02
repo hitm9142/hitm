@@ -6,6 +6,8 @@ import { Phone, Mail, MapPin, Clock, ChevronRight, Facebook, Linkedin, Instagram
 import { Separator } from '@/components/ui/separator';
 import VisitCounter from '@/components/VisitCounter';
 
+import { PROGRAMMES } from '@/config/programs';
+
 const footerLinks = {
   quickLinks: [
     { label: 'About HITM', href: '/about' },
@@ -17,14 +19,7 @@ const footerLinks = {
     { label: 'Notice Board', href: '/notice' },
     { label: 'Career', href: '/career' },
   ],
-  programs: [
-    { label: 'MBA', href: '/programs/mba' },
-    { label: 'MCA', href: '/programs/mca' },
-    { label: 'B.Tech', href: '/programs/engineering' },
-    { label: 'Diploma', href: '/programs/diploma' },
-    { label: 'BCA', href: '/programs/bca' },
-    { label: 'BBA', href: '/programs/bba' },
-  ],
+  programs: PROGRAMMES,
 };
 
 export default function Footer() {

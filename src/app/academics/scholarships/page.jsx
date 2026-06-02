@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { CheckCircle, Info, Award, Calendar, HandCoins, GraduationCap } from 'lucide-react';
 
-export default function ScholarshipsPage() { 
+export default function ScholarshipsPage() {
   const scholarshipTypes = [
     {
       title: "Merit-Based Scholarship",
@@ -32,11 +32,11 @@ export default function ScholarshipsPage() {
   return (
     <main className='flex flex-col min-h-screen bg-white'>
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-black/60 z-10" />
-        <Image 
+        <Image
           src="/images/scholar.webp"
           alt="Students studying"
           fill
@@ -69,11 +69,11 @@ export default function ScholarshipsPage() {
                     <GraduationCap className="w-6 h-6 text-hitm-red" />
                   </div>
                   <div>
-  <h3 className="font-bold text-hitm-navy">Committed to Supporting Every Student</h3>
-  <p className="text-sm text-gray-500">
-    Providing financial assistance and scholarships to help students begin their academic journey.
-  </p>
-</div>
+                    <h3 className="font-bold text-hitm-navy">Committed to Supporting Every Student</h3>
+                    <p className="text-sm text-gray-500">
+                      Providing financial assistance and scholarships to help students begin their academic journey.
+                    </p>
+                  </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="p-2 bg-hitm-gold/10 rounded-lg">
@@ -87,7 +87,7 @@ export default function ScholarshipsPage() {
               </div>
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl skew-y-2 lg:skew-y-0 lg:rotate-3 transition-transform hover:rotate-0 duration-500">
-              <Image 
+              <Image
                 src="/images/school.webp"
                 alt="Success at HITM"
                 fill
@@ -113,7 +113,7 @@ export default function ScholarshipsPage() {
       </section>
 
       {/* How to Get Scholarship */}
-      
+
 
       {/* CTA Section */}
       <section className="py-16 bg-hitm-navy text-white">
@@ -123,13 +123,12 @@ export default function ScholarshipsPage() {
             &quot;Our financial aid office is here to help you navigate your options and find the best support for your education.&quot;
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-hitm-red hover:bg-hitm-red-dark transition-colors rounded-full font-bold">Contact Advisor</button>
-            <button className="px-8 py-3 bg-white/10 hover:bg-white/20 transition-colors rounded-full font-bold border border-white/20">Download FAQ</button>
+            <a href="/contact" className="px-8 py-3 bg-hitm-red hover:bg-hitm-red-dark transition-colors rounded-full font-bold">Contact Advisor</a>
           </div>
         </div>
       </section>
 
       <Footer />
     </main>
-  ); 
+  );
 }

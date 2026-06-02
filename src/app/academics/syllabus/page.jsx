@@ -1,20 +1,58 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Download } from 'lucide-react';
+import { BookOpen, Download, Loader2 } from 'lucide-react';
 import { generatePagePDF } from '@/lib/pdf-service';
 import { Button } from '@/components/ui/button';
+import { db } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default function SyllabusPage() {
   const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedBranch, setSelectedBranch] = useState('');
   const [selectedSemester, setSelectedSemester] = useState('');
+  const [customSyllabus, setCustomSyllabus] = useState(null);
+  const [checkingDb, setCheckingDb] = useState(false);
+
+  useEffect(() => {
+    if (!selectedCourse || !selectedBranch || !selectedSemester || !db) {
+      setCustomSyllabus(null);
+      return;
+    }
+
+    const checkSyllabus = async () => {
+      setCheckingDb(true);
+      try {
+        const docId = `${selectedCourse}_${selectedBranch}_Sem_${selectedSemester}`;
+        const docSnap = await getDoc(doc(db, 'syllabuses', docId));
+        if (docSnap.exists()) {
+          setCustomSyllabus(docSnap.data());
+        } else {
+          setCustomSyllabus(null);
+        }
+      } catch (err) {
+        console.error('Error fetching custom syllabus:', err);
+        setCustomSyllabus(null);
+      } finally {
+        setCheckingDb(false);
+      }
+    };
+
+    checkSyllabus();
+  }, [selectedCourse, selectedBranch, selectedSemester]);
 
   const handleDownload = () => {
     if (!selectedCourse || !selectedBranch || !selectedSemester) return;
     
+    // If a custom syllabus file exists, download/open it directly in a new tab
+    if (customSyllabus && customSyllabus.fileUrl) {
+      window.open(customSyllabus.fileUrl, '_blank');
+      return;
+    }
+
+    // Default fallback to dynamic PDF generator
     generatePagePDF(
       `${selectedCourse}_${selectedBranch}_Sem_${selectedSemester}_Syllabus`,
       `Syllabus: ${selectedCourse} - ${selectedBranch} (Semester ${selectedSemester})`,
@@ -152,18 +190,24 @@ export default function SyllabusPage() {
                       <div className="flex flex-col xl:flex-row items-center justify-between p-4 bg-hitm-navy/5 rounded-2xl border border-hitm-red/10 gap-4">
                         <div className="flex gap-4 items-center">
                           <div className="w-12 h-12 rounded-xl bg-white shadow-sm text-hitm-red flex items-center justify-center shrink-0">
-                            <BookOpen size={24} />
+                            {checkingDb ? <Loader2 className="animate-spin text-hitm-navy" size={24} /> : <BookOpen size={24} />}
                           </div>
                           <div>
                             <h3 className="font-bold text-hitm-navy leading-tight">{selectedCourse} - {selectedBranch}</h3>
                             <p className="text-xs font-bold text-gray-400 mt-1 uppercase tracking-widest">Semester {selectedSemester} Syllabus</p>
+                            {customSyllabus && (
+                              <p className="text-[10px] text-green-600 font-bold mt-1.5 flex items-center gap-1">
+                                ✓ Dynamic PDF Uploaded: {customSyllabus.fileName}
+                              </p>
+                            )}
                           </div>
                         </div>
                         <button 
                           onClick={handleDownload}
-                          className="shrink-0 px-6 py-3 bg-hitm-red text-white font-bold rounded-xl hover:bg-hitm-navy transition-all shadow-lg flex items-center gap-2 w-full xl:w-auto justify-center"
+                          disabled={checkingDb}
+                          className="shrink-0 px-6 py-3 bg-hitm-red text-white font-bold rounded-xl hover:bg-hitm-navy transition-all shadow-lg flex items-center gap-2 w-full xl:w-auto justify-center disabled:opacity-50"
                         >
-                          <Download size={18} /> Download PDF
+                          <Download size={18} /> {customSyllabus ? 'Download Uploaded PDF' : 'Download Generated PDF'}
                         </button>
                       </div>
                     </div>

@@ -59,3 +59,31 @@ export async function getAdminDb() {
   }
   return null;
 }
+
+let adminAuth = null;
+export async function getAdminAuth() {
+  if (adminAuth) return adminAuth;
+  try {
+    const admin = await import("firebase-admin");
+    if (!admin.default.apps.length) {
+      const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+      const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+      const projectId = process.env.FIREBASE_PROJECT_ID;
+
+      if (privateKey && clientEmail && projectId && !privateKey.includes("YOUR_PRIVATE_KEY")) {
+        admin.default.initializeApp({
+          credential: admin.default.credential.cert({ projectId, clientEmail, privateKey }),
+          projectId,
+        });
+        adminAuth = admin.default.auth();
+        return adminAuth;
+      }
+    } else {
+      adminAuth = admin.default.auth();
+      return adminAuth;
+    }
+  } catch (e) {
+    // Firebase Admin not available or not configured
+  }
+  return null;
+}

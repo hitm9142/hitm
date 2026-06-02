@@ -7,7 +7,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import Link from 'next/link';
 import {
   LayoutDashboard, Bell, CalendarDays, Users, Briefcase,
-  Globe, LogOut, Menu, Clock, Sparkles, Rocket, CreditCard
+  Globe, LogOut, Menu, Clock, Sparkles, Rocket, CreditCard, BookOpen
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -20,6 +20,7 @@ import CareerManager from '@/components/admin/CareerManager';
 import PopupManager from '@/components/admin/PopupManager';
 import IncubationManager from '@/components/admin/IncubationManager';
 import PaymentsManager from '@/components/admin/PaymentsManager';
+import SyllabusManager from '@/components/admin/SyllabusManager';
 
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={16} /> },
@@ -31,6 +32,7 @@ const navItems = [
   { id: 'careers', label: 'Careers', icon: <Briefcase size={16} /> },
   { id: 'incubation', label: 'Incubation Leads', icon: <Rocket size={16} /> },
   { id: 'popup', label: 'Popup Leads', icon: <Sparkles size={16} /> },
+  { id: 'syllabus', label: 'Syllabus Manager', icon: <BookOpen size={16} /> },
 ];
 
 export default function AdminDashboard() {
@@ -91,6 +93,7 @@ export default function AdminDashboard() {
       case 'careers': return <CareerManager />;
       case 'incubation': return <IncubationManager />;
       case 'popup': return <PopupManager />;
+      case 'syllabus': return <SyllabusManager />;
       default: return (
         <div className="flex flex-col items-center justify-center py-20 text-gray-400">
           <Clock size={48} className="mb-4 opacity-40" />

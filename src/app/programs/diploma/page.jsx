@@ -4,19 +4,11 @@ import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Settings, Download } from 'lucide-react';
+import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Settings } from 'lucide-react';
 import Link from 'next/link';
-import { generatePagePDF } from '@/lib/pdf-service';
 import ApplyModal from '@/components/ApplyModal';
 
 export default function DiplomaPage() {
-  const handleDownload = () => {
-    generatePagePDF("Diploma_Information", "Diploma in Polytechnic - Technical Branches", {
-      headers: ["Branch Name", "Seats", "Affiliation"],
-      rows: branches.map(b => [b.name, b.seats, "JUT Ranchi"])
-    });
-  };
-
   const branches = [
     { name: 'Computer Science & Engineering (CSE)', seats: 120 },
     { name: 'Data Sciences (DS)', seats: 30 },
@@ -38,9 +30,6 @@ export default function DiplomaPage() {
         <div className="container mx-auto px-4 relative z-10 text-center">
           <div className="flex justify-center items-center gap-4 mb-4">
             <Badge variant="gold">Vocational Excellence</Badge>
-             <Button variant="ghost" size="sm" onClick={handleDownload} className="text-white hover:bg-white/10">
-              <Download size={16} className="mr-2" /> Download Technical-Brochure
-            </Button>
           </div>
           <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6">Diploma in Polytechnic</h1>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">

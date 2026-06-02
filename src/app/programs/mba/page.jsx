@@ -4,19 +4,11 @@ import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Briefcase, Download } from 'lucide-react';
+import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Briefcase } from 'lucide-react';
 import Link from 'next/link';
-import { generatePagePDF } from '@/lib/pdf-service';
 import ApplyModal from '@/components/ApplyModal';
 
 export default function MBAPage() {
-  const handleDownload = () => {
-    generatePagePDF("MBA_Brochure", "Master of Business Administration", {
-      headers: ["Specialization", "What you learn"],
-      rows: specializations.map(s => [s.name, s.desc])
-    });
-  };
-
   const specializations = [
     { name: 'Finance Management', desc: 'Focus on financial analysis, corporate finance, and investment banking.' },
     { name: 'Marketing Management', desc: 'Brand management, consumer behavior, and digital marketing strategies.' },
@@ -36,9 +28,6 @@ export default function MBAPage() {
         <div className="container mx-auto px-4 relative z-10 text-center">
           <div className="flex justify-center items-center gap-4 mb-4">
             <Badge variant="gold">Department of Management</Badge>
-            <Button variant="ghost" size="sm" onClick={handleDownload} className="text-white hover:bg-white/10">
-              <Download size={16} className="mr-2" /> PDF Brochure
-            </Button>
           </div>
           <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6">Master of Business Administration</h1>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
@@ -73,7 +62,7 @@ export default function MBAPage() {
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Dual Specializations</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Specializations</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {specializations.map((s, i) => (
                   <Card key={i} className="hover:shadow-md transition-all">
@@ -124,9 +113,6 @@ export default function MBAPage() {
                     Apply Now 2026
                   </Button>
                 </ApplyModal>
-                <Button variant="outline" className="w-full h-12 border-white/20 text-white hover:bg-white/10 hover:text-white">
-                  Download MBA Brochure
-                </Button>
               </div>
             </div>
 

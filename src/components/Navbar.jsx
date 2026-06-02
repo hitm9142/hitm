@@ -19,16 +19,16 @@ const navItems = [
   {
     label: 'Programmes', icon: <BookOpen size={16} />,
     children: [
-      { label: 'Engineering (B.Tech)', href: '/programs/engineering' },
+      { label: 'B.Tech', href: '/programs/engineering' },
       { label: 'MBA', href: '/programs/mba' },
       { label: 'MCA', href: '/programs/mca' },
-      { label: 'Engineering Diploma', href: '/programs/diploma' },
+      { label: 'Diploma', href: '/programs/diploma' },
       { label: 'BCA', href: '/programs/bca' },
       { label: 'BBA', href: '/programs/bba' },
     ],
   },
   {
-    label: 'Management', icon: <Building2 size={16} />,
+    label: 'Governance', icon: <Building2 size={16} />,
     children: [
       { label: 'Governing Body', href: '/about/governing-body' },
       { label: 'Vision & Mission', href: '/about/vision' },

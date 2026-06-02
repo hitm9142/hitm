@@ -4,23 +4,11 @@ import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Monitor, Download } from 'lucide-react';
+import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Monitor } from 'lucide-react';
 import Link from 'next/link';
-import { generatePagePDF } from '@/lib/pdf-service';
 import ApplyModal from '@/components/ApplyModal';
 
 export default function BCAPage() {
-  const handleDownload = () => {
-    generatePagePDF("BCA_Course_Curriculum", "Bachelor of Computer Applications", {
-      headers: ["Detail", "Value"],
-      rows: [
-        ["Duration", "3 Years"],
-        ["Eligibility", "10+2 with 45%"],
-        ["Language Focus", "C++, Java, Python"],
-        ["Labs", "Modern Labs with high-end systems"]
-      ]
-    });
-  };
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
@@ -33,9 +21,6 @@ export default function BCAPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex justify-between items-center mb-4">
             <Badge variant="gold">Top Rated IT Program</Badge>
-            <Button variant="ghost" size="sm" onClick={handleDownload} className="text-white hover:bg-white/10">
-              <Download size={16} className="mr-2" /> Download IT-Curriculum
-            </Button>
           </div>
           <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6 uppercase tracking-tight">Bachelor of Computer Applications</h1>
           <p className="text-gray-300 max-w-2xl text-lg leading-relaxed font-medium">

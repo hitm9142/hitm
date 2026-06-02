@@ -4,22 +4,11 @@ import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Code, Download } from 'lucide-react';
+import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Code } from 'lucide-react';
 import Link from 'next/link';
-import { generatePagePDF } from '@/lib/pdf-service';
 import ApplyModal from '@/components/ApplyModal';
 
 export default function MCAPage() {
-  const handleDownload = () => {
-    generatePagePDF("MCA_IT_Brochure", "MCA Advanced IT Program", {
-      headers: ["Feature", "Benefit"],
-      rows: [
-        ["Advanced Coding", "Focus on Java, Python, and C++"],
-        ["Industry Ready", "Practical hands-on training"],
-        ["2-Year Track", "Fast-track post-grad career"],
-      ]
-    });
-  };
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
@@ -32,9 +21,6 @@ export default function MCAPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex justify-between items-center mb-4">
             <Badge variant="gold">Postgraduate IT Program</Badge>
-            <Button variant="ghost" size="sm" onClick={handleDownload} className="text-white hover:bg-white/10">
-              <Download size={16} className="mr-2" /> Download Techno-Brochure
-            </Button>
           </div>
           <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6 uppercase tracking-tight">Master of Computer Applications</h1>
           <p className="text-gray-300 max-w-2xl text-lg leading-relaxed font-medium">

@@ -6,28 +6,37 @@ import { Loader2, ArrowLeft, CreditCard, ShieldCheck } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
-export default function PaymentView({ applicationData, onCancel }) {
+export default function PaymentView({ applicationData, onCancel, feeType = 'application' }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const isAdmission = feeType === 'admission';
+  const amount = isAdmission ? '10000.00' : '1000.00';
+  const title = isAdmission ? 'Admission Confirmation Fee' : 'Application Fee';
+  const orderPrefix = isAdmission ? 'ADM' : 'APP';
+  const dbField = isAdmission ? 'admissionPayment' : 'payment';
+  const successStatus = isAdmission ? 'Admission Confirmed' : 'Submitted';
+  const failStatus = isAdmission ? 'Verified' : 'Payment Pending';
+
 
   const handlePayNow = async () => {
     setLoading(true);
     setError('');
 
     try {
-      const orderId = `APP_${Date.now()}_${applicationData.phone}`;
+      const orderId = `${orderPrefix}_${Date.now()}_${applicationData.phone}`;
 
       // Update payment record in db
       await setDoc(doc(db, 'applications', applicationData.phone), {
-        payment: {
+        [dbField]: {
           orderId: orderId,
-          amount: '1000.00',
+          amount: amount,
           transactionId: 'N/A',
           receiptUrl: 'N/A',
           status: 'Pending',
           createdAt: serverTimestamp()
         },
-        status: 'Payment Pending',
+        status: failStatus,
         updatedAt: serverTimestamp()
       }, { merge: true });
 
@@ -39,11 +48,11 @@ export default function PaymentView({ applicationData, onCancel }) {
         },
         body: JSON.stringify({
           order_id: orderId,
-          amount: '1000.00',
+          amount: amount,
           billing_name: applicationData.name || 'Applicant',
           billing_email: applicationData.email || 'N/A',
           billing_tel: applicationData.phone,
-          order_type: 'admission'
+          order_type: isAdmission ? 'admission_confirmation' : 'admission'
         }),
       });
 
@@ -83,14 +92,14 @@ export default function PaymentView({ applicationData, onCancel }) {
           <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
             <CreditCard size={32} />
           </div>
-          <h3 className="text-2xl font-black font-serif mb-1">Application Fee</h3>
+          <h3 className="text-2xl font-black font-serif mb-1">{title}</h3>
           <p className="text-sm font-bold uppercase tracking-widest opacity-80">Secure Checkout</p>
         </div>
 
         <CardContent className="p-8 space-y-6">
           <div className="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex justify-between items-center">
-            <span className="text-gray-600 font-bold">Total Amount Due</span>
-            <span className="text-2xl font-black text-hitm-navy">₹1,000.00</span>
+            <span className="text-gray-600 font-bold">Total Amount Due {!isAdmission && <span className="block text-xs font-normal text-gray-500">(Non-Refundable)</span>}</span>
+            <span className="text-2xl font-black text-hitm-navy">₹{amount}</span>
           </div>
 
           <div className="flex items-start gap-3 bg-blue-50 text-blue-800 p-4 rounded-xl text-sm">
@@ -114,10 +123,10 @@ export default function PaymentView({ applicationData, onCancel }) {
                   onClick={async () => {
                      setLoading(true);
                      try {
-                        const orderId = `APP_${Date.now()}_${applicationData.phone}`;
+                        const orderId = `${orderPrefix}_${Date.now()}_${applicationData.phone}`;
                         await setDoc(doc(db, 'applications', applicationData.phone), {
-                          payment: { orderId, amount: '1000.00', transactionId: 'TXN_TEST_123', receiptUrl: 'N/A', status: 'Success', createdAt: serverTimestamp() },
-                          status: 'Submitted',
+                          [dbField]: { orderId, amount: amount, transactionId: 'TXN_TEST_123', receiptUrl: 'N/A', status: 'Success', createdAt: serverTimestamp() },
+                          status: successStatus,
                           updatedAt: serverTimestamp()
                         }, { merge: true });
                         onCancel(); // return to panel to see success
@@ -132,10 +141,10 @@ export default function PaymentView({ applicationData, onCancel }) {
                   onClick={async () => {
                      setLoading(true);
                      try {
-                        const orderId = `APP_${Date.now()}_${applicationData.phone}`;
+                        const orderId = `${orderPrefix}_${Date.now()}_${applicationData.phone}`;
                         await setDoc(doc(db, 'applications', applicationData.phone), {
-                          payment: { orderId, amount: '1000.00', transactionId: 'TXN_FAIL_123', receiptUrl: 'N/A', status: 'Failed', createdAt: serverTimestamp() },
-                          status: 'Payment Pending',
+                          [dbField]: { orderId, amount: amount, transactionId: 'TXN_FAIL_123', receiptUrl: 'N/A', status: 'Failed', createdAt: serverTimestamp() },
+                          status: failStatus,
                           updatedAt: serverTimestamp()
                         }, { merge: true });
                         onCancel(); // return to panel to see failure
@@ -157,7 +166,7 @@ export default function PaymentView({ applicationData, onCancel }) {
             >
               {loading ? (
                 <span className="flex items-center gap-2"><Loader2 className="animate-spin" size={20} /> Processing...</span>
-              ) : 'Pay ₹1,000 Now'}
+              ) : `Pay ₹${amount} Now`}
             </Button>
           )}
         </CardContent>

@@ -14,6 +14,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 export default function AdmissionApplyClient() {
   const [viewState, setViewState] = useState('LOGIN'); // LOGIN, PANEL, FORM, PAYMENT, DETAILS
+  const [paymentType, setPaymentType] = useState('application'); // application, admission
   const [applicationData, setApplicationData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -89,6 +90,11 @@ export default function AdmissionApplyClient() {
         setViewState('FORM');
         break;
       case 'PAY':
+        setPaymentType('application');
+        setViewState('PAYMENT');
+        break;
+      case 'PAY_ADMISSION':
+        setPaymentType('admission');
         setViewState('PAYMENT');
         break;
       case 'VIEW_APPLICATION':
@@ -121,6 +127,7 @@ export default function AdmissionApplyClient() {
 
   const handleFormComplete = async () => {
     await refreshApplicationData();
+    setPaymentType('application');
     setViewState('PAYMENT');
   };
 
@@ -163,6 +170,7 @@ export default function AdmissionApplyClient() {
               {viewState === 'PAYMENT' && applicationData && (
                 <PaymentView 
                   applicationData={applicationData}
+                  feeType={paymentType}
                   onCancel={handleReturnToPanel}
                 />
               )}

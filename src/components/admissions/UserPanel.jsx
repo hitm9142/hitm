@@ -70,9 +70,9 @@ export default function UserPanel({ applicationData, onAction }) {
               <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-5 bg-amber-50 rounded-2xl border border-amber-100">
                 <div>
                   <h4 className="font-bold text-amber-900 flex items-center gap-2">
-                    <CreditCard size={18} className="text-amber-600" /> Fee Payment
+                    <CreditCard size={18} className="text-amber-600" /> Application Fee
                   </h4>
-                  <p className="text-sm text-amber-700/80 mt-1">Pay the application fee of Rs. 1,000 to submit your form.</p>
+                  <p className="text-sm text-amber-700/80 mt-1">Pay the application fee of Rs. 1,000 <span className="font-bold">(Non-Refundable)</span> to submit your form.</p>
                 </div>
                 <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
                   <Button variant="outline" onClick={() => onAction('CONTINUE_FORM')} className="w-full md:w-auto shrink-0 border-amber-300 text-amber-700 hover:bg-amber-100 hover:text-amber-800">
@@ -85,7 +85,23 @@ export default function UserPanel({ applicationData, onAction }) {
               </div>
             )}
 
-            {(isSubmitted || isPendingPayment) && (
+            {isSubmitted && (!applicationData.admissionPayment || applicationData.admissionPayment.status !== 'Success') && (
+              <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-5 bg-blue-50 rounded-2xl border border-blue-100">
+                <div>
+                  <h4 className="font-bold text-blue-900 flex items-center gap-2">
+                    <CreditCard size={18} className="text-blue-600" /> Admission Confirmation Fee
+                  </h4>
+                  <p className="text-sm text-blue-700/80 mt-1">Pay the admission confirmation fee of Rs. 10,000 to secure your seat.</p>
+                </div>
+                <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
+                  <Button onClick={() => onAction('PAY_ADMISSION')} className="w-full md:w-auto shrink-0 bg-hitm-navy hover:bg-hitm-red text-white">
+                    Pay Rs. 10,000 <ArrowRight size={16} className="ml-2" />
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {(isSubmitted || isPendingPayment || applicationData.status === 'Admission Confirmed') && (
               <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-5 bg-gray-50 rounded-2xl border border-gray-100">
                 <div>
                   <h4 className="font-bold text-gray-900 flex items-center gap-2">

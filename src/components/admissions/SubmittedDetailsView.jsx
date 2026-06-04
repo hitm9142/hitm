@@ -113,23 +113,55 @@ export default function SubmittedDetailsView({ applicationData, onCancel }) {
 
           <section>
             <h3 className="text-lg font-bold text-hitm-navy mb-4 border-b pb-2 print:text-black">Payment Details</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
-              <div>
-                <p className="text-xs text-gray-500 font-bold uppercase">Status</p>
-                <p className={`font-medium ${isPaid ? 'text-green-600' : ''}`}>{applicationData.payment?.status || 'N/A'}</p>
+            
+            <div className="space-y-6">
+              {/* Application Fee */}
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 print:bg-white print:border-black">
+                <h4 className="font-bold text-hitm-navy mb-3 text-sm print:text-black">Application Fee (₹1,000)</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-4">
+                  <div>
+                    <p className="text-xs text-gray-500 font-bold uppercase">Status</p>
+                    <p className={`font-medium ${isPaid ? 'text-green-600' : ''}`}>{applicationData.payment?.status || 'N/A'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 font-bold uppercase">Order ID</p>
+                    <p className="font-medium text-xs break-words">{applicationData.payment?.orderId || 'N/A'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 font-bold uppercase">Transaction ID</p>
+                    <p className="font-medium text-xs break-words">{applicationData.payment?.transactionId || 'N/A'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 font-bold uppercase">Amount</p>
+                    <p className="font-medium">₹{applicationData.payment?.amount || '1000.00'}</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="text-xs text-gray-500 font-bold uppercase">Order ID</p>
-                <p className="font-medium text-xs break-words">{applicationData.payment?.orderId || 'N/A'}</p>
-              </div>
-              <div>
-                <p className="text-xs text-gray-500 font-bold uppercase">Transaction ID</p>
-                <p className="font-medium text-xs break-words">{applicationData.payment?.transactionId || 'N/A'}</p>
-              </div>
-              <div>
-                <p className="text-xs text-gray-500 font-bold uppercase">Amount</p>
-                <p className="font-medium">₹{applicationData.payment?.amount || '1000.00'}</p>
-              </div>
+
+              {/* Admission Confirmation Fee */}
+              {applicationData.admissionPayment && (
+                <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 print:bg-white print:border-black">
+                  <h4 className="font-bold text-blue-900 mb-3 text-sm print:text-black">Admission Confirmation Fee (₹10,000)</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-4">
+                    <div>
+                      <p className="text-xs text-blue-700/70 font-bold uppercase print:text-gray-500">Status</p>
+                      <p className={`font-medium ${applicationData.admissionPayment.status === 'Success' ? 'text-green-600' : 'text-blue-900'}`}>{applicationData.admissionPayment.status}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-blue-700/70 font-bold uppercase print:text-gray-500">Order ID</p>
+                      <p className="font-medium text-xs break-words text-blue-900">{applicationData.admissionPayment.orderId || 'N/A'}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-blue-700/70 font-bold uppercase print:text-gray-500">Transaction ID</p>
+                      <p className="font-medium text-xs break-words text-blue-900">{applicationData.admissionPayment.transactionId || 'N/A'}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-blue-700/70 font-bold uppercase print:text-gray-500">Amount</p>
+                      <p className="font-medium text-blue-900">₹{applicationData.admissionPayment.amount || '10000.00'}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </section>
 

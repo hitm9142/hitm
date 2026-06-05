@@ -40,8 +40,8 @@ export default function PaymentView({ applicationData, onCancel }) {
         body: JSON.stringify({
           order_id: orderId,
           amount: '1000.00',
-          billing_name: applicationData.name || 'Applicant',
-          billing_email: applicationData.email || 'N/A',
+          billing_name: applicationData.personalDetails?.name || applicationData.name || 'Applicant',
+          billing_email: applicationData.personalDetails?.email || applicationData.email || 'admissions@hitmranchi.ac.in',
           billing_tel: applicationData.phone,
           order_type: 'admission'
         }),

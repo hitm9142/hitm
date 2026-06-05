@@ -55,43 +55,55 @@ export async function POST(req) {
 
       // 2. Determine type (Admission vs General)
       if (orderId.startsWith('APP_')) {
-        // Query the enquiries collection to find the document with this orderId
+        // Query the applications collection to find the document with this orderId
         try {
-          const enquiriesQuery = await adminDb.collection('enquiries')
+          const applicationsQuery = await adminDb.collection('applications')
             .where('payment.orderId', '==', orderId)
             .get();
 
-          if (!enquiriesQuery.empty) {
-            const enquiryDoc = enquiriesQuery.docs[0];
-            const phone = enquiryDoc.id;
-            const enquiryData = enquiryDoc.data();
+          if (!applicationsQuery.empty) {
+            const appDoc = applicationsQuery.docs[0];
+            const phone = appDoc.id;
+            const appData = appDoc.data();
 
-            await adminDb.collection('enquiries').doc(phone).update({
+            await adminDb.collection('applications').doc(phone).update({
               'payment.status': orderStatus,
               'payment.transactionId': trackingId || 'N/A',
               'payment.updatedAt': new Date(),
-              status: orderStatus === 'Success' ? 'New' : 'Payment Failed',
+              status: orderStatus === 'Success' ? 'Submitted' : 'Payment Pending',
             });
 
             // 3. If successful, send Web3Forms notification email
             if (orderStatus === 'Success') {
               try {
+                const name = appData.personalDetails?.name || appData.name || 'Applicant';
+                const fatherName = appData.personalDetails?.fatherName || appData.fatherName || 'N/A';
+                const email = appData.personalDetails?.email || appData.email || 'N/A';
+                const program = appData.programSelection?.program || appData.program || 'N/A';
+                const branch = appData.programSelection?.branch || appData.branch || 'N/A';
+                const qualification = appData.academicDetails?.qualification || appData.qualification || 'N/A';
+                const board = appData.academicDetails?.board || appData.board || 'N/A';
+                const passingYear = appData.academicDetails?.passingYear || appData.passingYear || 'N/A';
+                const percentage = appData.academicDetails?.percentage || appData.percentage || 'N/A';
+                const documentUrl = appData.documentUrl || 'N/A';
+
                 const messageText = `
-=== NEW ADMISSION & PAYMENT ENQUIRY ===
+=== NEW ADMISSION APPLICATION & PAYMENT ===
 
 STUDENT DETAILS:
-- Name: ${enquiryData.name}
-- Father Name: ${enquiryData.fatherName}
-- Mobile Number / App ID: ${enquiryData.phone}
-- Email Address: ${enquiryData.email}
+- Name: ${name}
+- Father Name: ${fatherName}
+- Mobile Number / App ID: ${phone}
+- Email Address: ${email}
 
 ACADEMIC DETAILS:
-- Selected Course: ${enquiryData.program}
-- Branch/Specialization: ${enquiryData.branch || 'N/A'}
-- 10th Score: ${enquiryData.tenthPercentage}% (Board: ${enquiryData.tenthBoard}, Year: ${enquiryData.tenthYear})
-- 12th Score: ${enquiryData.twelfthPercentage}% (Board: ${enquiryData.twelfthBoard}, Year: ${enquiryData.twelfthYear})
-- Entrance Exam Score: ${enquiryData.examScore || 'N/A'}
-- Marksheet Document Link: ${enquiryData.documentUrl}
+- Selected Course: ${program}
+- Branch/Specialization: ${branch}
+- Qualification Level: ${qualification}
+- Board / University: ${board}
+- Passing Year: ${passingYear}
+- Percentage / CGPA: ${percentage}
+- Marksheet Document Link: ${documentUrl}
 
 PAYMENT VERIFICATION DETAILS:
 - Transaction ID / Tracking ID: ${trackingId}
@@ -99,7 +111,7 @@ PAYMENT VERIFICATION DETAILS:
 - Amount: ${currency} ${amount}
 - Date: ${transDate || new Date().toLocaleString()}
 
-Submitted from IP: ${enquiryData.ipAddress || 'N/A'}
+Submitted from IP: ${appData.ipAddress || 'N/A'}
 `;
 
                 await fetch("https://api.web3forms.com/submit", {
@@ -110,9 +122,9 @@ Submitted from IP: ${enquiryData.ipAddress || 'N/A'}
                   },
                   body: JSON.stringify({
                     access_key: "ea72c4d8-d56a-48f8-af05-7dd8d48268a9",
-                    subject: `Admission Fee Paid: ${enquiryData.name} (${enquiryData.program})`,
-                    name: enquiryData.name,
-                    email: enquiryData.email,
+                    subject: `Admission Fee Paid: ${name} (${program})`,
+                    name: name,
+                    email: email,
                     message: messageText
                   })
                 });
@@ -121,8 +133,8 @@ Submitted from IP: ${enquiryData.ipAddress || 'N/A'}
               }
             }
           }
-        } catch (enqErr) {
-          console.error('Error handling enquiry update:', enqErr);
+        } catch (appErr) {
+          console.error('Error handling application update:', appErr);
         }
       } else {
         // General Fee Payment

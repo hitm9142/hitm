@@ -64,41 +64,56 @@ export async function POST(req) {
       // 2. Type specific update
       if (orderId.startsWith('APP_')) {
         try {
-          const enquiriesQuery = await adminDb.collection('enquiries')
+          const applicationsQuery = await adminDb.collection('applications')
             .where('payment.orderId', '==', orderId)
             .get();
 
-          if (!enquiriesQuery.empty) {
-            const enquiryDoc = enquiriesQuery.docs[0];
-            const phone = enquiryDoc.id;
-            const enquiryData = enquiryDoc.data();
+          if (!applicationsQuery.empty) {
+            const appDoc = applicationsQuery.docs[0];
+            const phone = appDoc.id;
+            const appData = appDoc.data();
 
             // Only update if it wasn't already updated to Success
-            if (enquiryData.payment?.status !== 'Success') {
-              await adminDb.collection('enquiries').doc(phone).update({
+            if (appData.payment?.status !== 'Success') {
+              await adminDb.collection('applications').doc(phone).update({
                 'payment.status': orderStatus,
                 'payment.transactionId': trackingId || 'N/A',
                 'payment.updatedAt': new Date(),
-                status: orderStatus === 'Success' ? 'New' : 'Payment Failed',
+                status: orderStatus === 'Success' ? 'Submitted' : 'Payment Pending',
               });
 
               // Send email if successful
               if (orderStatus === 'Success') {
                 try {
+                  const name = appData.personalDetails?.name || appData.name || 'Applicant';
+                  const fatherName = appData.personalDetails?.fatherName || appData.fatherName || 'N/A';
+                  const email = appData.personalDetails?.email || appData.email || 'N/A';
+                  const program = appData.programSelection?.program || appData.program || 'N/A';
+                  const branch = appData.programSelection?.branch || appData.branch || 'N/A';
+                  const qualification = appData.academicDetails?.qualification || appData.qualification || 'N/A';
+                  const board = appData.academicDetails?.board || appData.board || 'N/A';
+                  const passingYear = appData.academicDetails?.passingYear || appData.passingYear || 'N/A';
+                  const percentage = appData.academicDetails?.percentage || appData.percentage || 'N/A';
+                  const documentUrl = appData.documentUrl || 'N/A';
+
                   const messageText = `
-=== NEW ADMISSION & PAYMENT ENQUIRY ===
+=== NEW ADMISSION APPLICATION & PAYMENT ===
 (RECEIVED VIA WEBHOOK BACKGROUND ECHO)
 
 STUDENT DETAILS:
-- Name: ${enquiryData.name}
-- Father Name: ${enquiryData.fatherName}
-- Mobile Number / App ID: ${enquiryData.phone}
-- Email Address: ${enquiryData.email}
+- Name: ${name}
+- Father Name: ${fatherName}
+- Mobile Number / App ID: ${phone}
+- Email Address: ${email}
 
 ACADEMIC DETAILS:
-- Selected Course: ${enquiryData.program}
-- Branch/Specialization: ${enquiryData.branch || 'N/A'}
-- Marksheet Document Link: ${enquiryData.documentUrl}
+- Selected Course: ${program}
+- Branch/Specialization: ${branch}
+- Qualification Level: ${qualification}
+- Board / University: ${board}
+- Passing Year: ${passingYear}
+- Percentage / CGPA: ${percentage}
+- Marksheet Document Link: ${documentUrl}
 
 PAYMENT VERIFICATION DETAILS:
 - Transaction ID / Tracking ID: ${trackingId}
@@ -115,9 +130,9 @@ PAYMENT VERIFICATION DETAILS:
                     },
                     body: JSON.stringify({
                       access_key: "ea72c4d8-d56a-48f8-af05-7dd8d48268a9",
-                      subject: `Admission Fee Paid (Webhook): ${enquiryData.name}`,
-                      name: enquiryData.name,
-                      email: enquiryData.email,
+                      subject: `Admission Fee Paid (Webhook): ${name}`,
+                      name: name,
+                      email: email,
                       message: messageText
                     })
                   });
@@ -127,8 +142,8 @@ PAYMENT VERIFICATION DETAILS:
               }
             }
           }
-        } catch (enqErr) {
-          console.error('Error in webhook enquiry sync:', enqErr);
+        } catch (appErr) {
+          console.error('Error in webhook application sync:', appErr);
         }
       } else {
         try {

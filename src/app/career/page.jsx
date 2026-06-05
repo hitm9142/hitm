@@ -12,7 +12,7 @@ import { db, storage } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useEffect } from 'react';
-import imageCompression from 'browser-image-compression';
+import { compressPDF } from '@/lib/pdf-compressor';
 import InlinePhoneVerifier from '@/components/InlinePhoneVerifier';
 
 export default function CareerPage() {
@@ -21,6 +21,7 @@ export default function CareerPage() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', exp: '', coverLetter: '' });
   const [resume, setResume] = useState(null);
   const [phoneVerified, setPhoneVerified] = useState(false);
+  const [careerUploadStatus, setCareerUploadStatus] = useState('');
 
   const [jobsData, setJobsData] = useState([]);
 
@@ -50,16 +51,17 @@ export default function CareerPage() {
       return;
     }
     setSubmitting(true);
+    setCareerUploadStatus('Initializing...');
     try {
       let resumeUrl = '';
       if (resume) {
         let fileToUpload = resume;
-        // Compress if it's an image
-        if (resume.type.startsWith('image/')) {
-          const options = { maxSizeMB: 0.5, maxWidthOrHeight: 1920, useWebWorker: true };
-          fileToUpload = await imageCompression(resume, options);
-        }
         
+        fileToUpload = await compressPDF(resume, (msg) => {
+          setCareerUploadStatus(msg);
+        });
+        
+        setCareerUploadStatus('Uploading PDF to storage...');
         const storageRef = ref(storage, `careers/${Date.now()}_${formData.phone}_${resume.name}`);
         const snapshot = await uploadBytes(storageRef, fileToUpload);
         resumeUrl = await getDownloadURL(snapshot.ref);
@@ -79,6 +81,7 @@ export default function CareerPage() {
       setFormData({ name: '', email: '', phone: '', exp: '', coverLetter: '' });
       setResume(null);
       setPhoneVerified(false);
+      setCareerUploadStatus('');
     } catch (err) {
       console.error(err);
       alert('Error submitting application. Please try again.');
@@ -236,9 +239,23 @@ export default function CareerPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Upload CV/Resume (PDF or Image, Optional)</Label>
+                  <Label>Upload CV/Resume (PDF Only, Optional)</Label>
                   <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-200 rounded-2xl py-6 hover:bg-gray-50 transition-colors cursor-pointer relative">
-                    <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept=".pdf,image/*" onChange={e => setResume(e.target.files[0])} />
+                    <input 
+                      type="file" 
+                      className="absolute inset-0 opacity-0 cursor-pointer" 
+                      accept=".pdf" 
+                      onChange={e => {
+                        const file = e.target.files[0];
+                        if (file && file.type !== 'application/pdf') {
+                          alert('Only PDF files are supported for CV/Resume upload.');
+                          e.target.value = '';
+                          setResume(null);
+                        } else {
+                          setResume(file);
+                        }
+                      }} 
+                    />
                     {resume ? (
                       <div className="flex items-center gap-2 text-hitm-red font-bold">
                         <FileText size={24} /> <span>{resume.name}</span>
@@ -246,7 +263,7 @@ export default function CareerPage() {
                     ) : (
                       <>
                         <Upload className="text-gray-300 mb-2" size={32} />
-                        <p className="text-xs text-gray-400">Drag and drop or click to upload</p>
+                        <p className="text-xs text-gray-400">Drag and drop or click to upload PDF</p>
                       </>
                     )}
                   </div>
@@ -254,8 +271,13 @@ export default function CareerPage() {
 
                 <div className="flex gap-4 pt-4 sticky bottom-0 bg-white">
                   {submitting ? (
-                    <div className="w-full flex items-center justify-center gap-2 bg-hitm-navy text-white rounded-xl py-3 text-sm font-bold animate-pulse">
-                      <Loader2 className="animate-spin" size={16} /> Submitting Application... Please wait
+                    <div className="w-full flex flex-col items-center justify-center gap-1 bg-hitm-navy text-white rounded-xl py-3 text-sm font-bold animate-pulse">
+                      <div className="flex items-center gap-2">
+                        <Loader2 className="animate-spin" size={16} /> Submitting Application... Please wait
+                      </div>
+                      {careerUploadStatus && (
+                        <span className="text-[11px] text-hitm-gold font-normal tracking-wide">{careerUploadStatus}</span>
+                      )}
                     </div>
                   ) : (
                     <>

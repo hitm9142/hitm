@@ -1,12 +1,14 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CheckCircle2, ArrowRight, ArrowLeft, Loader2, UploadCloud } from 'lucide-react';
-import { db } from '@/lib/firebase';
+import { CheckCircle2, ArrowRight, ArrowLeft, Loader2, UploadCloud, FileText, X } from 'lucide-react';
+import { db, storage } from '@/lib/firebase';
 import { doc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { compressPDF } from '@/lib/pdf-compressor';
 
 const branchOptions = {
   'B.Tech': ['Computer Science & Engineering (CSE)', 'Data Sciences', 'Artificial Intelligence (AI)', 'Electrical & Electronics Engineering', 'Mechanical Engineering', 'Civil Engineering'],
@@ -18,6 +20,90 @@ export default function ApplicationForm({ applicationData, onComplete, onCancel 
   const [step, setStep] = useState(applicationData.step || 1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState('');
+  const fileInputRef = useRef(null);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.type !== 'application/pdf') {
+      setError('Only PDF files are supported for document upload.');
+      return;
+    }
+
+    setUploading(true);
+    setUploadStatus('Reading file...');
+    setError('');
+
+    try {
+      const processedFile = await compressPDF(file, (msg) => {
+        setUploadStatus(msg);
+      });
+
+      setUploadStatus('Uploading document to secure storage...');
+      const storageRef = ref(storage, `applications/${applicationData.phone}/${Date.now()}_${file.name}`);
+      const snapshot = await uploadBytes(storageRef, processedFile);
+      const downloadUrl = await getDownloadURL(snapshot.ref);
+
+      setFormData(prev => ({
+        ...prev,
+        documentUrl: downloadUrl
+      }));
+
+      await updateDoc(doc(db, 'applications', applicationData.phone), {
+        documentUrl: downloadUrl,
+        updatedAt: serverTimestamp()
+      });
+
+      setUploadStatus('Document uploaded and saved successfully.');
+    } catch (err) {
+      console.error(err);
+      setError('Failed to upload document. Please try again.');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleRemoveDocument = async () => {
+    if (confirm('Are you sure you want to remove the uploaded document?')) {
+      setUploading(true);
+      setError('');
+      try {
+        setFormData(prev => ({
+          ...prev,
+          documentUrl: 'N/A'
+        }));
+
+        await updateDoc(doc(db, 'applications', applicationData.phone), {
+          documentUrl: 'N/A',
+          updatedAt: serverTimestamp()
+        });
+
+        setUploadStatus('Document removed.');
+      } catch (err) {
+        console.error(err);
+        setError('Failed to remove document. Please try again.');
+      } finally {
+        setUploading(false);
+      }
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    if (uploading) return;
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      const target = { files: [file] };
+      handleFileChange({ target });
+    }
+  };
 
   // Initial Form State
   const [formData, setFormData] = useState({
@@ -226,17 +312,80 @@ export default function ApplicationForm({ applicationData, onComplete, onCancel 
                   <span className="text-xs font-bold text-gray-400 uppercase">Optional</span>
                 </div>
                 
-                <div className="border-2 border-dashed border-gray-300 rounded-2xl p-10 text-center hover:bg-gray-50 transition-colors">
-                  <div className="w-16 h-16 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                     <UploadCloud size={32} />
+                <input 
+                  type="file" 
+                  ref={fileInputRef} 
+                  accept="application/pdf" 
+                  className="hidden" 
+                  onChange={handleFileChange}
+                  disabled={uploading}
+                />
+
+                {formData.documentUrl && formData.documentUrl !== 'N/A' ? (
+                  <div className="border-2 border-solid border-green-200 bg-green-50/50 rounded-2xl p-8 text-center flex flex-col items-center justify-center animate-in zoom-in-95 duration-200">
+                    <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                       <FileText size={32} />
+                    </div>
+                    <h4 className="text-lg font-bold text-gray-800 mb-1">Document Uploaded Successfully</h4>
+                    <p className="text-xs text-gray-500 mb-6 font-mono max-w-md truncate">
+                      {formData.documentUrl}
+                    </p>
+                    <div className="flex gap-4">
+                      <a 
+                        href={formData.documentUrl} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 rounded-xl transition-colors shadow-sm"
+                      >
+                        View Document
+                      </a>
+                      <Button 
+                        type="button" 
+                        variant="destructive" 
+                        className="rounded-xl flex items-center gap-1"
+                        onClick={handleRemoveDocument}
+                        disabled={uploading}
+                      >
+                        <X size={14} /> Remove
+                      </Button>
+                    </div>
                   </div>
-                  <h4 className="text-lg font-bold text-gray-700 mb-2">Upload Marksheets / ID Proof</h4>
-                  <p className="text-sm text-gray-500 mb-6">Drag and drop your files here, or click to browse. You can skip this step and provide documents later during admission.</p>
-                  
-                  <Button type="button" variant="outline" className="border-gray-300 text-gray-600 bg-white" onClick={() => alert('Document upload UI is ready. Firebase Storage integration pending.')}>
-                     Browse Files
-                  </Button>
-                </div>
+                ) : (
+                  <div 
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    className={`border-2 border-dashed border-gray-300 rounded-2xl p-10 text-center hover:bg-gray-50 transition-colors ${
+                      uploading ? 'bg-gray-50/50 pointer-events-none' : 'cursor-pointer'
+                    }`}
+                  >
+                    {uploading ? (
+                      <div className="flex flex-col items-center justify-center py-6">
+                        <Loader2 className="animate-spin text-hitm-red mb-4" size={40} />
+                        <h4 className="text-lg font-bold text-gray-700 mb-1">Processing Document</h4>
+                        <p className="text-sm text-gray-500 max-w-sm mt-1 animate-pulse">
+                          {uploadStatus}
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="w-16 h-16 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                           <UploadCloud size={32} />
+                        </div>
+                        <h4 className="text-lg font-bold text-gray-700 mb-2">Upload Marksheets / ID Proof</h4>
+                        <p className="text-sm text-gray-500 mb-6">Drag and drop your PDF here, or click to browse. Files over 100KB will be automatically compressed before saving.</p>
+                        
+                        <Button 
+                          type="button" 
+                          variant="outline" 
+                          className="border-gray-300 text-gray-600 bg-white" 
+                          onClick={() => fileInputRef.current?.click()}
+                        >
+                           Browse PDF
+                        </Button>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             )}
 

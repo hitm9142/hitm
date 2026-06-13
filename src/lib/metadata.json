@@ -1,0 +1,30 @@
+{
+  "/": {
+    "title": "Top Technical and Management Institute in Jharkhand | Apply",
+    "description": "Join a top technical and management institute in Jharkhand offering industry-focused programs, expert faculty, modern facilities, and placements."
+  },
+  "/programs/engineering": {
+    "title": "Best B Tech College in Ranchi with Excellent Placements",
+    "description": "Choose the best B Tech college in Ranchi for industry-focused engineering education, advanced infrastructure, skilled faculty, and career opportunities"
+  },
+  "/programs/mba": {
+    "title": "Best College for MBA in Ranchi with Placement Support",
+    "description": "Looking for the best college for MBA in Ranchi? Gain industry-focused management education, expert faculty, modern facilities, and placement support"
+  },
+  "/programs/mca": {
+    "title": "Best MCA College in Ranchi | Admissions Open 2026",
+    "description": "Join a best MCA college in Ranchi and build expertise in software development, data management, programming, and emerging technologies"
+  },
+  "/programs/bca": {
+    "title": "Best BCA College in Ranchi for IT & Computer Studies",
+    "description": "Start your journey at the best BCA college in Ranchi offering modern infrastructure, skilled faculty, practical learning, and career guidance"
+  },
+  "/programs/bba": {
+    "title": "Leading BBA Colleges in Ranchi | Apply Now",
+    "description": "Enroll in a top BBA college in Ranchi and gain the knowledge, leadership skills, and business expertise needed for career success"
+  },
+  "/student-life": {
+    "title": "B.Tech College in Ranchi with Advanced Facilities",
+    "description": "Build your engineering career at a B.Tech college in Ranchi with state-of-the-art infrastructure, experienced faculty, and industry exposure"
+  }
+}

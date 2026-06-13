@@ -1,11 +1,12 @@
 import './globals.css';
 import 'leaflet/dist/leaflet.css';
 import FloatingApply from '@/components/FloatingApply';
+import pageMeta from '@/lib/metadata.json';
 
-export const metadata = {
-  title: 'HITM Ranchi | AICTE Approved Institution',
-  description:
-    'Haider Institute of Technology and Management (HITM Ranchi) is a premier AICTE-approved engineering and management institution in Jharkhand, offering B.Tech, Diploma, MBA, MCA, BBA, and BCA programmes.',
+const SITE_URL = 'https://www.hitmranchi.ac.in';
+
+// Shared base metadata (icons, keywords, fb domain verification)
+const BASE_META = {
   keywords:
     'HITM Ranchi, Haider Institute of Technology and Management, engineering college Jharkhand, management institute Ranchi, BCA BTech MBA admissions 2026',
   other: {
@@ -17,6 +18,38 @@ export const metadata = {
     apple: [{ url: '/images/logo/ahct-logo.png', type: 'image/jpeg' }],
   },
 };
+
+// Fallback if a page has no entry in metadata.json
+const FALLBACK_META = {
+  title: 'HITM Ranchi | AICTE Approved Institution',
+  description:
+    'Haider Institute of Technology and Management (HITM Ranchi) is a premier AICTE-approved engineering and management institution in Jharkhand, offering B.Tech, Diploma, MBA, MCA, BBA, and BCA programmes',
+};
+
+/**
+ * generateMetadata is called by Next.js per page request.
+ * params.pathname is automatically provided when using the App Router.
+ * We match it against metadata.json to get page-specific title & description.
+ */
+export async function generateMetadata({ params, searchParams }, parent) {
+  // Next.js passes the resolved URL via the internal mechanism;
+  // we read the pathname from the headers helper.
+  const { headers } = await import('next/headers');
+  const headersList = await headers();
+  const pathname = headersList.get('x-pathname') || '/';
+
+  // Look up the page entry; fall back to root or default
+  const pageMeta_ = pageMeta[pathname] || pageMeta['/'] || FALLBACK_META;
+
+  return {
+    ...BASE_META,
+    title: pageMeta_.title,
+    description: pageMeta_.description,
+    alternates: {
+      canonical: `${SITE_URL}${pathname === '/' ? '' : pathname}`,
+    },
+  };
+}
 
 export const viewport = {
   width: 'device-width',

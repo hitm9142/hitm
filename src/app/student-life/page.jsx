@@ -9,45 +9,45 @@ import Image from 'next/image';
 export default function StudentLifePage() {
   const facilities = [
     {
-      image: "/images/hostel.webp",
-      title: "Hostel Facility",
-      desc: "Secure, clean, and separate hostels for boys and girls with 24/7 security and warden support.",
+      image: '/images/hostel.webp',
+      title: 'Hostel Facility',
+      desc: 'Secure, clean, and separate hostels for boys and girls with 24/7 security and warden support.',
     },
     {
-      image: "/images/transport.png",
-      title: "Transport",
-      desc: "Own fleet of buses connecting all major points of Ranchi for safe and timely commute.",
+      image: '/images/transport.png',
+      title: 'Transport',
+      desc: 'Own fleet of buses connecting all major points of Ranchi for safe and timely commute.',
     },
     {
-      image: "/images/cafateria.jpg",
-      title: "Cafeteria",
-      desc: "A modern, hygienic cafeteria serving nutritious meals and a variety of snacks.",
+      image: '/images/cafateria.jpg',
+      title: 'Cafeteria',
+      desc: 'A modern, hygienic cafeteria serving nutritious meals and a variety of snacks.',
     },
     {
-      image: "/images/wifi.png",
-      title: "Wi-Fi Campus",
-      desc: "High-speed internet connectivity across the campus for research and academic needs.",
+      image: '/images/wifi.png',
+      title: 'Wi-Fi Campus',
+      desc: 'High-speed internet connectivity across the campus for research and academic needs.',
     },
     {
-      image: "/images/audutorim.jpg",
-      title: "Seminar Hall",
-      desc: "A state-of-the-art seminar hall for cultural events, seminars, and technical workshops.",
+      image: '/images/audutorim.jpg',
+      title: 'Seminar Hall',
+      desc: 'A state-of-the-art seminar hall for cultural events, seminars, and technical workshops.',
     },
     {
-      image: "/images/labs.jpg",
-      title: "Labs & Library",
-      desc: "Fully equipped modern laboratories and a massive digital library with an extensive collection of textbooks, reference books, and digital resources.",
+      image: '/images/labs.jpg',
+      title: 'Labs & Library',
+      desc: 'Fully equipped modern laboratories and a massive digital library with an extensive collection of textbooks, reference books, and digital resources.',
     },
     {
-      image: "/common-room.jpg",
-      title: "Common Room for Girls & Boys",
-      desc: "Spacious, comfortable, and separate common rooms for girls and boys to relax, study, and engage in indoor games.",
+      image: '/common-room.jpg',
+      title: 'Common Room for Girls & Boys',
+      desc: 'Spacious, comfortable, and separate common rooms for girls and boys to relax, study, and engage in indoor games.',
     },
     {
-      image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=600&auto=format&fit=crop",
-      title: "Sports & Recreation",
-      desc: "Well-equipped sports fields, indoor game provisions, and recreation spaces promoting physical fitness and student wellness.",
-    }
+      image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=600&auto=format&fit=crop',
+      title: 'Sports & Recreation',
+      desc: 'Well-equipped sports fields, indoor game provisions, and recreation spaces promoting physical fitness and student wellness.',
+    },
   ];
 
   return (
@@ -56,16 +56,17 @@ export default function StudentLifePage() {
 
       <div className="flex-1 bg-white pt-24 pb-20">
         <div className="container mx-auto px-4 max-w-6xl">
-
           {/* Header */}
           <div className="text-center mb-16">
-            <Badge variant="gold" className="mb-4">Beyond Academics</Badge>
+            <Badge variant="gold" className="mb-4">
+              Beyond Academics
+            </Badge>
             <h1 className="text-4xl md:text-5xl font-black font-serif text-hitm-navy mb-4">
-              Student Life & Facilities
+              B.Tech College in Ranchi with Modern Infrastructure
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              At HITM Ranchi, we believe in providing an environment that fosters holistic growth.
-              Explore our premium facilities designed for your comfort and success.
+              At HITM Ranchi, we believe in providing an environment that fosters holistic growth. Explore our premium
+              facilities designed for your comfort and success.
             </p>
           </div>
 
@@ -77,7 +78,6 @@ export default function StudentLifePage() {
                 className="border-none shadow-md hover:shadow-xl transition-all duration-300 bg-gray-50 group overflow-hidden"
               >
                 <CardContent className="p-0">
-
                   {/* Image */}
                   <div className="h-44 w-full overflow-hidden">
                     <Image
@@ -94,11 +94,8 @@ export default function StudentLifePage() {
                     <h3 className="text-xl font-bold text-hitm-navy mb-3 font-serif uppercase tracking-tight">
                       {f.title}
                     </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {f.desc}
-                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
                   </div>
-
                 </CardContent>
               </Card>
             ))}
@@ -115,17 +112,14 @@ export default function StudentLifePage() {
 
             <div className="absolute inset-0 bg-gradient-to-t from-hitm-navy via-transparent to-transparent flex items-end p-12">
               <div className="text-white max-w-xl">
-                <h2 className="text-3xl font-black font-serif italic mb-2 uppercase">
-                  Vibrant Campus Culture
-                </h2>
+                <h2 className="text-3xl font-black font-serif italic mb-2 uppercase">Vibrant Campus Culture</h2>
                 <p className="text-gray-300 font-medium">
-                  Join a diverse community of learners and participate in various student clubs,
-                  annual fests, and sports meets that define the HITM experience.
+                  Join a diverse community of learners and participate in various student clubs, annual fests, and
+                  sports meets that define the HITM experience.
                 </p>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 

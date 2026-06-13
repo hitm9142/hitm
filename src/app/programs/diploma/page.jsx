@@ -15,7 +15,7 @@ export default function DiplomaPage() {
     { name: 'Artificial Intelligence (AI)', seats: 30 },
     { name: 'Mechanical Engineering (ME)', seats: 60 },
     { name: 'Electrical & Electronics Engineering (EEE)', seats: 60 },
-    { name: 'Civil Engineering (CE)', seats: 60 }
+    { name: 'Civil Engineering (CE)', seats: 60 },
   ];
 
   return (
@@ -31,9 +31,12 @@ export default function DiplomaPage() {
           <div className="flex justify-center items-center gap-4 mb-4">
             <Badge variant="gold">Vocational Excellence</Badge>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6">Diploma (Polytechnic)</h1>
+          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6 capitalize">
+            top diploma colleges in ranchi
+          </h1>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
-            Gain practical technical skills. Our 3-year diploma programs are recognized by AICTE and designed for high employability.
+            Gain practical technical skills. Our 3-year diploma programs are recognized by AICTE and designed for high
+            employability.
           </p>
         </div>
       </section>
@@ -42,17 +45,23 @@ export default function DiplomaPage() {
       <section className="py-20 flex-1">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-black font-serif text-gray-900 mb-8">Technical Branches</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {branches.map((b, i) => (
-                  <div key={i} className="flex items-center justify-between p-5 bg-gray-50 border rounded-2xl hover:border-hitm-red/30 transition-all group">
+                  <div
+                    key={i}
+                    className="flex items-center justify-between p-5 bg-gray-50 border rounded-2xl hover:border-hitm-red/30 transition-all group"
+                  >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-gray-400 group-hover:text-hitm-red transition-colors"><Settings size={18} /></div>
+                      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-gray-400 group-hover:text-hitm-red transition-colors">
+                        <Settings size={18} />
+                      </div>
                       <span className="font-bold text-gray-800 text-sm">{b.name}</span>
                     </div>
-                    <Badge variant="secondary" className="bg-white text-[10px]">{b.seats} Seats</Badge>
+                    <Badge variant="secondary" className="bg-white text-[10px]">
+                      {b.seats} Seats
+                    </Badge>
                   </div>
                 ))}
               </div>
@@ -64,8 +73,12 @@ export default function DiplomaPage() {
                   of our B.Tech programs. This provides a clear pathway from vocational to degree education.
                 </p>
                 <div className="flex gap-4">
-                  <div className="flex items-center gap-2 text-xs font-bold text-hitm-red"><CheckCircle size={14} /> AICTE Approved</div>
-                  <div className="flex items-center gap-2 text-xs font-bold text-hitm-red"><CheckCircle size={14} /> JUT Affiliated</div>
+                  <div className="flex items-center gap-2 text-xs font-bold text-hitm-red">
+                    <CheckCircle size={14} /> AICTE Approved
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-bold text-hitm-red">
+                    <CheckCircle size={14} /> JUT Affiliated
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,9 +89,15 @@ export default function DiplomaPage() {
                   <Users className="mx-auto text-hitm-gold mb-4" />
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Duration & Eligibility</h3>
                   <div className="space-y-4 text-sm text-gray-500 mb-8 text-left">
-                    <p className="flex justify-between border-b pb-2"><span>Duration</span> <span className="font-bold text-gray-900">3 Years</span></p>
-                    <p className="flex justify-between border-b pb-2"><span>Min Qual.</span> <span className="font-bold text-gray-900">10th Std</span></p>
-                    <p className="flex justify-between border-b pb-2"><span>Min. Marks</span> <span className="font-bold text-gray-900">35% Avg</span></p>
+                    <p className="flex justify-between border-b pb-2">
+                      <span>Duration</span> <span className="font-bold text-gray-900">3 Years</span>
+                    </p>
+                    <p className="flex justify-between border-b pb-2">
+                      <span>Min Qual.</span> <span className="font-bold text-gray-900">10th Std</span>
+                    </p>
+                    <p className="flex justify-between border-b pb-2">
+                      <span>Min. Marks</span> <span className="font-bold text-gray-900">35% Avg</span>
+                    </p>
                   </div>
                   <ApplyModal courseName="Diploma in Polytechnic">
                     <Button className="w-full bg-hitm-navy hover:bg-hitm-red h-14" size="lg">
@@ -104,10 +123,14 @@ export default function DiplomaPage() {
                     <span className="text-sm font-black">₹ 2,35,000</span>
                   </div>
                 </div>
-                <Link href="/admissions/fee" className="text-xs font-bold text-white hover:text-hitm-gold flex items-center gap-2 relative z-10">View Installment Plans <ArrowRight size={14} /></Link>
+                <Link
+                  href="/admissions/fee"
+                  className="text-xs font-bold text-white hover:text-hitm-gold flex items-center gap-2 relative z-10"
+                >
+                  View Installment Plans <ArrowRight size={14} />
+                </Link>
               </div>
             </div>
-
           </div>
         </div>
       </section>

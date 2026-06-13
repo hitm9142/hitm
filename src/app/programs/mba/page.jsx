@@ -13,7 +13,7 @@ export default function MBAPage() {
     { name: 'Finance Management', desc: 'Focus on financial analysis, corporate finance, and investment banking.' },
     { name: 'Marketing Management', desc: 'Brand management, consumer behavior, and digital marketing strategies.' },
     { name: 'Human Resource Management', desc: 'Organizational behavior, talent acquisition, and labor laws.' },
-    { name: 'Information Technology', desc: 'IT project management, systems analysis, and technology leadership.' }
+    { name: 'Information Technology', desc: 'IT project management, systems analysis, and technology leadership.' },
   ];
 
   return (
@@ -23,15 +23,22 @@ export default function MBAPage() {
       {/* Hero */}
       <section className="bg-hitm-navy pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img src="https://images.unsplash.com/photo-1523240682765-9a026219b22e?auto=format&fit=crop&q=80&w=1600" alt="MBA" className="w-full h-full object-cover" />
+          <img
+            src="https://images.unsplash.com/photo-1523240682765-9a026219b22e?auto=format&fit=crop&q=80&w=1600"
+            alt="MBA"
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center">
           <div className="flex justify-center items-center gap-4 mb-4">
             <Badge variant="gold">Department of Management</Badge>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6">Master of Business Administration</h1>
+          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6 capitalize">
+            best college for mba in ranchi
+          </h1>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
-            Leading Jharkhand in management education. Transform into a strategic leader with our industry-aligned MBA program.
+            Leading Jharkhand in management education. Transform into a strategic leader with our industry-aligned MBA
+            program.
           </p>
         </div>
       </section>
@@ -40,25 +47,44 @@ export default function MBAPage() {
       <section className="py-20 flex-1">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-black font-serif text-gray-900 mb-8">Program Overview</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0"><Clock /></div>
-                  <div><p className="text-sm font-bold text-gray-900">2 Years</p><p className="text-xs text-gray-400 font-serif">Full Time Program</p></div>
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0">
+                    <Clock />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900">2 Years</p>
+                    <p className="text-xs text-gray-400 font-serif">Full Time Program</p>
+                  </div>
                 </div>
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0"><Users /></div>
-                  <div><p className="text-sm font-bold text-gray-900">180 Seats</p><p className="text-xs text-gray-400 font-serif">Approved Intake</p></div>
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0">
+                    <Users />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900">180 Seats</p>
+                    <p className="text-xs text-gray-400 font-serif">Approved Intake</p>
+                  </div>
                 </div>
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0"><Briefcase /></div>
-                  <div><p className="text-sm font-bold text-gray-900">Excellent ROI</p><p className="text-xs text-gray-400 font-serif">Placement Support</p></div>
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0">
+                    <Briefcase />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900">Excellent ROI</p>
+                    <p className="text-xs text-gray-400 font-serif">Placement Support</p>
+                  </div>
                 </div>
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0"><BookOpen /></div>
-                  <div><p className="text-sm font-bold text-gray-900">AICTE Approved</p><p className="text-xs text-gray-400 font-serif">Globally Recognized</p></div>
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-hitm-red shrink-0">
+                    <BookOpen />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900">AICTE Approved</p>
+                    <p className="text-xs text-gray-400 font-serif">Globally Recognized</p>
+                  </div>
                 </div>
               </div>
 
@@ -82,16 +108,20 @@ export default function MBAPage() {
                   'Graduation with min. 50% Marks',
                   'Valid CAT / MAT / CMAT Score',
                   'Personal Interview Round',
-                  'Document Verification'
+                  'Document Verification',
                 ].map((step, i) => (
                   <div key={i} className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded-full bg-hitm-red flex items-center justify-center text-xs font-black shrink-0">{i + 1}</div>
+                    <div className="w-8 h-8 rounded-full bg-hitm-red flex items-center justify-center text-xs font-black shrink-0">
+                      {i + 1}
+                    </div>
                     <span className="text-sm text-white/80">{step}</span>
                   </div>
                 ))}
               </div>
 
-              <h3 className="text-xl font-bold font-serif mb-5 text-hitm-gold border-t border-white/10 pt-8 mt-8">Fee Structure</h3>
+              <h3 className="text-xl font-bold font-serif mb-5 text-hitm-gold border-t border-white/10 pt-8 mt-8">
+                Fee Structure
+              </h3>
               <div className="space-y-4 mb-10">
                 <div className="flex justify-between border-b border-white/10 pb-3">
                   <span className="text-sm text-white/70 font-medium">One-time Fees</span>
@@ -115,7 +145,6 @@ export default function MBAPage() {
                 </ApplyModal>
               </div>
             </div>
-
           </div>
         </div>
       </section>

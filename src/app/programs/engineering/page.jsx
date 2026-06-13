@@ -9,32 +9,58 @@ import Link from 'next/link';
 import ApplyModal from '@/components/ApplyModal';
 
 export default function EngineeringPage() {
-
   const branches = [
-    { name: 'Computer Science & Engineering (CSE)', seats: 120, desc: 'Cutting-edge curriculum focused on AI, Software Engineering, and Cloud Computing.' },
-    { name: 'Data Sciences (DS)', seats: 30, desc: 'Advanced analytics, statistical modeling, and big data technologies.' },
-    { name: 'Artificial Intelligence (AI)', seats: 30, desc: 'Deep learning, robotics, and neural networks integration.' },
-    { name: 'Electrical & Electronics Engineering (EEE)', seats: 60, desc: 'Power systems, microelectronics, and control systems.' },
+    {
+      name: 'Computer Science & Engineering (CSE)',
+      seats: 120,
+      desc: 'Cutting-edge curriculum focused on AI, Software Engineering, and Cloud Computing.',
+    },
+    {
+      name: 'Data Sciences (DS)',
+      seats: 30,
+      desc: 'Advanced analytics, statistical modeling, and big data technologies.',
+    },
+    {
+      name: 'Artificial Intelligence (AI)',
+      seats: 30,
+      desc: 'Deep learning, robotics, and neural networks integration.',
+    },
+    {
+      name: 'Electrical & Electronics Engineering (EEE)',
+      seats: 60,
+      desc: 'Power systems, microelectronics, and control systems.',
+    },
     { name: 'Mechanical Engineering (ME)', seats: 60, desc: 'Thermodynamics, robotics, and precision manufacturing.' },
-    { name: 'Civil Engineering (CE)', seats: 60, desc: 'Structural design, construction management, and urban planning.' }
+    {
+      name: 'Civil Engineering (CE)',
+      seats: 60,
+      desc: 'Structural design, construction management, and urban planning.',
+    },
   ];
 
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      
+
       {/* Hero */}
       <section className="bg-hitm-navy pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600" alt="Engineering" className="w-full h-full object-cover" />
+          <img
+            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600"
+            alt="Engineering"
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex justify-between items-center mb-4">
             <Badge variant="gold">Department of Engineering</Badge>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6">Bachelor of Technology (B.Tech)</h1>
+          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6 capitalize">
+            Best b tech college in ranchi
+          </h1>
           <p className="text-gray-300 max-w-2xl text-lg leading-relaxed">
-            Empowering the next generation of engineers with innovation, practical skills, and technical excellence at HITM Ranchi.
+            Empowering the next generation of engineers with innovation, practical skills, and technical excellence at
+            HITM Ranchi.
           </p>
         </div>
       </section>
@@ -78,7 +104,9 @@ export default function EngineeringPage() {
                     <CardContent className="p-6">
                       <div className="flex justify-between items-start mb-2">
                         <h3 className="font-bold text-gray-900">{b.name}</h3>
-                        <Badge variant="outline" className="text-[10px]">{b.seats} Seats</Badge>
+                        <Badge variant="outline" className="text-[10px]">
+                          {b.seats} Seats
+                        </Badge>
                       </div>
                       <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
                     </CardContent>
@@ -94,7 +122,7 @@ export default function EngineeringPage() {
                   '10+2 with Physics, Chemistry & Math',
                   'Minimum 45% aggregate (40% for reserved)',
                   'Valid JEE Main or JCECEB ScoreCard',
-                  'Lateral Entry available for Diploma holders'
+                  'Lateral Entry available for Diploma holders',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-gray-600 text-sm">
                     <CheckCircle className="text-hitm-red shrink-0" size={18} />
@@ -104,7 +132,9 @@ export default function EngineeringPage() {
               </ul>
 
               <div className="bg-hitm-red/5 p-6 rounded-2xl mb-8 border border-hitm-red/10">
-                <h4 className="text-sm font-bold text-hitm-navy uppercase tracking-widest mb-4 font-serif text-center">Fee Structure</h4>
+                <h4 className="text-sm font-bold text-hitm-navy uppercase tracking-widest mb-4 font-serif text-center">
+                  Fee Structure
+                </h4>
                 <div className="space-y-3 mb-2">
                   <div className="flex justify-between items-center border-b border-hitm-red/10 pb-2">
                     <span className="text-xs font-semibold text-gray-600">One-time Fees (Reg. + Caution)</span>

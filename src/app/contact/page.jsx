@@ -112,7 +112,7 @@ export default function ContactPage() {
             <Badge variant="gold" className="mb-4">Get In Touch</Badge>
             <h1 className="text-4xl md:text-5xl font-black font-serif text-hitm-navy mb-4">Contact HITM Ranchi</h1>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              Have questions about admissions, courses, or campus life? We&apos;re here to help. 
+              Have questions about admissions, courses, or campus life? We&apos;re here to help.
               Reach out to us through any of the channels below.
             </p>
           </div>
@@ -137,7 +137,7 @@ export default function ContactPage() {
                         <Phone className="text-hitm-gold" size={20} />
                       </div>
                       <p className="text-gray-300 text-sm leading-relaxed">
-                        Admission: 764-496-6461
+                        Admission: 9031628245, 9031628246, 9031628248
                       </p>
                     </div>
                     <div className="flex gap-4">
@@ -189,8 +189,8 @@ export default function ContactPage() {
                     <p className="text-gray-500 max-w-md mx-auto">
                       Thank you for contacting us. Your message has been safely saved, and we will get back to you shortly.
                     </p>
-                    <Button 
-                      className="mt-8 bg-hitm-navy hover:bg-hitm-red text-white" 
+                    <Button
+                      className="mt-8 bg-hitm-navy hover:bg-hitm-red text-white"
                       onClick={() => setStatus(null)}
                     >
                       Send Another Message
@@ -201,30 +201,30 @@ export default function ContactPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label>Full Name *</Label>
-                        <Input 
+                        <Input
                           required
                           value={formData.name}
                           onChange={e => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="John Doe" 
-                          className="h-12 bg-gray-50 border-gray-200" 
+                          placeholder="John Doe"
+                          className="h-12 bg-gray-50 border-gray-200"
                         />
                       </div>
                       <div className="space-y-2">
                         <Label>Email Address *</Label>
-                        <Input 
+                        <Input
                           required
-                          type="email" 
+                          type="email"
                           value={formData.email}
                           onChange={e => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="john@example.com" 
-                          className="h-12 bg-gray-50 border-gray-200" 
+                          placeholder="john@example.com"
+                          className="h-12 bg-gray-50 border-gray-200"
                         />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label>Mobile Number *</Label>
-                        <InlinePhoneVerifier 
+                        <InlinePhoneVerifier
                           phone={formData.phone}
                           onChange={p => setFormData({ ...formData, phone: p })}
                           onVerificationComplete={setPhoneVerified}
@@ -233,44 +233,44 @@ export default function ContactPage() {
                       </div>
                       <div className="space-y-2">
                         <Label>Subject</Label>
-                        <Input 
+                        <Input
                           value={formData.subject}
                           onChange={e => setFormData({ ...formData, subject: e.target.value })}
-                          placeholder="Admission Inquiry" 
-                          className="h-12 bg-gray-50 border-gray-200" 
+                          placeholder="Admission Inquiry"
+                          className="h-12 bg-gray-50 border-gray-200"
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label>Your Message *</Label>
-                      <Textarea 
+                      <Textarea
                         required
                         value={formData.message}
                         onChange={e => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Type your message here..." 
-                        className="min-h-[150px] bg-gray-50 border-gray-200" 
+                        placeholder="Type your message here..."
+                        className="min-h-[150px] bg-gray-50 border-gray-200"
                       />
                     </div>
-                    
+
                     {status === 'error' && (
                       <p className="text-red-500 text-sm font-semibold bg-red-50 p-3 rounded-lg border border-red-100 animate-in fade-in duration-300">
                         {errorMessage}
                       </p>
                     )}
 
-                     {loading ? (
-                       <div className="w-full flex items-center justify-center gap-2 bg-hitm-navy text-white rounded-md py-3 text-sm font-bold animate-pulse">
-                         <Loader2 className="animate-spin" size={16} /> Sending Message... Please wait
-                       </div>
-                     ) : (
-                       <Button 
-                         type="submit"
-                         disabled={!phoneVerified}
-                         className="w-full h-12 bg-hitm-red hover:bg-hitm-navy text-white font-bold tracking-widest uppercase transition-all shadow-lg hover:shadow-hitm-red/20 group"
-                       >
-                         Send Message <Send className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
-                       </Button>
-                     )}
+                    {loading ? (
+                      <div className="w-full flex items-center justify-center gap-2 bg-hitm-navy text-white rounded-md py-3 text-sm font-bold animate-pulse">
+                        <Loader2 className="animate-spin" size={16} /> Sending Message... Please wait
+                      </div>
+                    ) : (
+                      <Button
+                        type="submit"
+                        disabled={!phoneVerified}
+                        className="w-full h-12 bg-hitm-red hover:bg-hitm-navy text-white font-bold tracking-widest uppercase transition-all shadow-lg hover:shadow-hitm-red/20 group"
+                      >
+                        Send Message <Send className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+                      </Button>
+                    )}
 
                   </form>
                 )}

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 
-const AUTH_KEY = 'VcxOhu59dnEWvI0m_bCXepBLKZRwL7kptdXzt6n3YmY';
+const AUTH_KEY = 'EkdlXu3rZAgYvHr-HaqdDdRZIn0vZRhZTypHEl4l8bg';
 const SECRET_KEY = process.env.OTP_SECRET_KEY || 'hitm-website-otp-secret-key-2026-v1';
 
 export async function POST(request) {

@@ -24,6 +24,9 @@ const FALLBACK_META = {
   title: 'HITM Ranchi | AICTE Approved Institution',
   description:
     'Haider Institute of Technology and Management (HITM Ranchi) is a premier AICTE-approved engineering and management institution in Jharkhand, offering B.Tech, Diploma, MBA, MCA, BBA, and BCA programmes',
+  verification: {
+    google: 'j-rqbnSDi-F6lHZE_kHitbES715vdXs71ggzA_W6Cfc',
+  },
 };
 
 /**
@@ -100,6 +103,20 @@ export default function RootLayout({ children }) {
             style={{ display: 'none', visibility: 'hidden' }}
           ></iframe>
         </noscript>
+
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-FS600B5DP1"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FS600B5DP1');
+          `}
+        </Script>
         {/* End Google Tag Manager (noscript) */}
         {children}
         <FloatingApply />

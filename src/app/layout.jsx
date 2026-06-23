@@ -2,6 +2,7 @@ import './globals.css';
 import 'leaflet/dist/leaflet.css';
 import FloatingApply from '@/components/FloatingApply';
 import pageMeta from '@/lib/metadata.json';
+import Script from 'next/script';
 
 const SITE_URL = 'https://www.hitmranchi.ac.in';
 
@@ -17,6 +18,9 @@ const BASE_META = {
     shortcut: [{ url: '/images/logo/ahct-logo.png', type: 'image/jpeg' }],
     apple: [{ url: '/images/logo/ahct-logo.png', type: 'image/jpeg' }],
   },
+  verification: {
+    google: 'j-rqbnSDi-F6lHZE_kHitbES715vdXs71ggzA_W6Cfc',
+  },
 };
 
 // Fallback if a page has no entry in metadata.json
@@ -24,9 +28,7 @@ const FALLBACK_META = {
   title: 'HITM Ranchi | AICTE Approved Institution',
   description:
     'Haider Institute of Technology and Management (HITM Ranchi) is a premier AICTE-approved engineering and management institution in Jharkhand, offering B.Tech, Diploma, MBA, MCA, BBA, and BCA programmes',
-  verification: {
-    google: 'j-rqbnSDi-F6lHZE_kHitbES715vdXs71ggzA_W6Cfc',
-  },
+
 };
 
 /**

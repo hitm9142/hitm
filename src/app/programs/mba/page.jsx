@@ -128,7 +128,7 @@ export default function MBAPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-hitm-navy/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6">
                 <p className="text-white font-bold text-lg">World-Class Infrastructure & Facilities</p>
-                <p className="text-white/80 text-sm mt-1">Creating tomorrow's innovators today</p>
+                <p className="text-white/80 text-sm mt-1">Creating tomorrow&apos;s innovators today</p>
               </div>
             </div>
           </div>

@@ -5,7 +5,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, Clock, Users, BookOpen, ArrowRight, Target } from 'lucide-react';
-import Link from 'next/link';
 import ApplyModal from '@/components/ApplyModal';
 
 export default function BBAPage() {
@@ -40,7 +39,6 @@ export default function BBAPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Image on Left */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] lg:h-[500px]">
               <img src="/images/bba-img.webp" alt="B.Tech Program at HITM" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-hitm-navy/60 to-transparent"></div>
@@ -71,7 +69,6 @@ export default function BBAPage() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Content on Left */}
             <div>
               <h2 className="text-3xl md:text-4xl font-black font-serif text-gray-900 leading-tight mb-6">
                 Why Choose HITM?
@@ -122,7 +119,7 @@ export default function BBAPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-hitm-navy/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6">
                 <p className="text-white font-bold text-lg">World-Class Infrastructure & Facilities</p>
-                <p className="text-white/80 text-sm mt-1">Creating tomorrow's innovators today</p>
+                <p className="text-white/80 text-sm mt-1">Creating tomorrow&apos;s innovators today</p>
               </div>
             </div>
           </div>

@@ -36,6 +36,102 @@ export default function MCAPage() {
         </div>
       </section>
 
+      {/* About the Program Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Image on Left */}
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] lg:h-[500px]">
+              <img
+                src="/images/mca-image-1.webp"
+                alt="B.Tech Program at HITM"
+                className="w-full h-full object-cover object-left"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-hitm-navy/60 to-transparent"></div>
+              <Badge className="absolute top-6 left-6 bg-hitm-red text-white border-none">AICTE Approved</Badge>
+            </div>
+
+            {/* Content on Right */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-black font-serif text-gray-900 leading-tight mb-6">
+                About the Program
+              </h2>
+              <div className="space-y-5 text-gray-600 text-base leading-8">
+                <p>
+                  The Master of Computer Applications (MCA) program at HITM is a 2-year postgraduate qualification. The
+                  program is designed to equip students with advanced software engineering, programming languages, and
+                  application development knowledge, where students dive deep into the concepts of software development,
+                  data science, and web technologies. HITM’s<b> MCA course in Ranchi</b> is offered across numerous
+                  specialization domains focusing on emerging technologies like AI/ML, data science, etc., for students’
+                  future readiness.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose HITM Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Content on Left */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-black font-serif text-gray-900 leading-tight mb-6">
+                Why Choose HITM
+              </h2>
+              <div className="space-y-4">
+                <ul className="space-y-4">
+                  {[
+                    {
+                      title: 'Technical Proficiency',
+                      desc: 'Students in the MCA program at HITM build a deep understanding of logic, mathematical and theoretical foundations, and programming languages like Java, Python, and C++.',
+                    },
+                    {
+                      title: 'Experienced Faculty',
+                      desc: 'Students at HITM receive academic guidance directly from the faculty of the IIT. It ensures that students receive the best mentorship for their future prospects.',
+                    },
+                    {
+                      title: 'Value-Added Laboratories',
+                      desc: 'Any resources that students may require in their learning journey at HITM are provided by our state-of-the-art laboratories.',
+                    },
+                    {
+                      title: 'Industry-Oriented Curriculum',
+                      desc: ' Our curriculum across all the courses has been aligned with industry demand, where students focus on AI, innovation, and emerging technologies.',
+                    },
+                    {
+                      title: 'Top-Notch Infrastructure',
+                      desc: 'Our infrastructure has been designed to provide students with the highest comfort required for the best learning experience. Infrastructure is one of the qualities that separates HITM from an average MCA in Jharkhand.',
+                    },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle className="text-hitm-red shrink-0 mt-1" size={20} />
+                      <div>
+                        <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                        <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Image on Right */}
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] lg:h-[600px]">
+              <img
+                src="/images/hitm-infrastructure-img.webp"
+                alt="HITM Campus Infrastructure"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-hitm-navy/60 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-white font-bold text-lg">World-Class Infrastructure & Facilities</p>
+                <p className="text-white/80 text-sm mt-1">Creating tomorrow's innovators today</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Overview */}
       <section className="py-20 flex-1">
         <div className="container mx-auto px-4">

@@ -302,7 +302,7 @@ export default function HomePage() {
 
   // Increment visit counter only on homepage load
   useEffect(() => {
-    fetch('/api/visits', { method: 'POST' }).catch(() => { });
+    fetch('/api/visits', { method: 'POST' }).catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -574,10 +574,15 @@ export default function HomePage() {
                 Jharkhand’s Dedicated Technology & Management Campus
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Haider Institute of Technology & Management (HITM) is an AICTE-approved institution in Ranchi offering numerous engineering, technology and management programs. All its courses are focused towards professional and career development, ensuring students are equipped with industry-ready skills.
+                Haider Institute of Technology & Management (HITM) is an AICTE-approved institution in Ranchi offering
+                numerous engineering, technology and management programs. All its courses are focused towards
+                professional and career development, ensuring students are equipped with industry-ready skills. Instead
+                of offering loads of irrelevant courses, we host limited courses to dedicate our efforts to preparing
+                students for what really matters in the future.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
-                Instead of offering loads of irrelevant courses, we host limited courses to dedicate our efforts to preparing students for what really matters in the future.
+                Additionally, HITM is also an affordable engineering college in Ranchi, making quality education
+                available to all.
               </p>
               {/* <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
@@ -937,19 +942,34 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
             <div>
               <p className="text-hitm-red font-bold text-sm uppercase tracking-widest mb-2">About HITM Ranchi</p>
-              <h2 className="text-3xl md:text-4xl font-black font-serif text-gray-900 leading-tight">
-                Why HITM?
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-black font-serif text-gray-900 leading-tight">Why HITM?</h2>
               <div className="mt-6 space-y-5 text-gray-600 text-base leading-8">
                 <ul className="list-disc list-inside md:list-outside pl-4 md:pl-5 flex flex-col gap-3 text-gray-700 text-[16px] leading-relaxed">
-                  <li><strong>Approved by AICTE:</strong> HITM is one of the few newly affiliated colleges that has been approved by the All India Council for Technical Education. This marks a huge feat for educational excellence. </li>
-                  <li><strong>Top-Tier Faculty:</strong> Students at HITM receive academic guidance directly from the faculty of the IIT. It ensures that students receive the best guidance for their future prospects.</li>
-                  <li><strong>Value-Added Laboratories:</strong> All the laboratories in the institute have been developed as per the AICTE norms and standards.</li>
-                  <li><strong>Industry-Oriented Curriculum:</strong> Our curriculum across all the courses has been aligned with industry demand, where students focus on AI, innovation, and emerging technologies.</li>
-                  <li><strong>Modern Infrastructure:</strong> Students at the college get access to the best infrastructural facilities in Ranchi, providing a world-class learning environment.</li>
+                  <li>
+                    <strong>Approved by AICTE:</strong> HITM is one of the few newly affiliated colleges that has been
+                    approved by the All India Council for Technical Education. This marks a huge feat for educational
+                    excellence.{' '}
+                  </li>
+                  <li>
+                    <strong>Top-Tier Faculty:</strong> Students at HITM receive academic guidance directly from the
+                    faculty of the IIT. It ensures that students receive the best guidance for their future prospects.
+                  </li>
+                  <li>
+                    <strong>Value-Added Laboratories:</strong> All the laboratories in the institute have been developed
+                    as per the AICTE norms and standards.
+                  </li>
+                  <li>
+                    <strong>Industry-Oriented Curriculum:</strong> Our curriculum across all the courses has been
+                    aligned with industry demand, where students focus on AI, innovation, and emerging technologies.
+                  </li>
+                  <li>
+                    <strong>Modern Infrastructure:</strong> Students at the college get access to the best
+                    infrastructural facilities in Ranchi, providing a world-class learning environment.
+                  </li>
                 </ul>
                 <p className="leading-2">
-                  In a sense, Haider Institute of Technology and Management stands as a center of learning where education meets innovation, opportunity, and growth.
+                  In a sense, Haider Institute of Technology and Management stands as a center of learning where
+                  education meets innovation, opportunity, and growth.
                 </p>
               </div>
             </div>

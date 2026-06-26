@@ -35,7 +35,98 @@ export default function BBAPage() {
           </p>
         </div>
       </section>
+      {/* About the Program Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Image on Left */}
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] lg:h-[500px]">
+              <img src="/images/bba-img.webp" alt="B.Tech Program at HITM" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-hitm-navy/60 to-transparent"></div>
+              <Badge className="absolute top-6 left-6 bg-hitm-red text-white border-none">AICTE Approved</Badge>
+            </div>
 
+            {/* Content on Right */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-black font-serif text-gray-900 leading-tight mb-6">
+                About the Program
+              </h2>
+              <div className="space-y-5 text-gray-600 text-base leading-8">
+                <p>
+                  The Bachelor of Business Administration (MBA) program at HITM is a 3-year undergraduate qualification.
+                  The program is designed to equip students with foundational business skills and knowledge necessary
+                  for understanding the functional aspects of a company and their interconnection. HITM’s{' '}
+                  <b>BBA course in Jharkhand</b> also focuses on building leadership, strategic thinking, and
+                  entrepreneurial skills alongside emerging fintech trends for management in the modern business
+                  dynamic.{' '}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose HITM Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Content on Left */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-black font-serif text-gray-900 leading-tight mb-6">
+                Why Choose HITM?
+              </h2>
+              <div className="space-y-4">
+                <ul className="space-y-4">
+                  {[
+                    {
+                      title: 'Guaranteed Real World Success',
+                      desc: 'Students of the BBA program at HITM are encouraged with practical projects and summer internships. It builds the crucial foundation for the early placement support in the final year of the program.',
+                    },
+                    {
+                      title: 'Experienced Faculty',
+                      desc: 'Students at HITM receive academic guidance from professionals with extensive industry experience. It ensures that students receive the best mentorship for their future prospects.',
+                    },
+                    {
+                      title: 'Value-Added Laboratories',
+                      desc: 'HITM students develop a deeper understanding of the business dynamics, helping them with the ability to handle both self-owned and multinational businesses. This business acumen is a lost attribute of many BBA colleges in Ranchi Jharkhand, but not HITM.',
+                    },
+                    {
+                      title: 'Industry-Oriented Curriculum',
+                      desc: 'Our curriculum across all the courses has been aligned with the latest business demands, where students focus on AI, innovation, and emerging technologies.',
+                    },
+                    {
+                      title: 'Top-Notch Infrastructure',
+                      desc: 'Our infrastructure has been designed to provide students with the highest comfort required for the best learning experience. Infrastructure is one of the qualities that separates HITM among the best colleges in Jharkhand for BBA.',
+                    },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle className="text-hitm-red shrink-0 mt-1" size={20} />
+                      <div>
+                        <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                        <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Image on Right */}
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] lg:h-[600px]">
+              <img
+                src="/images/hitm-infrastructure-img.webp"
+                alt="HITM Campus Infrastructure"
+                className="w-full h-full object-cover object-left"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-hitm-navy/60 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-white font-bold text-lg">World-Class Infrastructure & Facilities</p>
+                <p className="text-white/80 text-sm mt-1">Creating tomorrow's innovators today</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Program Info */}
       <section className="py-20 flex-1">
         <div className="container mx-auto px-4">
@@ -97,7 +188,7 @@ export default function BBAPage() {
             <div className="h-fit sticky top-32">
               <Card className="shadow-2xl border-none p-6 bg-hitm-navy text-white rounded-[40px]">
                 <CardContent className="pt-6">
-                  <h3 className="text-xl font-bold mb-6 font-serif text-hitm-gold">Quick Admission</h3>
+                  <h3 className="text-xl font-bold mb-6 font-serif text-hitm-gold">BBA Admission in Ranchi</h3>
                   <div className="space-y-3 mb-8">
                     {[
                       { label: 'Seats', value: '180' },

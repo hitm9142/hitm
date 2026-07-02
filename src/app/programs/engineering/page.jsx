@@ -56,7 +56,7 @@ export default function EngineeringPage() {
             <Badge variant="gold">Department of Engineering</Badge>
           </div>
           <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6 capitalize">
-            Best b tech college in ranchi
+            Best b.Tech college in ranchi
           </h1>
           <p className="text-gray-300 max-w-2xl text-lg leading-relaxed">
             Empowering the next generation of engineers with innovation, practical skills, and technical excellence at
@@ -119,7 +119,7 @@ export default function EngineeringPage() {
                   program recognized by the All India Council for Technical Education (AICTE). The program aims to build
                   an engineering mindset where students build the essential skills of problem-solving, critical
                   thinking, and insightfully using data for decision-making. The program at HITM’s{' '}
-                  <b> B.Tech institute in Ranchi</b> is offered across numerous specialization domains, providing
+                  <b>B.Tech institute in Ranchi</b> is offered across numerous specialization domains, providing
                   students with the flexibility to pursue a field of their interest.
                 </p>
               </div>
@@ -135,14 +135,14 @@ export default function EngineeringPage() {
             {/* Content on Left */}
             <div>
               <h2 className="text-3xl md:text-4xl font-black font-serif text-gray-900 leading-tight mb-6">
-                Why Choose HITM
+                Why Choose HITM Among Private B.Tech Colleges in Ranchi?
               </h2>
               <div className="space-y-4">
                 <ul className="space-y-4">
                   {[
                     {
                       title: 'AICTE Approved',
-                      desc: 'All the B.Tech programs at HITM have been approved by the statutory national-level council for technical education. Such approvals improve the credibility and are only traits of a top B Tech college in Ranchi.',
+                      desc: 'All the B.Tech programs at HITM have been approved by the statutory national-level council for technical education. Such approvals improve the credibility and are only traits of a top B.Tech college in Ranchi.',
                     },
                     {
                       title: 'Experienced Faculty',
@@ -158,7 +158,7 @@ export default function EngineeringPage() {
                     },
                     {
                       title: 'Top-Notch Infrastructure',
-                      desc: 'Our infrastructure has been designed to provide students with the highest comfort required for the best learning experience. Infrastructure is one of the qualities that separates HITM as the best B Tech college in Jharkhand.',
+                      desc: 'Our infrastructure has been designed to provide students with the highest comfort required for the best learning experience. Infrastructure is one of the qualities that separates HITM as the best B.Tech college in Jharkhand.',
                     },
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">

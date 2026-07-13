@@ -6,7 +6,6 @@ Allow: /
 User-agent: *
 Disallow: /404
 Disallow: /thank-you
-Disallow: /blogs
 Disallow: /api/
 Disallow: /api-proxy/
 Disallow: /_next/

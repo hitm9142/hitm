@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import {
   Phone,
@@ -86,12 +86,19 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMobileItem, setOpenMobileItem] = useState(null);
   const [academicYear, setAcademicYear] = useState('');
+  const [navHeight, setNavHeight] = useState(0);
+  const headerRef = useRef(null);
 
   useEffect(() => {
     const currentMonth = new Date().getMonth();
     const currentYear = new Date().getFullYear();
     const isNew = currentMonth >= 2; // March onwards
     setAcademicYear(isNew ? `${currentYear}-${currentYear + 1}` : `${currentYear - 1}-${currentYear}`);
+
+    // Capture height before going sticky so placeholder matches exactly
+    if (headerRef.current) {
+      setNavHeight(headerRef.current.offsetHeight);
+    }
 
     const handler = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handler);
@@ -100,11 +107,15 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Placeholder to prevent layout jump when header becomes fixed */}
+      {scrolled && <div style={{ height: navHeight }} aria-hidden="true" />}
+
       {/* Premium Header Container */}
       <header
+        ref={headerRef}
         className={cn(
-          'bg-white w-full z-[1000] transition-all duration-300',
-          scrolled ? 'fixed top-0 shadow-2xl' : 'relative',
+          'bg-white w-full z-[1000] transition-shadow duration-300',
+          scrolled ? 'fixed top-0 shadow-2xl animate-slide-down' : 'relative',
         )}
       >
         <div className="flex flex-wrap justify-between items-center lg:flex-nowrap lg:items-stretch w-full">

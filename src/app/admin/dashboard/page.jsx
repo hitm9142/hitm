@@ -6,8 +6,19 @@ import { auth, db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import Link from 'next/link';
 import {
-  LayoutDashboard, Bell, CalendarDays, Users, Briefcase,
-  Globe, LogOut, Menu, Clock, Sparkles, Rocket, CreditCard, BookOpen
+  LayoutDashboard,
+  Bell,
+  CalendarDays,
+  Users,
+  Briefcase,
+  Globe,
+  LogOut,
+  Menu,
+  Clock,
+  Sparkles,
+  Rocket,
+  CreditCard,
+  BookOpen,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -39,32 +50,32 @@ export default function AdminDashboard() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [activeSection, setActiveSection] = useState('dashboard');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    if (!auth || !db) return;
-    const unsubscribe = onAuthStateChanged(auth, async (u) => {
-      if (u) {
-        try {
-          const userDoc = await getDoc(doc(db, 'users', u.uid));
-          if (userDoc.exists() && userDoc.data().userType === 'admin') {
-            setUser({ ...u, ...userDoc.data() });
-          } else {
-            await signOut(auth);
-            router.push('/admin/login');
-          }
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-          router.push('/admin/login');
-        }
-      } else {
-        router.push('/admin/login');
-      }
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, [router]);
+  // useEffect(() => {
+  //   if (!auth || !db) return;
+  //   const unsubscribe = onAuthStateChanged(auth, async (u) => {
+  //     if (u) {
+  //       try {
+  //         const userDoc = await getDoc(doc(db, 'users', u.uid));
+  //         if (userDoc.exists() && userDoc.data().userType === 'admin') {
+  //           setUser({ ...u, ...userDoc.data() });
+  //         } else {
+  //           await signOut(auth);
+  //           router.push('/admin/login');
+  //         }
+  //       } catch (error) {
+  //         console.error('Error fetching user data:', error);
+  //         router.push('/admin/login');
+  //       }
+  //     } else {
+  //       router.push('/admin/login');
+  //     }
+  //     setLoading(false);
+  //   });
+  //   return () => unsubscribe();
+  // }, [router]);
 
   const handleSignOut = async () => {
     await signOut(auth);
@@ -84,23 +95,34 @@ export default function AdminDashboard() {
 
   const renderContent = () => {
     switch (activeSection) {
-      case 'dashboard': return <DashboardView />;
-      case 'notices': return <NoticesManager />;
-      case 'events': return <EventsManager />;
-      case 'applications': return <ApplicationsManager />;
-      case 'enquiries': return <EnquiriesManager />;
-      case 'payments': return <PaymentsManager />;
-      case 'careers': return <CareerManager />;
-      case 'incubation': return <IncubationManager />;
-      case 'popup': return <PopupManager />;
-      case 'syllabus': return <SyllabusManager />;
-      default: return (
-        <div className="flex flex-col items-center justify-center py-20 text-gray-400">
-          <Clock size={48} className="mb-4 opacity-40" />
-          <h3 className="text-xl font-bold font-serif mb-2">Coming Soon</h3>
-          <p className="text-sm">This section is under development</p>
-        </div>
-      );
+      case 'dashboard':
+        return <DashboardView />;
+      case 'notices':
+        return <NoticesManager />;
+      case 'events':
+        return <EventsManager />;
+      case 'applications':
+        return <ApplicationsManager />;
+      case 'enquiries':
+        return <EnquiriesManager />;
+      case 'payments':
+        return <PaymentsManager />;
+      case 'careers':
+        return <CareerManager />;
+      case 'incubation':
+        return <IncubationManager />;
+      case 'popup':
+        return <PopupManager />;
+      case 'syllabus':
+        return <SyllabusManager />;
+      default:
+        return (
+          <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+            <Clock size={48} className="mb-4 opacity-40" />
+            <h3 className="text-xl font-bold font-serif mb-2">Coming Soon</h3>
+            <p className="text-sm">This section is under development</p>
+          </div>
+        );
     }
   };
 
@@ -110,12 +132,16 @@ export default function AdminDashboard() {
         <div className="fixed inset-0 bg-black/50 z-40 xl:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
-      <aside className={cn(
-        'fixed top-0 left-0 h-full w-64 bg-gray-950 z-50 flex flex-col transition-transform duration-300',
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full xl:translate-x-0'
-      )}>
+      <aside
+        className={cn(
+          'fixed top-0 left-0 h-full w-64 bg-gray-950 z-50 flex flex-col transition-transform duration-300',
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full xl:translate-x-0',
+        )}
+      >
         <div className="bg-hitm-red/80 px-4 py-5 text-center shrink-0">
-          <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white font-black text-xl font-serif mx-auto mb-2">A</div>
+          <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white font-black text-xl font-serif mx-auto mb-2">
+            A
+          </div>
           <h2 className="text-white font-bold font-serif text-sm">HITM Admin</h2>
           <p className="text-white/60 text-[11px] mt-0.5">Management Portal</p>
         </div>
@@ -126,7 +152,10 @@ export default function AdminDashboard() {
             <button
               key={item.id}
               id={`nav-${item.id}`}
-              onClick={() => { setActiveSection(item.id); setSidebarOpen(false); }}
+              onClick={() => {
+                setActiveSection(item.id);
+                setSidebarOpen(false);
+              }}
               className={cn('admin-sidebar-link w-full text-left mb-0.5', activeSection === item.id && 'active')}
             >
               {item.icon} {item.label}
@@ -137,7 +166,10 @@ export default function AdminDashboard() {
           <Link href="/" className="admin-sidebar-link flex w-full">
             <Globe size={16} /> View Website
           </Link>
-          <button onClick={handleSignOut} className="admin-sidebar-link w-full text-left text-red-400 hover:text-red-300 hover:bg-red-900/20">
+          <button
+            onClick={handleSignOut}
+            className="admin-sidebar-link w-full text-left text-red-400 hover:text-red-300 hover:bg-red-900/20"
+          >
             <LogOut size={16} /> Sign Out
           </button>
         </nav>
@@ -163,9 +195,7 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        <main className="flex-1 p-4 md:p-6">
-          {renderContent()}
-        </main>
+        <main className="flex-1 p-4 md:p-6">{renderContent()}</main>
       </div>
     </div>
   );

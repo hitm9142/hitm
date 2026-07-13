@@ -1,19 +1,33 @@
 import { NextResponse } from 'next/server';
+import { proxy } from '@/proxy';
 
 /**
- * Middleware – runs on every request before rendering.
- * Injects the current pathname as a request header (x-pathname)
- * so layout.jsx's generateMetadata can read it and serve the
- * correct title/description from metadata.json.
+ * Next.js middleware — runs on every matched request before rendering.
+ *
+ * Responsibilities:
+ *  1. Injects the current pathname as `x-pathname` header so layout.jsx's
+ *     generateMetadata can read it for dynamic SEO.
+ *  2. Delegates Blog Admin route protection (/admin-dashboard/*) to proxy.js.
+ *
+ * The existing Firebase Lead Capture Admin at /admin/* is intentionally
+ * excluded — it handles its own authentication independently.
  */
-export function middleware(request) {
+export async function middleware(request) {
   const { pathname } = request.nextUrl;
+
+  // ── Blog Admin protection ────────────────────────────────────────────────
+  if (pathname.startsWith('/admin-dashboard')) {
+    return proxy(request);
+  }
+
+  // ── Pathname header (SEO / metadata) ────────────────────────────────────
   const response = NextResponse.next();
   response.headers.set('x-pathname', pathname);
   return response;
 }
 
-// Run on all routes except static assets and Next.js internals
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|images|robots.txt|sitemap.xml).*)'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|images|robots.txt|sitemap.xml).*)',
+  ],
 };

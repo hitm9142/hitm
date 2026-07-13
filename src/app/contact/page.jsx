@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Script from 'next/script';
 import dynamicImport from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -29,14 +30,14 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message || !formData.phone) {
-      setErrorMessage("Please fill in all required fields.");
-      setStatus("error");
+      setErrorMessage('Please fill in all required fields.');
+      setStatus('error');
       return;
     }
 
     if (!phoneVerified) {
-      setErrorMessage("Please verify your phone number with OTP first.");
-      setStatus("error");
+      setErrorMessage('Please verify your phone number with OTP first.');
+      setStatus('error');
       return;
     }
 
@@ -55,46 +56,46 @@ export default function ContactPage() {
           phone: formData.phone,
           subject: formData.subject || 'General Inquiry',
           message: formData.message,
-          createdAt: serverTimestamp()
+          createdAt: serverTimestamp(),
         });
         firestoreSuccess = true;
       } else {
-        throw new Error("Database not initialized.");
+        throw new Error('Database not initialized.');
       }
     } catch (err) {
-      console.error("Firestore submit error:", err);
-      setErrorMessage("Could not save to database. Please check your internet connection.");
-      setStatus("error");
+      console.error('Firestore submit error:', err);
+      setErrorMessage('Could not save to database. Please check your internet connection.');
+      setStatus('error');
     }
 
     // 2. Try to submit to Web3Forms email API
     // We wrap this in a try-catch so that even if Web3Forms fails, it doesn't affect Firestore success!
     if (firestoreSuccess) {
       try {
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
           },
           body: JSON.stringify({
-            access_key: "ea72c4d8-d56a-48f8-af05-7dd8d48268a9",
+            access_key: 'ea72c4d8-d56a-48f8-af05-7dd8d48268a9',
             name: formData.name,
             email: formData.email,
             phone: formData.phone,
-            subject: formData.subject || "Contact Page Message",
-            message: formData.message
-          })
+            subject: formData.subject || 'Contact Page Message',
+            message: formData.message,
+          }),
         });
         const data = await res.json();
         if (!data.success) {
-          console.warn("Web3Forms email submission returned success: false", data);
+          console.warn('Web3Forms email submission returned success: false', data);
         }
       } catch (mailErr) {
-        console.error("Web3Forms email submission failed:", mailErr);
+        console.error('Web3Forms email submission failed:', mailErr);
       }
 
-      setStatus("success");
+      setStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
       setPhoneVerified(false);
     }
@@ -102,18 +103,19 @@ export default function ContactPage() {
     setLoading(false);
   };
 
-
   return (
     <main className="flex flex-col min-h-screen">
       <Navbar />
       <div className="flex-1 bg-white pt-24 pb-20">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
-            <Badge variant="gold" className="mb-4">Get In Touch</Badge>
+            <Badge variant="gold" className="mb-4">
+              Get In Touch
+            </Badge>
             <h1 className="text-4xl md:text-5xl font-black font-serif text-hitm-navy mb-4">Contact HITM Ranchi</h1>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              Have questions about admissions, courses, or campus life? We&apos;re here to help.
-              Reach out to us through any of the channels below.
+              Have questions about admissions, courses, or campus life? We&apos;re here to help. Reach out to us through
+              any of the channels below.
             </p>
           </div>
 
@@ -145,23 +147,29 @@ export default function ContactPage() {
                         <FaWhatsapp className="text-green-400" size={20} />
                       </div>
                       <p className="text-gray-300 text-sm leading-relaxed">
-                        <a href="https://wa.me/917644966461" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 font-bold hover:underline transition-colors">Chat on WhatsApp</a>
+                        <a
+                          href="https://wa.me/917644966461"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-green-400 hover:text-green-300 font-bold hover:underline transition-colors"
+                        >
+                          Chat on WhatsApp
+                        </a>
                       </p>
                     </div>
                     <div className="flex gap-4">
                       <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
                         <Mail className="text-hitm-gold" size={20} />
                       </div>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        info@hitmranchi.ac.in
-                      </p>
+                      <p className="text-gray-300 text-sm leading-relaxed">info@hitmranchi.ac.in</p>
                     </div>
                     <div className="flex gap-4">
                       <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
                         <Clock className="text-hitm-gold" size={20} />
                       </div>
                       <p className="text-gray-300 text-sm leading-relaxed">
-                        Office Hours: Mon - Sat<br />
+                        Office Hours: Mon - Sat
+                        <br />
                         09:00 AM - 05:00 PM
                       </p>
                     </div>
@@ -180,6 +188,10 @@ export default function ContactPage() {
                   <h3 className="text-2xl font-bold text-hitm-navy mb-2">Send us a Message</h3>
                   <p className="text-gray-500 text-sm">We&apos;ll get back to you within 24 business hours.</p>
                 </div>
+                {/* NoPaperForms Enquiry Widget */}
+                <div className="npf_wgts" data-height="510px" data-w="92a2ad338fcee31956c6a2a71b1852cb" />
+
+                {/* Previous custom contact form (kept for reference)
                 {status === 'success' ? (
                   <div className="text-center py-10 animate-in fade-in zoom-in duration-300">
                     <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-100 animate-bounce">
@@ -271,16 +283,23 @@ export default function ContactPage() {
                         Send Message <Send className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                       </Button>
                     )}
-
                   </form>
                 )}
+                */}
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
       <Footer />
+      <Script type="text/javascript" strategy="lazyOnload">
+        {`
+          var s=document.createElement("script");
+          s.type="text/javascript"; s.async=true;
+          s.src="https://widgets.in4.nopaperforms.com/emwgts.js";
+          document.body.appendChild(s);
+        `}
+      </Script>
     </main>
   );
 }
-

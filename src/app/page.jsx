@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Script from 'next/script';
 import {
   GraduationCap,
   Trophy,
@@ -472,6 +473,10 @@ export default function HomePage() {
               <CardDescription className="text-center">We will contact you within 24 hours</CardDescription>
             </CardHeader>
             <CardContent>
+              {/* NoPaperForms Enquiry Widget */}
+              <div className="npf_wgts" data-height="510px" data-w="92a2ad338fcee31956c6a2a71b1852cb" />
+
+              {/* Previous custom enquiry form (kept for reference)
               <form onSubmit={handleEnquiry} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="text-sm font-medium">Full Name *</label>
@@ -540,6 +545,7 @@ export default function HomePage() {
                   </Button>
                 )}
               </form>
+              */}
             </CardContent>
           </Card>
         </div>
@@ -1010,6 +1016,14 @@ export default function HomePage() {
       </section>
 
       <Footer />
+      <Script type="text/javascript" strategy="lazyOnload">
+        {`
+          var s=document.createElement("script");
+          s.type="text/javascript"; s.async=true;
+          s.src="https://widgets.in4.nopaperforms.com/emwgts.js";
+          document.body.appendChild(s);
+        `}
+      </Script>
     </main>
   );
 }

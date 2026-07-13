@@ -17,14 +17,37 @@ export default function IncubationPage() {
   const [phoneVerified, setPhoneVerified] = useState(false);
 
   const features = [
-    { icon: <Lightbulb size={32} />, title: 'Idea Validation', desc: 'Work with industry mentors to turn your academic projects into viable business models.' },
-    { icon: <Zap size={32} />, title: 'Seed Funding', desc: 'Access to seed grants and connection to angel investors for promising student startups.' },
-    { icon: <Globe size={32} />, title: 'Global Network', desc: 'Partnerships with international incubators for cross-border mentorship and expansion.' }
+    {
+      icon: <Lightbulb size={32} />,
+      title: 'Idea Validation',
+      desc: 'Work with industry mentors to turn your academic projects into viable business models.',
+    },
+    {
+      icon: <Zap size={32} />,
+      title: 'Seed Funding',
+      desc: 'Access to seed grants and connection to angel investors for promising student startups.',
+    },
+    {
+      icon: <Globe size={32} />,
+      title: 'Global Network',
+      desc: 'Partnerships with international incubators for cross-border mentorship and expansion.',
+    },
   ];
 
   const openModal = () => {
     setStatusMessage('');
     setShowModal(true);
+    // Widget div is now in DOM — re-append the script so NoPaperForms re-scans and initializes it
+    setTimeout(() => {
+      const existing = document.querySelector('.npf_wgts[data-w="92a2ad338fcee31956c6a2a71b1852cb"] iframe');
+      if (!existing) {
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'https://widgets.in4.nopaperforms.com/emwgts.js';
+        document.body.appendChild(s);
+      }
+    }, 50);
   };
 
   const closeModal = () => {
@@ -74,19 +97,22 @@ export default function IncubationPage() {
       <section className="pt-32 pb-20 bg-hitm-navy relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-hitm-red/5 skew-x-12 translate-x-1/4" />
         <div className="container mx-auto px-4 relative z-10 text-center">
-          <Badge variant="gold" className="mb-4">Innovation Hub</Badge>
-          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6 uppercase tracking-tighter italic">HITM Incubation Center</h1>
+          <Badge variant="gold" className="mb-4">
+            Innovation Hub
+          </Badge>
+          <h1 className="text-4xl md:text-6xl font-black font-serif text-white mb-6 uppercase tracking-tighter italic">
+            HITM Incubation Center
+          </h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Empowering the entrepreneurs of tomorrow. We provide the space, mentorship, and resources to transform your vision into a successful startup.
+            Empowering the entrepreneurs of tomorrow. We provide the space, mentorship, and resources to transform your
+            vision into a successful startup.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="navy" size="lg" className="h-14 px-10 rounded-full shadow-xl" onClick={openModal}>
               Apply for Incubation 2026
             </Button>
           </div>
-          {statusMessage && (
-            <p className="mt-6 text-sm text-amber-100 max-w-xl mx-auto">{statusMessage}</p>
-          )}
+          {statusMessage && <p className="mt-6 text-sm text-amber-100 max-w-xl mx-auto">{statusMessage}</p>}
         </div>
       </section>
 
@@ -95,7 +121,10 @@ export default function IncubationPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
             {features.map((f, i) => (
-              <div key={i} className="text-center p-8 rounded-[40px] bg-gray-50 hover:bg-white hover:shadow-2xl transition-all border border-gray-100 group">
+              <div
+                key={i}
+                className="text-center p-8 rounded-[40px] bg-gray-50 hover:bg-white hover:shadow-2xl transition-all border border-gray-100 group"
+              >
                 <div className="w-20 h-20 bg-white rounded-3xl shadow-sm flex items-center justify-center mx-auto mb-6 text-hitm-red group-hover:rotate-6 group-hover:scale-110 transition-all">
                   {f.icon}
                 </div>
@@ -108,11 +137,15 @@ export default function IncubationPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
               <div className="w-full h-[500px] bg-gray-200 rounded-[40px] overflow-hidden shadow-2xl">
-                 <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800" alt="Incubation Center" className="w-full h-full object-cover" />
+                <img
+                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800"
+                  alt="Incubation Center"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-hitm-red p-8 rounded-[32px] text-white shadow-2xl hidden md:block">
-                 <p className="text-3xl font-black font-serif">2026</p>
-                 <p className="text-xs font-bold uppercase tracking-widest opacity-80">Vision Launch</p>
+                <p className="text-3xl font-black font-serif">2026</p>
+                <p className="text-xs font-bold uppercase tracking-widest opacity-80">Vision Launch</p>
               </div>
             </div>
 
@@ -120,7 +153,9 @@ export default function IncubationPage() {
               <div>
                 <h2 className="text-4xl font-black font-serif text-hitm-navy mb-6">Our Vision for Startups</h2>
                 <p className="text-gray-600 text-lg leading-relaxed">
-                  The HITM Incubation Center (AIC) is designed to be the heartbeat of innovation in Jharkhand. We don&apos;t just provide office space; we build an ecosystem where students can experiment, fail fast, and succeed bigger.
+                  The HITM Incubation Center (AIC) is designed to be the heartbeat of innovation in Jharkhand. We
+                  don&apos;t just provide office space; we build an ecosystem where students can experiment, fail fast,
+                  and succeed bigger.
                 </p>
               </div>
 
@@ -128,7 +163,7 @@ export default function IncubationPage() {
                 {[
                   { title: 'Mentorship', tip: 'Access to 10+ industry veterans and successful founders.' },
                   { title: 'Co-working', tip: 'State-of-the-art labs, high-speed internet, and meeting rooms.' },
-                  { title: 'Legal Support', tip: 'Assistance with patent filing and company registration.' }
+                  { title: 'Legal Support', tip: 'Assistance with patent filing and company registration.' },
                 ].map((item, index) => (
                   <div key={index} className="flex gap-4 items-start p-4 rounded-2xl bg-gray-50 border border-gray-100">
                     <div className="w-10 h-10 rounded-full bg-hitm-navy/10 flex items-center justify-center text-hitm-navy shrink-0">
@@ -143,7 +178,12 @@ export default function IncubationPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button variant="default" size="lg" className="h-14 bg-hitm-navy hover:bg-hitm-red px-10 rounded-full shadow-xl" onClick={openModal}>
+                <Button
+                  variant="default"
+                  size="lg"
+                  className="h-14 bg-hitm-navy hover:bg-hitm-red px-10 rounded-full shadow-xl"
+                  onClick={openModal}
+                >
                   Apply for Incubation 2026
                 </Button>
               </div>
@@ -158,7 +198,8 @@ export default function IncubationPage() {
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h2 className="text-3xl md:text-5xl font-black font-serif mb-8 italic">Have a Groundbreaking Idea?</h2>
           <p className="text-white/60 mb-10 max-w-xl mx-auto text-lg">
-            We are looking for innovative startups to join our 2026 cohort and grow with strong mentorship, support, and resources.
+            We are looking for innovative startups to join our 2026 cohort and grow with strong mentorship, support, and
+            resources.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="gold" size="lg" className="h-14 px-12 rounded-full shadow-2xl" onClick={openModal}>
@@ -169,22 +210,37 @@ export default function IncubationPage() {
       </section>
 
       {showModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 flex items-center justify-center p-4" style={{ zIndex: '1000' }}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeModal} />
           <div className="relative w-full max-w-2xl rounded-[40px] bg-white shadow-2xl overflow-hidden">
-            <div className="bg-hitm-navy px-8 py-8 text-white relative overflow-hidden">
+            {/* Close button floated above everything including the iframe */}
+            <button
+              type="button"
+              onClick={closeModal}
+              className="absolute top-5 right-5 rounded-full border border-white/20 bg-hitm-navy p-3 text-white hover:bg-hitm-red transition-colors shrink-0"
+              style={{ zIndex: 50 }}
+            >
+              <X size={20} />
+            </button>
+            <div className="bg-hitm-navy px-6 py-6 text-white relative overflow-hidden" style={{ zIndex: 10 }}>
               <div className="absolute right-0 top-0 w-44 h-44 bg-white/10 rounded-full blur-3xl" />
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-hitm-gold mb-3">Incubation Enquiry</p>
-                  <h2 className="text-3xl md:text-4xl font-black font-serif max-w-xl">Share your startup idea with our 2026 cohort.</h2>
+                  <h2 className="text-3xl md:text-4xl font-black font-serif max-w-xl">
+                    Share your startup idea with our 2026 cohort.
+                  </h2>
                 </div>
-                <button type="button" onClick={closeModal} className="rounded-full border border-white/20 bg-white/10 p-3 text-white hover:bg-white/20 transition-colors">
-                  <X size={20} />
-                </button>
+                {/* Spacer to preserve layout balance now that button is absolute */}
+                <div className="w-12 h-12 shrink-0" />
               </div>
             </div>
-            <form onSubmit={handleSubmit} className="p-8 grid gap-6 bg-white">
+            <div className="p-3 bg-white">
+              {/* NoPaperForms Enquiry Widget */}
+              <div className="npf_wgts" data-height="400px" data-w="92a2ad338fcee31956c6a2a71b1852cb" />
+
+              {/* Previous custom incubation form (kept for reference)
+              <form onSubmit={handleSubmit} className="p-8 grid gap-6 bg-white">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <label className="space-y-2 text-sm text-gray-700">
                   <span>Name</span>
@@ -228,9 +284,7 @@ export default function IncubationPage() {
                   />
                 </label>
               </div>
-              {statusMessage && (
-                <p className="text-sm text-rose-600">{statusMessage}</p>
-              )}
+              {statusMessage && <p className="text-sm text-rose-600">{statusMessage}</p>}
               <div className="flex flex-col sm:flex-row gap-4 justify-end w-full">
                 {submitting ? (
                   <div className="w-full flex items-center justify-center gap-2 bg-hitm-navy text-white rounded-full py-4 text-sm font-bold animate-pulse">
@@ -238,7 +292,12 @@ export default function IncubationPage() {
                   </div>
                 ) : (
                   <>
-                    <Button variant="outline" type="button" className="h-14 rounded-full flex-1 sm:flex-none" onClick={closeModal}>
+                    <Button
+                      variant="outline"
+                      type="button"
+                      className="h-14 rounded-full flex-1 sm:flex-none"
+                      onClick={closeModal}
+                    >
                       Cancel
                     </Button>
                     <Button type="submit" className="h-14 rounded-full flex-1 sm:flex-none" disabled={!phoneVerified}>
@@ -247,7 +306,9 @@ export default function IncubationPage() {
                   </>
                 )}
               </div>
-            </form>
+              </form>
+              */}
+            </div>
           </div>
         </div>
       )}

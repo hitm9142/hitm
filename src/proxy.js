@@ -16,7 +16,7 @@ const COOKIE_NAME = 'hitm_admin_token';
  */
 async function verifyEdgeToken(token) {
   try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET_1);
     const { payload } = await jwtVerify(token, secret);
     return payload;
   } catch {

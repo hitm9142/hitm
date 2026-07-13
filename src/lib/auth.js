@@ -2,12 +2,12 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET_1 = process.env.JWT_SECRET_1;
 const COOKIE_NAME = 'hitm_admin_token';
 const BCRYPT_ROUNDS = 12;
 
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is not defined');
+if (!JWT_SECRET_1) {
+  throw new Error('JWT_SECRET_1 environment variable is not defined');
 }
 
 // ─── Password hashing ──────────────────────────────────────────────────────────
@@ -23,12 +23,12 @@ export async function comparePassword(plain, hashed) {
 // ─── JWT ───────────────────────────────────────────────────────────────────────
 
 export function signToken(payload, expiresIn = '1d') {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn });
+  return jwt.sign(payload, JWT_SECRET_1, { expiresIn });
 }
 
 export function verifyToken(token) {
   try {
-    return jwt.verify(token, JWT_SECRET);
+    return jwt.verify(token, JWT_SECRET_1);
   } catch {
     return null;
   }

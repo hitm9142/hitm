@@ -1016,7 +1016,7 @@ export default function HomePage() {
       </section>
 
       <Footer />
-      <Script type="text/javascript" strategy="lazyOnload">
+      <Script id="npf-widget" type="text/javascript" strategy="lazyOnload">
         {`
           var s=document.createElement("script");
           s.type="text/javascript"; s.async=true;

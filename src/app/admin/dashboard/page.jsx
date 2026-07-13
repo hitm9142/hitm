@@ -53,29 +53,29 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // useEffect(() => {
-  //   if (!auth || !db) return;
-  //   const unsubscribe = onAuthStateChanged(auth, async (u) => {
-  //     if (u) {
-  //       try {
-  //         const userDoc = await getDoc(doc(db, 'users', u.uid));
-  //         if (userDoc.exists() && userDoc.data().userType === 'admin') {
-  //           setUser({ ...u, ...userDoc.data() });
-  //         } else {
-  //           await signOut(auth);
-  //           router.push('/admin/login');
-  //         }
-  //       } catch (error) {
-  //         console.error('Error fetching user data:', error);
-  //         router.push('/admin/login');
-  //       }
-  //     } else {
-  //       router.push('/admin/login');
-  //     }
-  //     setLoading(false);
-  //   });
-  //   return () => unsubscribe();
-  // }, [router]);
+  useEffect(() => {
+    if (!auth || !db) return;
+    const unsubscribe = onAuthStateChanged(auth, async (u) => {
+      if (u) {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', u.uid));
+          if (userDoc.exists() && userDoc.data().userType === 'admin') {
+            setUser({ ...u, ...userDoc.data() });
+          } else {
+            await signOut(auth);
+            router.push('/admin/login');
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+          router.push('/admin/login');
+        }
+      } else {
+        router.push('/admin/login');
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, [router]);
 
   const handleSignOut = async () => {
     await signOut(auth);

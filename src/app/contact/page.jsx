@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import Script from 'next/script';
+import { useState, useEffect } from 'react';
 import dynamicImport from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -21,6 +20,21 @@ import InlinePhoneVerifier from '@/components/InlinePhoneVerifier';
 const ContactLeafletMap = dynamicImport(() => import('@/components/ContactLeafletMap'), { ssr: false });
 
 export default function ContactPage() {
+  useEffect(() => {
+    // Remove any stale widget iframe so the script re-initializes cleanly
+    const widget = document.querySelector('.npf_wgts[data-w="92a2ad338fcee31956c6a2a71b1852cb"]');
+    if (widget) widget.innerHTML = '';
+    // Always inject a fresh script so NoPaperForms scans the DOM on every visit
+    const s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = 'https://widgets.in4.nopaperforms.com/emwgts.js';
+    document.body.appendChild(s);
+    return () => {
+      document.body.removeChild(s);
+    };
+  }, []);
+
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null); // 'success' | 'error'
@@ -292,14 +306,6 @@ export default function ContactPage() {
         </div>
       </div>
       <Footer />
-      <Script id="npf-widget" type="text/javascript" strategy="lazyOnload">
-        {`
-          var s=document.createElement("script");
-          s.type="text/javascript"; s.async=true;
-          s.src="https://widgets.in4.nopaperforms.com/emwgts.js";
-          document.body.appendChild(s);
-        `}
-      </Script>
     </main>
   );
 }

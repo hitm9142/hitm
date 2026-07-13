@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Script from 'next/script';
 import {
   GraduationCap,
   Trophy,
@@ -299,6 +298,21 @@ export default function HomePage() {
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    // Remove any stale widget iframe so the script re-initializes cleanly
+    const widget = document.querySelector('.npf_wgts[data-w="92a2ad338fcee31956c6a2a71b1852cb"]');
+    if (widget) widget.innerHTML = '';
+    // Always inject a fresh script so NoPaperForms scans the DOM on every visit
+    const s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = 'https://widgets.in4.nopaperforms.com/emwgts.js';
+    document.body.appendChild(s);
+    return () => {
+      document.body.removeChild(s);
+    };
   }, []);
 
   // Increment visit counter only on homepage load
@@ -1016,14 +1030,6 @@ export default function HomePage() {
       </section>
 
       <Footer />
-      <Script id="npf-widget" type="text/javascript" strategy="lazyOnload">
-        {`
-          var s=document.createElement("script");
-          s.type="text/javascript"; s.async=true;
-          s.src="https://widgets.in4.nopaperforms.com/emwgts.js";
-          document.body.appendChild(s);
-        `}
-      </Script>
     </main>
   );
 }

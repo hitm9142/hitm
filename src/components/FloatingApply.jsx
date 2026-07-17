@@ -90,7 +90,7 @@ export default function FloatingApply() {
     <>
       {pathname?.startsWith('/admin-dashboard') ? null : (
         <>
-          {/* Desktop View: Stack of UG, PG, Diploma Buttons */}
+          {/* Desktop View: Stack of UG, PG, Diploma Buttons + Register Now */}
           <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-[2px] items-end pointer-events-none">
             {floatingButtons.map((btn) => (
               <Link
@@ -104,6 +104,17 @@ export default function FloatingApply() {
                 </span>
               </Link>
             ))}
+            <a
+              href="https://applynow.hitmranchi.ac.in/?utm_source=website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pointer-events-auto w-20 bg-[#e67e22] text-white flex flex-col items-center justify-center py-2.5 px-1 rounded-l-md shadow-lg hover:w-24 transition-all duration-300 group border-b border-white/20"
+            >
+              <span className="text-[11px] font-black leading-none uppercase tracking-tight text-center">REGISTER</span>
+              <span className="text-[7px] font-bold uppercase tracking-tight text-center leading-tight mt-1 text-white/80 group-hover:text-white">
+                NOW
+              </span>
+            </a>
           </div>
 
           {/* Mobile View: Single Enquiry Now Button */}

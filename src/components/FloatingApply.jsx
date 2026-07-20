@@ -92,7 +92,7 @@ export default function FloatingApply() {
         <>
           {/* Desktop View: Stack of UG, PG, Diploma Buttons + Register Now */}
           <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-[2px] items-end pointer-events-none">
-            {floatingButtons.map((btn) => (
+            {/* {floatingButtons.map((btn) => (
               <Link
                 key={btn.label}
                 href={`/admissions/apply?form=1&course=${encodeURIComponent(btn.course)}`}
@@ -103,7 +103,7 @@ export default function FloatingApply() {
                   APPLY{'\n'}NOW
                 </span>
               </Link>
-            ))}
+            ))} */}
             <a
               href="https://applynow.hitmranchi.ac.in/?utm_source=website"
               target="_blank"

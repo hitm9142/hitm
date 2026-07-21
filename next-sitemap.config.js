@@ -129,7 +129,6 @@ module.exports = {
       { path: '/programs/bca', priority: 0.8, changefreq: 'monthly' },
       { path: '/programs/mca', priority: 0.8, changefreq: 'monthly' },
       { path: '/programs/diploma', priority: 0.8, changefreq: 'monthly' },
-      { path: '/admissions/apply', priority: 0.9, changefreq: 'weekly' },
       { path: '/admissions/eligibility', priority: 0.8, changefreq: 'monthly' },
       { path: '/admissions/fee', priority: 0.8, changefreq: 'monthly' },
       { path: '/admissions/brochures', priority: 0.7, changefreq: 'monthly' },

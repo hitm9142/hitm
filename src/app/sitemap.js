@@ -36,7 +36,6 @@ export default function sitemap() {
     { url: '/programs/diploma', priority: 0.8, changeFrequency: 'monthly' },
 
     // Admissions
-    { url: '/admissions/apply', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/admissions/eligibility', priority: 0.8, changeFrequency: 'monthly' },
     { url: '/admissions/fee', priority: 0.8, changeFrequency: 'monthly' },
     { url: '/admissions/brochures', priority: 0.7, changeFrequency: 'monthly' },

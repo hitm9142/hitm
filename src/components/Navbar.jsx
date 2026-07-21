@@ -52,7 +52,7 @@ const navItems = [
     icon: <Users size={16} />,
     children: [
       { label: 'Eligibility', href: '/admissions/eligibility' },
-      { label: 'Admission Process', href: '/admissions/apply' },
+      { label: 'Admission Process', href: 'https://applynow.hitmranchi.ac.in/?utm_source=website' },
       { label: 'Fee Structure', href: '/admissions/fee' },
     ],
   },

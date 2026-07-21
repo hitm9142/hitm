@@ -13,16 +13,18 @@ import { CheckCircle2, XCircle, Loader2, Printer, Home, RefreshCw, FileText } fr
 
 export default function PaymentStatusPage() {
   return (
-    <Suspense fallback={
-      <main className="min-h-screen bg-gray-50 flex flex-col justify-between">
-        <Navbar />
-        <div className="flex-1 flex flex-col items-center justify-center p-4">
-          <Loader2 size={48} className="animate-spin text-hitm-red mb-4" />
-          <h2 className="text-xl font-bold font-serif text-hitm-navy">Loading Payment Status...</h2>
-        </div>
-        <Footer />
-      </main>
-    }>
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-gray-50 flex flex-col justify-between">
+          <Navbar />
+          <div className="flex-1 flex flex-col items-center justify-center p-4">
+            <Loader2 size={48} className="animate-spin text-hitm-red mb-4" />
+            <h2 className="text-xl font-bold font-serif text-hitm-navy">Loading Payment Status...</h2>
+          </div>
+          <Footer />
+        </main>
+      }
+    >
       <PaymentStatusContent />
     </Suspense>
   );
@@ -46,18 +48,22 @@ function PaymentStatusContent() {
     }
 
     // Set up a real-time listener on the Firestore document
-    const unsub = onSnapshot(doc(db, 'transactions', orderId), (docSnap) => {
-      if (docSnap.exists()) {
-        setTransaction(docSnap.data());
-      } else {
-        setError('Transaction record not found in our database.');
-      }
-      setLoading(false);
-    }, (err) => {
-      console.error('Error listening to transaction:', err);
-      setError('Failed to load real-time payment status.');
-      setLoading(false);
-    });
+    const unsub = onSnapshot(
+      doc(db, 'transactions', orderId),
+      (docSnap) => {
+        if (docSnap.exists()) {
+          setTransaction(docSnap.data());
+        } else {
+          setError('Transaction record not found in our database.');
+        }
+        setLoading(false);
+      },
+      (err) => {
+        console.error('Error listening to transaction:', err);
+        setError('Failed to load real-time payment status.');
+        setLoading(false);
+      },
+    );
 
     return () => unsub();
   }, [orderId]);
@@ -68,7 +74,7 @@ function PaymentStatusContent() {
 
   const handleRetry = () => {
     if (orderId && orderId.startsWith('APP_')) {
-      router.push('/admissions/apply');
+      router.push('https://applynow.hitmranchi.ac.in/?utm_source=website');
     } else {
       router.push('/payment');
     }
@@ -95,7 +101,9 @@ function PaymentStatusContent() {
         <div className="flex-1 flex flex-col items-center justify-center p-4">
           <XCircle size={64} className="text-red-500 mb-4" />
           <h2 className="text-2xl font-black font-serif text-hitm-navy">Payment Error</h2>
-          <p className="text-red-600 bg-red-50 border border-red-100 rounded-2xl px-5 py-3 mt-2 text-sm font-semibold max-w-md text-center">{error}</p>
+          <p className="text-red-600 bg-red-50 border border-red-100 rounded-2xl px-5 py-3 mt-2 text-sm font-semibold max-w-md text-center">
+            {error}
+          </p>
           <Button onClick={() => router.push('/')} className="mt-6 bg-hitm-navy text-white">
             <Home size={16} className="mr-2" /> Back to Home
           </Button>
@@ -116,7 +124,6 @@ function PaymentStatusContent() {
       </div>
 
       <div className="flex-1 pt-32 pb-20 container mx-auto px-4 max-w-2xl print:p-0 print:pt-0">
-        
         {/* Status Card (Hidden during print) */}
         <div className="print:hidden text-center mb-8">
           {isSuccess && (
@@ -124,9 +131,13 @@ function PaymentStatusContent() {
               <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
                 <CheckCircle2 size={48} />
               </div>
-              <Badge variant="green" className="text-xs uppercase tracking-widest font-black mb-2 px-3 py-1">Payment Successful</Badge>
+              <Badge variant="green" className="text-xs uppercase tracking-widest font-black mb-2 px-3 py-1">
+                Payment Successful
+              </Badge>
               <h2 className="text-3xl font-black font-serif text-hitm-navy">Thank You!</h2>
-              <p className="text-gray-500 text-sm mt-1 max-w-sm">Your payment was processed successfully. A confirmation summary is displayed below.</p>
+              <p className="text-gray-500 text-sm mt-1 max-w-sm">
+                Your payment was processed successfully. A confirmation summary is displayed below.
+              </p>
             </div>
           )}
 
@@ -135,9 +146,13 @@ function PaymentStatusContent() {
               <div className="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-4">
                 <Loader2 size={48} className="animate-spin" />
               </div>
-              <Badge variant="amber" className="text-xs uppercase tracking-widest font-black mb-2 px-3 py-1">Payment Awaiting Confirmation</Badge>
+              <Badge variant="amber" className="text-xs uppercase tracking-widest font-black mb-2 px-3 py-1">
+                Payment Awaiting Confirmation
+              </Badge>
               <h2 className="text-3xl font-black font-serif text-hitm-navy">Processing Payment</h2>
-              <p className="text-gray-500 text-sm mt-1 max-w-sm">We are waiting for CCAvenue to confirm your payment status. This card will auto-update.</p>
+              <p className="text-gray-500 text-sm mt-1 max-w-sm">
+                We are waiting for CCAvenue to confirm your payment status. This card will auto-update.
+              </p>
             </div>
           )}
 
@@ -146,7 +161,9 @@ function PaymentStatusContent() {
               <div className="w-20 h-20 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
                 <XCircle size={48} />
               </div>
-              <Badge variant="destructive" className="text-xs uppercase tracking-widest font-black mb-2 px-3 py-1">Payment Failed / Aborted</Badge>
+              <Badge variant="destructive" className="text-xs uppercase tracking-widest font-black mb-2 px-3 py-1">
+                Payment Failed / Aborted
+              </Badge>
               <h2 className="text-3xl font-black font-serif text-hitm-navy">Transaction Unsuccessful</h2>
               <p className="text-gray-500 text-sm mt-1 max-w-sm">
                 The payment could not be processed. Code: {transaction.statusMessage || 'Rejected by Bank'}
@@ -156,26 +173,34 @@ function PaymentStatusContent() {
         </div>
 
         {/* Receipt Card (Print Target) */}
-        <Card 
+        <Card
           ref={printRef}
           className={`shadow-2xl border-none rounded-[40px] overflow-hidden bg-white print:shadow-none print:border-none print:rounded-none`}
         >
           {/* Header */}
           <div className="bg-hitm-navy p-8 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b-2 border-hitm-red print:bg-white print:text-gray-900 print:p-0 print:pb-4 print:border-b">
             <div>
-              <div className="text-xs font-black uppercase tracking-widest text-hitm-red print:text-hitm-red">Fee Payment Receipt</div>
-              <h1 className="text-xl sm:text-2xl font-black font-serif tracking-tight mt-1">HAIDER INSTITUTE OF TECHNOLOGY &amp; MANAGEMENT</h1>
-              <p className="text-xs text-gray-400 mt-0.5 print:text-gray-500">Ranchi, Jharkhand, India · Approved by AICTE</p>
+              <div className="text-xs font-black uppercase tracking-widest text-hitm-red print:text-hitm-red">
+                Fee Payment Receipt
+              </div>
+              <h1 className="text-xl sm:text-2xl font-black font-serif tracking-tight mt-1">
+                HAIDER INSTITUTE OF TECHNOLOGY &amp; MANAGEMENT
+              </h1>
+              <p className="text-xs text-gray-400 mt-0.5 print:text-gray-500">
+                Ranchi, Jharkhand, India · Approved by AICTE
+              </p>
             </div>
             <div className="text-right print:text-right shrink-0">
-              <Badge variant={isSuccess ? 'green' : isPending ? 'amber' : 'destructive'} className="text-xs uppercase font-bold py-1 px-3">
+              <Badge
+                variant={isSuccess ? 'green' : isPending ? 'amber' : 'destructive'}
+                className="text-xs uppercase font-bold py-1 px-3"
+              >
                 {transaction.status}
               </Badge>
             </div>
           </div>
 
           <CardContent className="p-8 space-y-6 print:p-0 print:pt-6">
-            
             {/* Payment Summary */}
             <div className="bg-gray-50 rounded-3xl p-6 border border-gray-100 grid grid-cols-2 gap-4 print:bg-transparent print:border-0 print:p-0 print:mb-6">
               <div>
@@ -183,13 +208,19 @@ function PaymentStatusContent() {
                 <p className="font-bold text-sm text-hitm-navy mt-0.5">{transaction.orderId}</p>
               </div>
               <div>
-                <Label className="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Tracking / Reference ID</Label>
+                <Label className="text-[10px] uppercase tracking-wider text-gray-400 font-bold">
+                  Tracking / Reference ID
+                </Label>
                 <p className="font-bold text-sm text-hitm-navy mt-0.5">{transaction.trackingId || 'N/A'}</p>
               </div>
               <div>
                 <Label className="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Transaction Date</Label>
                 <p className="font-bold text-sm text-hitm-navy mt-0.5">
-                  {transaction.updatedAt ? (transaction.updatedAt.toDate ? transaction.updatedAt.toDate().toLocaleString() : new Date(transaction.updatedAt).toLocaleString()) : new Date().toLocaleString()}
+                  {transaction.updatedAt
+                    ? transaction.updatedAt.toDate
+                      ? transaction.updatedAt.toDate().toLocaleString()
+                      : new Date(transaction.updatedAt).toLocaleString()
+                    : new Date().toLocaleString()}
                 </p>
               </div>
               <div>
@@ -200,7 +231,9 @@ function PaymentStatusContent() {
 
             {/* Student & Payment Details */}
             <div className="space-y-4">
-              <h3 className="font-bold font-serif text-lg text-hitm-navy border-b pb-2 print:text-sm">Student details</h3>
+              <h3 className="font-bold font-serif text-lg text-hitm-navy border-b pb-2 print:text-sm">
+                Student details
+              </h3>
               <div className="grid grid-cols-2 gap-y-4 gap-x-6 text-sm">
                 <div>
                   <Label className="text-xs text-gray-500 font-semibold">Student Name</Label>
@@ -236,14 +269,18 @@ function PaymentStatusContent() {
                   <tbody>
                     <tr className="border-t">
                       <td className="py-4 px-4 font-medium text-gray-900">
-                        {transaction.type === 'admission' ? 'Admission Registration Form Fee 2026' : `College Online Fee Payment (${transaction.orderId})`}
+                        {transaction.type === 'admission'
+                          ? 'Admission Registration Form Fee 2026'
+                          : `College Online Fee Payment (${transaction.orderId})`}
                       </td>
                       <td className="py-4 px-4 text-right font-bold text-gray-900">
                         ₹{parseFloat(transaction.amount).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
                       </td>
                     </tr>
                     <tr className="border-t font-black bg-gray-50/50 print:bg-transparent">
-                      <td className="py-3 px-4 text-right uppercase tracking-wider text-xs font-bold text-gray-500">Total Paid</td>
+                      <td className="py-3 px-4 text-right uppercase tracking-wider text-xs font-bold text-gray-500">
+                        Total Paid
+                      </td>
                       <td className="py-3 px-4 text-right text-lg text-hitm-navy">
                         ₹{parseFloat(transaction.amount).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
                       </td>
@@ -266,7 +303,6 @@ function PaymentStatusContent() {
                 <span className="font-bold text-gray-500">HITM Accounts</span>
               </div>
             </div>
-
           </CardContent>
         </Card>
 
@@ -288,7 +324,6 @@ function PaymentStatusContent() {
             <Home size={16} className="mr-2" /> Back to Home
           </Button>
         </div>
-
       </div>
 
       <div className="print:hidden">

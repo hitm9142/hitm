@@ -23,7 +23,7 @@ const footerLinks = {
   quickLinks: [
     { label: 'About HITM', href: '/about' },
     { label: 'All Programmes', href: '/programs' },
-    { label: 'Apply Online', href: '/admissions/apply?form=1' },
+    { label: 'Apply Online', href: 'https://applynow.hitmranchi.ac.in/?utm_source=website' },
     { label: 'Academic Calendar', href: '/academics/calendar' },
     { label: 'Placement', href: '/placement/overview' },
     { label: 'Photo Gallery', href: '/campus/gallery' },

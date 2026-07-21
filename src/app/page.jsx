@@ -178,7 +178,7 @@ const quickLinks = [
   {
     icon: <Bell size={18} />,
     label: 'Apply Online',
-    href: '/admissions/apply?form=1',
+    href: 'https://applynow.hitmranchi.ac.in/?utm_source=website',
   },
   { icon: <BookOpen size={18} />, label: 'Notice Board', href: '/notice' },
   {
@@ -242,7 +242,7 @@ function HeroSlider() {
             <p className="text-white/85 text-lg mb-8 leading-relaxed max-w-xl">{slide.subtitle}</p>
             <div className="flex gap-3 flex-wrap">
               <Button asChild variant="gold" size="lg" className="shadow-xl">
-                <Link href="/admissions/apply?form=1">
+                <Link href="https://applynow.hitmranchi.ac.in/?utm_source=website" target="_blank">
                   Register Now <ArrowRight size={18} />
                 </Link>
               </Button>
@@ -630,7 +630,9 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/admissions/apply?form=1">Apply Now</Link>
+                  <Link href="https://applynow.hitmranchi.ac.in/?utm_source=website" target="_blank">
+                    Apply Now
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -839,7 +841,11 @@ export default function HomePage() {
                   Be a part of an emerging technical & management institution in Jharkhand.
                 </p>
                 <Button asChild variant="gold" size="sm" className="w-full font-bold shadow-lg">
-                  <Link href="/admissions/apply?form=1" className="flex items-center justify-center gap-2">
+                  <Link
+                    href="https://applynow.hitmranchi.ac.in/?utm_source=website"
+                    target="_blank"
+                    className="flex items-center justify-center gap-2"
+                  >
                     Apply for 2026 Batch <ArrowRight size={14} />
                   </Link>
                 </Button>

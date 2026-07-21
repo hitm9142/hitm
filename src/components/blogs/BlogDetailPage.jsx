@@ -304,7 +304,8 @@ export default function BlogDetailPage({ blog, related = [] }) {
                     AICTE-approved programmes in Engineering, Management, and Technology.
                   </p>
                   <Link
-                    href="/admissions/apply?form=1"
+                    href="https://applynow.hitmranchi.ac.in/?utm_source=website"
+                    target="_blank"
                     className="inline-flex items-center gap-2 bg-hitm-red hover:bg-hitm-red-dark text-white text-[13px] font-bold px-5 py-2.5 rounded-xl transition shadow-lg"
                   >
                     Apply Now <span aria-hidden>→</span>

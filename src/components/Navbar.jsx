@@ -161,7 +161,8 @@ export default function Navbar() {
               </div>
               <div className="flex items-center gap-4 xl:gap-6">
                 <Link
-                  href="/admissions/apply?form=1"
+                  href="https://applynow.hitmranchi.ac.in/?utm_source=website"
+                  target="_blank"
                   className="hover:text-hitm-gold transition-colors border-r border-white/20 pr-6 underline decoration-hitm-gold decoration-2 underline-offset-4"
                 >
                   <span suppressHydrationWarning>APPLY NOW Batch-2026</span>
@@ -363,7 +364,7 @@ export default function Navbar() {
             className="w-full bg-hitm-red hover:bg-hitm-navy text-white h-12 uppercase tracking-widest text-sm font-bold shadow-xl"
             onClick={() => setMobileOpen(false)}
           >
-            <Link href="/admissions/apply?form=1" suppressHydrationWarning>
+            <Link href="https://applynow.hitmranchi.ac.in/?utm_source=website" target="_blank" suppressHydrationWarning>
               Apply Now 2026
             </Link>
           </Button>

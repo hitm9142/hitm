@@ -93,6 +93,14 @@ export default function RootLayout({ children }) {
           />
         </noscript>
         {/* End Meta Pixel Code */}
+
+        {/* NoPaperForms Tracking */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `var npf_d='https://applynow.hitmranchi.ac.in';var npf_c='7178';var npf_m='1';var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://track.nopaperforms.com/js/track.js";document.body.appendChild(s);`,
+          }}
+        />
+        {/* End NoPaperForms Tracking */}
       </head>
       <body className="antialiased">
         {/* Google Tag Manager (noscript) */}
@@ -119,21 +127,6 @@ export default function RootLayout({ children }) {
         {/* End Google Tag Manager (noscript) */}
         {children}
         <FloatingApply />
-
-        {/* NoPaperForms Tracking */}
-        <Script id="nopaperforms-track" strategy="afterInteractive">
-          {`
-            var npf_d = 'https://applynow.hitmranchi.ac.in';
-            var npf_c = '7178';
-            var npf_m = '1';
-            var s = document.createElement("script");
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://track.nopaperforms.com/js/track.js";
-            document.body.appendChild(s);
-          `}
-        </Script>
-        {/* End NoPaperForms Tracking */}
       </body>
     </html>
   );

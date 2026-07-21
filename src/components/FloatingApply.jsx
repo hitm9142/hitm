@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { X, Send, CheckCircle2, MessageSquareText, Loader2 } from 'lucide-react';
@@ -86,6 +86,32 @@ export default function FloatingApply() {
     }
   };
 
+  // Re-initialize NoPaperForms widget every time modal opens
+  useEffect(() => {
+    if (!showModal) return;
+
+    // Give React time to mount the widget div in the DOM
+    const timer = setTimeout(() => {
+      // Clear any previous widget content so it re-renders fresh
+      const widget = document.querySelector('.npf_wgts[data-w="92a2ad338fcee31956c6a2a71b1852cb"]');
+      if (widget) widget.innerHTML = '';
+
+      // Remove old script if already injected
+      const existing = document.getElementById('npf-widget-script');
+      if (existing) existing.remove();
+
+      // Inject fresh script so NoPaperForms scans the DOM
+      const s = document.createElement('script');
+      s.id = 'npf-widget-script';
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://widgets.in4.nopaperforms.com/emwgts.js';
+      document.body.appendChild(s);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [showModal]);
+
   return (
     <>
       {pathname?.startsWith('/admin-dashboard') ? null : (
@@ -146,90 +172,9 @@ export default function FloatingApply() {
                 </div>
 
                 <div className="p-6 overflow-y-auto custom-scrollbar bg-white flex-1">
-                  {step === 1 ? (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="space-y-1">
-                        <Input
-                          placeholder="Full Name *"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          required
-                          className="border-gray-200 bg-gray-50 focus:bg-white transition-all rounded-xl h-11 text-sm"
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <InlinePhoneVerifier
-                          phone={formData.phone}
-                          onChange={(p) => setFormData({ ...formData, phone: p })}
-                          onVerificationComplete={setPhoneVerified}
-                          recaptchaId="mobile-enquiry-popup"
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <Input
-                          placeholder="Email ID (Optional)"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="border-gray-200 bg-gray-50 focus:bg-white transition-all rounded-xl h-11 text-sm"
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="space-y-1">
-                          <select
-                            required
-                            className="w-full h-11 border border-gray-200 rounded-xl px-3 bg-gray-50 text-sm focus:bg-white focus:ring-1 focus:ring-hitm-red outline-none"
-                            value={formData.course}
-                            onChange={(e) => setFormData({ ...formData, course: e.target.value, branch: '' })}
-                          >
-                            <option value="">Programme *</option>
-                            {courseOptions.map((c) => (
-                              <option key={c} value={c}>
-                                {c}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        {branchOptions[formData.course] ? (
-                          <div className="space-y-1">
-                            <select
-                              required
-                              className="w-full h-11 border border-gray-200 rounded-xl px-3 bg-white text-sm focus:ring-1 focus:ring-hitm-red outline-none animate-in fade-in duration-200"
-                              value={formData.branch}
-                              onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
-                            >
-                              <option value="">Branch *</option>
-                              {branchOptions[formData.course].map((b) => (
-                                <option key={b} value={b}>
-                                  {b}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        ) : (
-                          <div className="hidden" />
-                        )}
-                      </div>
-
-                      {loading ? (
-                        <div className="w-full flex items-center justify-center gap-2 bg-hitm-navy text-white rounded-xl py-3 text-sm font-bold animate-pulse mt-4">
-                          <Loader2 className="animate-spin" size={16} /> Submitting Enquiry... Please wait
-                        </div>
-                      ) : (
-                        <Button
-                          type="submit"
-                          className="w-full bg-hitm-red hover:bg-hitm-navy text-white rounded-xl h-12 font-bold transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 mt-4"
-                          disabled={!phoneVerified}
-                        >
-                          <Send size={16} /> Submit Enquiry
-                        </Button>
-                      )}
-                    </form>
-                  ) : (
+                  {/* {step === 1 ? ( */}
+                  <div className="npf_wgts" data-height="510px" data-w="92a2ad338fcee31956c6a2a71b1852cb" />
+                  {/* ) : (
                     <div className="py-10 text-center">
                       <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-100 animate-bounce">
                         <CheckCircle2 className="text-green-500 w-8 h-8" />
@@ -239,7 +184,7 @@ export default function FloatingApply() {
                         Your enquiry has been successfully verified and saved. Our counselor will contact you shortly.
                       </p>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>

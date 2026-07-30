@@ -160,7 +160,7 @@ export default function BlogDetailPage({ blog, related = [] }) {
         </div>
 
         {/* Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute bottom-[-1px] left-0 right-0">
           <svg viewBox="0 0 1440 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
             <path d="M0 40 C360 0 1080 0 1440 40 L1440 40 L0 40 Z" fill="#f9fafb" />
           </svg>

@@ -152,9 +152,35 @@ export default function ContactPage() {
                       <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
                         <Phone className="text-hitm-gold" size={20} />
                       </div>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        Admission: 9031628245, 9031628246, 9031628248
-                      </p>
+                      <div className="gap-1">
+                        <p className="text-gray-400 text-xs uppercase font-semibold tracking-wider mb-1">Admission</p>
+                        <div className="flex flex-wrap gap-1">
+                          <a
+                            href="tel:9031628245"
+                            className="text-gray-300 text-sm hover:text-hitm-gold transition-colors"
+                          >
+                            9031628245,
+                          </a>
+                          <a
+                            href="tel:9031628246"
+                            className="text-gray-300 text-sm hover:text-hitm-gold transition-colors"
+                          >
+                            9031628246,
+                          </a>
+                          <a
+                            href="tel:9031628248"
+                            className="text-gray-300 text-sm hover:text-hitm-gold transition-colors"
+                          >
+                            9031628248,
+                          </a>
+                          <a
+                            href="tel:09060621603"
+                            className="text-gray-300 text-sm hover:text-hitm-gold transition-colors"
+                          >
+                            09060621603
+                          </a>
+                        </div>
+                      </div>
                     </div>
                     <div className="flex gap-4">
                       <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">

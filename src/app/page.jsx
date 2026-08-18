@@ -315,9 +315,14 @@ export default function HomePage() {
     };
   }, []);
 
-  // Increment visit counter only on homepage load
+  // Increment visit counter only once per browser session
   useEffect(() => {
-    fetch('/api/visits', { method: 'POST' }).catch(() => {});
+    try {
+      if (!sessionStorage.getItem('hitm_visited')) {
+        fetch('/api/visits', { method: 'POST' }).catch(() => {});
+        sessionStorage.setItem('hitm_visited', 'true');
+      }
+    } catch {}
   }, []);
 
   useEffect(() => {

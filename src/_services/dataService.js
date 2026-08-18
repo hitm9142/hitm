@@ -1,8 +1,12 @@
 import connectDB from '@/lib/mongodb';
 import Blog from '@/models/Blog';
-
+import { getCache, setCache } from '@/lib/cache';
 
 export async function getLatestBlogs(limit = 4) {
+  const cacheKey = `blogs:latest:${limit}`;
+  const cached = await getCache(cacheKey);
+  if (cached) return cached;
+
   try {
     await connectDB();
 
@@ -12,7 +16,9 @@ export async function getLatestBlogs(limit = 4) {
       .limit(limit)
       .lean();
 
-    return blogs || [];
+    const result = blogs || [];
+    await setCache(cacheKey, result, 300); // 5 min cache
+    return result;
   } catch (error) {
     console.error('[GET LATEST BLOGS ERROR]:', error);
     return [];
@@ -20,6 +26,10 @@ export async function getLatestBlogs(limit = 4) {
 }
 
 export async function getBlogWithRelated(slug) {
+  const cacheKey = `blog:detail:${slug}`;
+  const cached = await getCache(cacheKey);
+  if (cached) return cached;
+
   await connectDB();
 
   const blog = await Blog.findOne({ slug, status: 'published' }).lean();
@@ -38,8 +48,12 @@ export async function getBlogWithRelated(slug) {
     .select('title slug shortDescription featuredImage publishedAt author category readingTime')
     .lean();
 
-  return {
+  const result = {
     blog: JSON.parse(JSON.stringify(blog)),
     related: JSON.parse(JSON.stringify(related)),
   };
+
+  await setCache(cacheKey, result, 300); // 5 min cache
+  return result;
 }
+

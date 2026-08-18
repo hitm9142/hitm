@@ -13,13 +13,14 @@ export async function GET(request) {
       if (category) query = query.where('category', '==', category);
       const snapshot = await query.get();
       const notices = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      return NextResponse.json({ success: true, data: notices });
+      const headers = { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' };
+      return NextResponse.json({ success: true, data: notices }, { headers });
     }
 
     // Fallback to mock data
     let data = mockStore.notices;
     if (category) data = data.filter(n => n.category === category);
-    return NextResponse.json({ success: true, data: data.slice(0, limit) });
+    return NextResponse.json({ success: true, data: data.slice(0, limit) }, { headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' } });
   } catch (err) {
     return NextResponse.json({ success: false, message: err.message }, { status: 500 });
   }

@@ -3,14 +3,15 @@ import { mockStore, getAdminDb } from '@/lib/firebase-admin';
 
 export async function GET() {
   try {
+    const headers = { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' };
     const db = await getAdminDb();
     if (db) {
       const snap = await db.collection('events').orderBy('date', 'asc').get();
-      return NextResponse.json({ success: true, data: snap.docs.map(d => ({ id: d.id, ...d.data() })) });
+      return NextResponse.json({ success: true, data: snap.docs.map(d => ({ id: d.id, ...d.data() })) }, { headers });
     }
-    return NextResponse.json({ success: true, data: mockStore.events });
+    return NextResponse.json({ success: true, data: mockStore.events }, { headers });
   } catch (err) {
-    return NextResponse.json({ success: true, data: mockStore.events });
+    return NextResponse.json({ success: true, data: mockStore.events }, { headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' } });
   }
 }
 

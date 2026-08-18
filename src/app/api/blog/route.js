@@ -55,17 +55,24 @@ export async function GET(request) {
 
     const totalPages = Math.ceil(totalDocs / limit);
 
-    return successResponse({
-      docs,
-      totalDocs,
-      publishedCount,
-      draftCount,
-      page,
-      limit,
-      totalPages,
-      hasNextPage: page < totalPages,
-      hasPrevPage: page > 1,
-    });
+    return successResponse(
+      {
+        docs,
+        totalDocs,
+        publishedCount,
+        draftCount,
+        page,
+        limit,
+        totalPages,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
+      'Success',
+      200,
+      {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+      }
+    );
   } catch (error) {
     console.error('[BLOG LIST ERROR]', error);
     return errorResponse('Failed to fetch blogs', 500);

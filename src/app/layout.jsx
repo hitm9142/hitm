@@ -30,30 +30,19 @@ const FALLBACK_META = {
     'Haider Institute of Technology and Management (HITM Ranchi) is a premier AICTE-approved engineering and management institution in Jharkhand, offering B.Tech, Diploma, MBA, MCA, BBA, and BCA programmes',
 };
 
-/**
- * generateMetadata is called by Next.js per page request.
- * params.pathname is automatically provided when using the App Router.
- * We match it against metadata.json to get page-specific title & description.
- */
-export async function generateMetadata({ params, searchParams }, parent) {
-  // Next.js passes the resolved URL via the internal mechanism;
-  // we read the pathname from the headers helper.
-  const { headers } = await import('next/headers');
-  const headersList = await headers();
-  const pathname = headersList.get('x-pathname') || '/';
-
-  // Look up the page entry; fall back to root or default
-  const pageMeta_ = pageMeta[pathname] || pageMeta['/'] || FALLBACK_META;
-
-  return {
-    ...BASE_META,
-    title: pageMeta_.title,
-    description: pageMeta_.description,
-    alternates: {
-      canonical: `${SITE_URL}${pathname === '/' ? '' : pathname}`,
-    },
-  };
-}
+export const metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'HITM Ranchi | AICTE Approved Institution',
+    template: '%s | HITM Ranchi',
+  },
+  description:
+    'Haider Institute of Technology and Management (HITM Ranchi) is a premier AICTE-approved engineering and management institution in Jharkhand, offering B.Tech, Diploma, MBA, MCA, BBA, and BCA programmes',
+  keywords: BASE_META.keywords,
+  other: BASE_META.other,
+  icons: BASE_META.icons,
+  verification: BASE_META.verification,
+};
 
 export const viewport = {
   width: 'device-width',

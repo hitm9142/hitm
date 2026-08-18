@@ -9,13 +9,13 @@
  * @param {Record<string, string>} params - query parameters
  * @returns {Promise<any>} parsed JSON response
  */
-export async function fetchWithClient(endpoint, params = {}) {
+export async function fetchWithClient(endpoint, params = {}, options = {}) {
   const cleaned = Object.fromEntries(
     Object.entries(params).filter(([, v]) => v !== undefined && v !== null && v !== ''),
   );
   const query = new URLSearchParams(cleaned).toString();
   const url = `/api/${endpoint}${query ? `?${query}` : ''}`;
-  const res = await fetch(url, { cache: 'no-store' });
+  const res = await fetch(url, options);
   if (!res.ok) throw new Error(`API request failed: ${res.status} ${res.statusText}`);
   return res.json();
 }

@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 
 // ─── Success ───────────────────────────────────────────────────────────────────
 
-export function successResponse(data, message = 'Success', status = 200) {
-  return NextResponse.json({ success: true, message, data }, { status });
+export function successResponse(data, message = 'Success', status = 200, headers = {}) {
+  return NextResponse.json({ success: true, message, data }, { status, headers });
 }
 
 // ─── Errors ────────────────────────────────────────────────────────────────────

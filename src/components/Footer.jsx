@@ -164,9 +164,6 @@ export default function Footer() {
               <div className="flex gap-3">
                 <Phone size={16} className="text-hitm-gold shrink-0" />
                 <div className="flex flex-wrap gap-1">
-                  <a href="tel:9031628245" className="text-gray-400 text-sm hover:text-hitm-gold transition-colors">
-                    9031628245,
-                  </a>
                   <a href="tel:9031628246" className="text-gray-400 text-sm hover:text-hitm-gold transition-colors">
                     9031628246,
                   </a>

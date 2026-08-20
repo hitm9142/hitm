@@ -156,12 +156,6 @@ export default function ContactPage() {
                         <p className="text-gray-400 text-xs uppercase font-semibold tracking-wider mb-1">Admission</p>
                         <div className="flex flex-wrap gap-1">
                           <a
-                            href="tel:9031628245"
-                            className="text-gray-300 text-sm hover:text-hitm-gold transition-colors"
-                          >
-                            9031628245,
-                          </a>
-                          <a
                             href="tel:9031628246"
                             className="text-gray-300 text-sm hover:text-hitm-gold transition-colors"
                           >

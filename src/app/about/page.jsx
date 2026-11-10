@@ -46,7 +46,7 @@ export default function AboutPage() {
           <Badge variant="gold" className="mb-6 uppercase tracking-widest px-4 py-1.5 shadow-lg">Our Legacy</Badge>
           <h1 className="text-4xl md:text-7xl font-black font-serif text-white mb-6 leading-tight uppercase tracking-tighter italic">About <span className="text-hitm-gold">HITM Ranchi</span></h1>
           <p className="text-white/70 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-light">
-            Founded in 2008, HITM has transformed from a local college into a premier technical institution, shaping the future of Jharkhand through excellence in Engineering and Management.
+            Founded in 2026, HITM has transformed from a local college into a premier technical institution, shaping the future of Jharkhand through excellence in Engineering and Management.
           </p>
         </div>
       </section>
